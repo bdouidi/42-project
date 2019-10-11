@@ -10,41 +10,54 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-int		count_set(char const *s1, char const *set)
+int		ft_count_set(char const *s1, char const *set)
 {
 	int	i;
 	int j;
 	int	stock;
-	int lenght;
 
 	i = 0;
 	j = 0;
 	stock = 0;
 		while (s1[i])
 		{
-			while (set[j])
-			{
-
-			}
+			while (set[j] && set[j] != s1[i])
+				j++;
+			if (set[j] == '\0')
+				stock++;
+			j = 0;
+			i++;
 		}
-	}
-	//printf("%d\n", stock);
 	return (stock);
 
 }
 
-/*char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
+	int	i;
+	char	*stock;
+	int	j;
+	int	k;
 
-}
-*/
-
-int main ()
-{
-
-printf("%d\n", count_set("salut", "slt"));
-return 0;
+	i = 0;
+	j = 0;
+	k = 0;
+	if (!(stock = (char *)malloc(sizeof(char) * ft_count_set(s1, set) + 1)))
+		return (NULL);
+	while (s1[i])
+	{
+		while (set[j] && set[j] != s1[i])
+			j++;
+		if (set[j] == '\0')
+		{
+			stock[k] = s1[i];
+			k++;
+		}
+		j = 0;
+		i++;
+	}
+	stock[k] = '\0';
+	return (stock);
 }
