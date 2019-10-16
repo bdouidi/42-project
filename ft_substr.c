@@ -6,7 +6,7 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 23:46:55 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/14 15:57:48 by idouidi          ###   ########.fr       */
+/*   Updated: 2019/10/16 21:23:09 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	j = len;
 	if (!s)
 		return (NULL);
+	if (start > len)
+		return (0);
 	if (!(ptr = (char *)malloc(sizeof(char) * j + 1)))
 		return (NULL);
 	while (len)

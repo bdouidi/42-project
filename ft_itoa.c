@@ -6,7 +6,7 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 18:21:15 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/14 15:26:52 by idouidi          ###   ########.fr       */
+/*   Updated: 2019/10/16 16:51:25 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ int		ft_count_digit(int n)
 	int	stock;
 
 	stock = 0;
-	if (n < 0)
+	if (n <= 0)
+	{
 		n = n * -1;
+		stock++;
+	}
 	while (n)
 	{
 		n = n / 10;
@@ -48,7 +51,7 @@ void	ft_reverse_str(char *str)
 	}
 }
 
-void	ft_fill_str(char *str, int n, int sign)
+void	ft_fill_str(char *str, long n, int sign)
 {
 	int		i;
 	char	*ref;
@@ -58,7 +61,7 @@ void	ft_fill_str(char *str, int n, int sign)
 	if (n < 0)
 	{
 		n = n * -1;
-		str[ft_count_digit(n)] = '-';
+		str[ft_count_digit(n - 1)] = '-';
 	}
 	while (n)
 	{
@@ -82,14 +85,25 @@ char	*ft_itoa(int n)
 	int		stock;
 	char	*tab;
 	int		sign;
+	int		i;
 
+	i = 0;
+	n = (long)n;
 	stock = ft_count_digit(n);
 	sign = 0;
 	if (n < 0)
 		sign = -1;
-	if (!(tab = (char *)malloc(sizeof(char) * stock)))
+	if (!(tab = (char *)malloc(sizeof(char) * stock + 1)))
 		return (NULL);
-	ft_fill_str(tab, n, sign);
-	ft_reverse_str(tab);
+	if (n == 0)
+	{
+		tab[i] = '0';
+		tab[i + 1] = '\0';
+	}
+	else
+	{
+		ft_fill_str(tab, n, sign);
+		ft_reverse_str(tab);
+	}
 	return (tab);
 }

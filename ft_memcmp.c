@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strmapi.c                                          :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/14 11:13:40 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/15 15:38:38 by idouidi          ###   ########.fr       */
+/*   Created: 2019/10/16 18:15:31 by idouidi           #+#    #+#             */
+/*   Updated: 2019/10/16 18:46:40 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char				*stock;
-	unsigned int		i;
-
-	if (!s)
-		return (NULL);
-	if (!(stock = ft_strdup(s)))
-		return (NULL);
-	i = 0;
-	while (stock[i])
+	if (s1 == NULL || s2 == NULL)
+		return (0);
+	while (n)
 	{
-		stock[i] = f(i, stock[i]);
-		i++;
+		if ((unsigned const char *)s1 != (unsigned const char *)s2)
+			return ((unsigned const char *)s1 - (unsigned const char *)s2);
+		s1++;
+		s2++;
 	}
-	return (stock);
+	return (0);
 }

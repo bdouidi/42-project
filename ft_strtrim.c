@@ -6,58 +6,90 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 03:04:37 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/14 18:11:59 by idouidi          ###   ########.fr       */
+/*   Updated: 2019/10/16 16:26:56 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-int		ft_count_set(char const *s1, char const *set)
+int		ft_isset(char c, char const *set)
 {
 	int	i;
-	int j;
-	int	stock;
 
 	i = 0;
-	j = 0;
-	stock = 0;
-	while (s1[i])
+	while (set[i])
 	{
-		while (set[j] && set[j] != s1[i])
-			j++;
-		if (set[j] == '\0')
-			stock++;
-		j = 0;
-		i++;
+		if (set[i] == c)
+			return (1);
+		else
+			i++;
 	}
+	return (0);
+}
+
+int		ft_count_char(char const *s1, char const *set)
+{
+	int	stock;
+	int	start;
+	int end;
+
+	stock = 0;
+	start = 0;
+	end = ft_strlen(s1) - 1;
+	while (s1[start] && ft_isset(s1[start], set))
+		start++;
+	while (s1[end] && ft_isset(s1[end], set))
+		end--;
+	if (end < 0)
+		return (0);
+	stock = end - start + 1;
 	return (stock);
+}
+
+char	*ft_fillstr(char *ptr, char const *s1, char const *set)
+{
+	int	stock;
+	int	start;
+	int end;
+	int	i;
+
+	start = 0;
+	i = 0;
+	end = ft_strlen(s1) - 1;
+	while (s1[start] && ft_isset(s1[start], set))
+		start++;
+	while (s1[end] && ft_isset(s1[end], set))
+		end--;
+	if (end < 0)
+		return (0);
+	stock = end - start + 1;
+	while (stock)
+	{
+		ptr[i] = s1[start];
+		i++;
+		start++;
+		stock--;
+	}
+	ptr[i] = '\0';
+	return (ptr);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		i;
-	char	*stock;
-	int		j;
-	int		k;
+	int		stock;
+	char	*ptr;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	if (s1 == NULL || set == NULL)
+	if (!s1 || !set)
 		return (NULL);
-	if (!(stock = (char *)malloc(sizeof(char) * ft_count_set(s1, set) + 1)))
+	stock = ft_count_char(s1, set);
+	if (!(ptr = (char *)malloc(sizeof(char) * (stock + 1))))
 		return (NULL);
-	while (s1[i])
+	if (stock + 1 == 1)
 	{
-		while (set[j] && set[j] != s1[i])
-			j++;
-		if (set[j] == '\0')
-		{
-			stock[k++] = s1[i];
-		}
-		j = 0;
-		i++;
+		ptr[0] = '\0';
+		return (ptr);
 	}
-	stock[k] = '\0';
-	return (stock);
+	ptr = ft_fillstr(ptr, s1, set);
+	return (ptr);
 }

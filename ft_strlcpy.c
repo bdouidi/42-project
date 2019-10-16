@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strlcpy.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 12:15:40 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/14 15:47:53 by idouidi          ###   ########.fr       */
+/*   Created: 2019/10/16 18:49:02 by idouidi           #+#    #+#             */
+/*   Updated: 2019/10/16 21:14:59 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		return (ft_strlen(src));
 	else
 	{
-		while (i < dstsize - 1)
+		while (src[i] && i < dstsize - 1)
 		{
 			dst[i] = src[i];
 			i++;

@@ -6,7 +6,7 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 18:07:43 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/14 18:08:21 by idouidi          ###   ########.fr       */
+/*   Updated: 2019/10/16 18:35:03 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int		ft_isalpha(int c);
 int		isascii(int c);
 
 int		ft_isdigit(int c);
+
+int		ft_memcmp(const void *s1, const void *s2, size_t n);
 
 int		ft_isprint(int c);
 

@@ -6,7 +6,7 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:11:31 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/14 15:42:30 by idouidi          ###   ########.fr       */
+/*   Updated: 2019/10/15 14:26:30 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		ft_lenghtword(char const *s, char c)
 	return (i);
 }
 
-char	*ft_strncpy(char *dest, const char *src, size_t n)
+char	*ft_sncpy(char *dest, const char *src, size_t n)
 {
 	size_t	i;
 
@@ -81,7 +81,7 @@ char	**ft_split(char const *s, char c)
 		if (!ft_isnotsep(s[i], c))
 		{
 			tab[j] = (char *)malloc(sizeof(char) * ft_lenghtword(&s[i], c));
-			tab[j] = ft_strncpy(tab[j], &s[i], ft_lenghtword(&s[i], c));
+			tab[j] = ft_sncpy(tab[j], &s[i], ft_lenghtword(&s[i], c));
 			j++;
 			i = i + ft_lenghtword(&s[i], c);
 		}
