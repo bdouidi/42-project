@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strmapi.c                                          :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/14 11:13:40 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/15 15:38:38 by idouidi          ###   ########.fr       */
+/*   Created: 2019/10/18 18:54:05 by idouidi           #+#    #+#             */
+/*   Updated: 2019/10/18 19:35:04 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+void ft_lstadd_back(t_list **alst, t_list *new)
 {
-	char				*stock;
-	unsigned int		i;
-
-	if (!s)
-		return (NULL);
-	if (!(stock = ft_strdup(s)))
-		return (NULL);
-	i = 0;
-	while (stock[i])
+	if (alst && (*alst) && new)
 	{
-		stock[i] = f(i, stock[i]);
-		i++;
+		if ((*alst) == NULL)
+			(*alst) = new;
+		else
+		{
+			while ((*alst)->next)
+				(*alst) = (*alst)->next;
+			(*alst)->next = new;
+		}
 	}
-	return (stock);
 }

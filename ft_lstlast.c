@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strmapi.c                                          :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/14 11:13:40 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/15 15:38:38 by idouidi          ###   ########.fr       */
+/*   Created: 2019/10/18 18:45:01 by idouidi           #+#    #+#             */
+/*   Updated: 2019/10/18 18:47:35 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+t_list	*ft_lstlast(t_list *lst)
 {
-	char				*stock;
-	unsigned int		i;
-
-	if (!s)
-		return (NULL);
-	if (!(stock = ft_strdup(s)))
-		return (NULL);
-	i = 0;
-	while (stock[i])
-	{
-		stock[i] = f(i, stock[i]);
-		i++;
-	}
-	return (stock);
+	while (lst)
+		lst++;
+	return (lst);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                        :+:      :+:    :+:   */
+/*   putnbr_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,13 +14,13 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	long	res;
+	unsigned int res;
 
-	res = (long)n;
+	res = (unsigned int)n;
 	if (n < 0)
 	{
 		ft_putchar_fd('-', fd);
-		res = (long)(n * -1);
+		res = (unsigned int)(n * -1);
 	}
 	if (res >= 0 && res <= 9)
 		ft_putchar_fd(res + '0', fd);

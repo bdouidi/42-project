@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strmapi.c                                          :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/14 11:13:40 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/15 15:38:38 by idouidi          ###   ########.fr       */
+/*   Created: 2019/10/18 16:24:20 by idouidi           #+#    #+#             */
+/*   Updated: 2019/10/18 18:02:08 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	char				*stock;
-	unsigned int		i;
+	size_t	i;
+	size_t	len;
 
-	if (!s)
-		return (NULL);
-	if (!(stock = ft_strdup(s)))
-		return (NULL);
+	len = ft_strlen(dst) + ft_strlen(src);
+	if (size <= ft_strlen(dst))
+		return (ft_strlen(src) + size);
+	while (*dst)
+		dst++;
 	i = 0;
-	while (stock[i])
+	while ((i < size - (len - ft_strlen(src)) - 1) && src[i])
 	{
-		stock[i] = f(i, stock[i]);
+		dst[i] = src[i];
 		i++;
 	}
-	return (stock);
+	dst[i] = '\0';
+	return (len);
 }
