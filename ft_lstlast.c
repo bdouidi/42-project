@@ -6,7 +6,7 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 18:45:01 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/18 18:47:35 by idouidi          ###   ########.fr       */
+/*   Updated: 2019/10/21 19:56:03 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	while (lst)
-		lst++;
+	if (!lst)
+		return (0);
+	while (lst->next)
+		lst = lst->next;
 	return (lst);
 }

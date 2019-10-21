@@ -6,7 +6,7 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 19:40:13 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/18 21:41:59 by idouidi          ###   ########.fr       */
+/*   Updated: 2019/10/21 19:56:32 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,23 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	if(lst && del)
+	t_list	*l;
+	t_list	*stock;
+
+	l = *lst;
+	stock = NULL;
+	if (lst && del)
 	{
-		while(lst)
+		while (l)
 		{
-			if ((*lst)->next)
-				del((*lst)->content);
+			if (l->next)
+				stock = l->next;
 			else
-				(*lst) = NULL;
-			free((*lst));
-			(*lst) = NULL;
+				stock = NULL;
+			del(l->content);
+			free(l);
+			l = stock;
 		}
 	}
+	*lst = NULL;
 }

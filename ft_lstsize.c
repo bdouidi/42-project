@@ -6,7 +6,7 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 18:05:23 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/18 18:49:46 by idouidi          ###   ########.fr       */
+/*   Updated: 2019/10/19 18:59:28 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ int	ft_lstsize(t_list *lst)
 {
 	int	i;
 
-	i = 0;
-	while (lst)
+	i = 1;
+	if (!lst)
+		return (0);
+	while (lst->next)
 	{
 		i++;
-		lst++;
+		lst = lst->next;
 	}
 	return (i);
 }

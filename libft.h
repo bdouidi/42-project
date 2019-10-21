@@ -5,13 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/14 18:07:43 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/18 19:38:43 by idouidi          ###   ########.fr       */
+/*   Created: 2019/10/21 20:01:14 by idouidi           #+#    #+#             */
+/*   Updated: 2019/10/21 20:21:35 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __LIBFT_H__
-# define __LIBFT_H__
+#ifndef LIBFT_H
+# define LIBFT_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -109,4 +109,8 @@ void				ft_lstdelone(t_list *st, void (*del) (void *));
 
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 
+void				ft_lstiter(t_list *lst, void (*f) (void *));
+
+t_list				*ft_lstmap(t_list *lst, void *(*f) (void *),
+		void (*del) (void *));
 #endif
