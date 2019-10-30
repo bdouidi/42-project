@@ -6,7 +6,7 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:45:32 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/15 19:44:12 by idouidi          ###   ########.fr       */
+/*   Updated: 2019/10/26 20:18:40 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char		*ptr_dst;
-	char		*ptr_src;
-	size_t		i;
+	unsigned int	i;
+	unsigned char	*d;
 
+	d = dst;
 	i = 0;
-	ptr_dst = (char *)dst;
-	ptr_src = (char *)src;
-	if (src == dst)
-		return (dst);
-	if (src > dst)
+	if (!dst && !src)
 	{
+		if (!(d = malloc(sizeof(char))))
+			return (NULL);
+		d[0] = 0;
+		return (d);
+	}
+	if (((unsigned char *)src) < ((unsigned char *)dst))
+		while (len-- > 0)
+			((unsigned char *)dst)[len] = ((unsigned char *)src)[len];
+	else
 		while (i < len)
 		{
-			ptr_dst[i] = ptr_src[i];
-			i++;
+			((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+			i += 1;
 		}
-	}
-	else
-	{
-		i = len;
-		while (i-- > 0)
-			ptr_dst[i] = ptr_src[i];
-	}
-	return (dst);
+	return (((unsigned char *)dst));
 }

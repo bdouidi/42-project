@@ -6,7 +6,7 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 20:01:14 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/21 20:21:35 by idouidi          ###   ########.fr       */
+/*   Updated: 2019/10/23 16:54:54 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
+
+void				ft_bzero(void *s, size_t n);
 
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 
@@ -79,7 +81,7 @@ int					ft_isalnum(int c);
 
 int					ft_isalpha(int c);
 
-int					isascii(int c);
+int					ft_isascii(int c);
 
 int					ft_isdigit(int c);
 

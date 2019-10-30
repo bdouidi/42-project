@@ -6,7 +6,7 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 12:43:30 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/15 19:29:01 by idouidi          ###   ########.fr       */
+/*   Updated: 2019/10/24 15:12:59 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned int res;
+	long	res;
 
-	res = (unsigned int)n;
-	if (n < 0)
+	res = (long)n;
+	if (res < 0)
 	{
 		ft_putchar_fd('-', fd);
-		res = (unsigned int)(n * -1);
+		res = (res * -1);
 	}
 	if (res >= 0 && res <= 9)
 		ft_putchar_fd(res + '0', fd);

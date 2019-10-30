@@ -6,12 +6,11 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 03:04:37 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/16 16:26:56 by idouidi          ###   ########.fr       */
+/*   Updated: 2019/10/25 14:14:27 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 int		ft_isset(char c, char const *set)
 {

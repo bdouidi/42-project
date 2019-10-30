@@ -6,7 +6,7 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 16:57:43 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/14 16:06:22 by idouidi          ###   ########.fr       */
+/*   Updated: 2019/10/23 17:59:03 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ void	*ft_calloc(size_t count, size_t size)
 	i = 0;
 	if (!(stock = (char *)malloc(count * size)))
 		return (NULL);
-	while (stock[i])
-	{
-		stock[i] = 0;
-		i++;
-	}
+	ft_bzero(stock, count);
 	return (stock);
 }

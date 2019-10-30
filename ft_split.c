@@ -6,7 +6,7 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:11:31 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/15 14:26:30 by idouidi          ###   ########.fr       */
+/*   Updated: 2019/10/24 14:56:30 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ int		ft_isnotsep(char letter, char c)
 	return (0);
 }
 
-int		ft_lenghtword(char const *s, char c)
+int		ft_lenght_w(char const *s, char c)
 {
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i] && s[i] != c)
 		i++;
 	return (i);
@@ -54,6 +56,8 @@ char	*ft_sncpy(char *dest, const char *src, size_t n)
 {
 	size_t	i;
 
+	if (!dest || !src)
+		return (NULL);
 	i = 0;
 	while (src[i] && i < n)
 	{
@@ -74,16 +78,16 @@ char	**ft_split(char const *s, char c)
 	j = 0;
 	if (!s)
 		return (NULL);
-	if (!(tab = (char **)malloc(sizeof(char*) * ft_count_word(s, c))))
+	if (!(tab = (char **)malloc(sizeof(char*) * ft_count_word(s, c) + 10)))
 		return (NULL);
 	while (s[i])
 	{
 		if (!ft_isnotsep(s[i], c))
 		{
-			tab[j] = (char *)malloc(sizeof(char) * ft_lenghtword(&s[i], c));
-			tab[j] = ft_sncpy(tab[j], &s[i], ft_lenghtword(&s[i], c));
+			tab[j] = (char *)malloc(sizeof(char) * ft_lenght_w(&s[i], c) + 10);
+			tab[j] = ft_sncpy(tab[j], &s[i], ft_lenght_w(&s[i], c));
 			j++;
-			i = i + ft_lenghtword(&s[i], c);
+			i = i + ft_lenght_w(&s[i], c);
 		}
 		else
 			i++;

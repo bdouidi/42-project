@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 13:33:44 by idouidi           #+#    #+#             */
-/*   Updated: 2019/10/26 19:53:38 by idouidi          ###   ########.fr       */
+/*   Created: 2019/10/18 18:05:23 by idouidi           #+#    #+#             */
+/*   Updated: 2019/10/26 19:14:31 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+int	ft_lstsize(t_list *lst)
 {
-	size_t	i;
-	char	*s;
+	int	i;
 
 	i = 0;
-	s = b;
-	while (i < len)
+	while (lst)
 	{
-		s[i] = (unsigned char)c;
 		i++;
+		lst = lst->next;
 	}
-	return ((void*)s);
+	return (i);
 }
