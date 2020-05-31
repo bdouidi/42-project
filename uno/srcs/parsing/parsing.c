@@ -6,92 +6,164 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 18:14:54 by othabchi          #+#    #+#             */
-/*   Updated: 2020/05/30 21:29:48 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/05/31 05:46:21 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-char	*pars_line(char *str)
+void print_tab(char **tab)
 {
-	int	i;
-	int	j;
+	int i = 0;
+	while (tab[i])
+	{
+		printf("%s\n", tab[i]);
+		i++;
+	}
+}
+
+int		is_present(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '1' && str[i] != ' ' &&  str[i] != '	')
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
+int		check_map_content(char **tab, int len)
+{
+	int		i;
+	int		j;
+	int		check;
 
 	i = 0;
 	j = 0;
-	while (str[i])
+	check = 0;
+	while (tab[i])
 	{
-		j = i + 1;
-		if (str[j] && (str[j] == ' ' || str[j] == '	'))
-			if (str[i] == '0' || str[i] == '2')
-				return (NULL);
-		while(str[j] && (str[j] == ' ' || str[j] == '	'))
+		while(tab[i][j])
 		{
-			str[j] = '*';
-			if (str[j] == '0' || str[j] == '2')
-				return (NULL);
+			if (tab[i][j] != '1' && tab[i][j] != '2' && tab[i][j] != '0' && tab[i][j] != 'N' && tab[i][j] != 'S' && tab[i][j] != 'E' && tab[i][j] != 'W' && tab[i][j] != ' ' && tab[i][j] != '	')
+				return (-1);
+			if (tab[i][j] == 'N' || tab[i][j] == 'S' || tab[i][j] == 'E' || tab[i][j] == 'W')
+			{
+				if (i == 0 || i == len)
+					return (-1);
+				check++;
+			}
+			j++;
 		}
+		j = 0;
 		i++;
 	}
-	return (str);
+	if (check != 1)
+		return (-1);
+	return (0);
+}
+int		pars_map(char **tab)
+{
+	int	i;
+	int	j;
+	int k;
+	int	len;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	len = i - 1;
+	if (is_present(tab[0]) == -1 || is_present(tab[len]) == -1 || check_map_content(tab, len) == -1)
+		return (-1);
+	j = 0;
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i][0] != '1' || tab[i][ft_strlen(tab[i]) - 1] != '1')
+			return (-1);
+		k = i;
+		while (tab[k][j])
+		{
+			if (tab[k][j] == ' ' || tab[k][j] == '	')
+			{
+				if ((tab[k][j - 1] == '2' || tab[k][j - 1] == '0') || (tab[k][j + 1] == '2' || tab[k][j + 1] == '0'))
+					return (-1);
+				if (k == 0 && (tab[k + 1][j] == '2' || tab[k + 1][j] == '0'))
+					return (-1);
+				if (k == len && (tab[k - 1][j] == '2' || tab[k - 1][j] == '0')) 
+					return (-1);
+			}
+			j++;
+		}
+		i++;
+		j = 0;
+	}
+	return (0);
 }
 
-char **pars_map(int fd)
+char	*only_map(char *tmp)
+{
+	int		i;
+	int		len;
+
+	i = 0;
+	len = ft_strlen(tmp) - 1;
+	while (tmp[i])
+	{
+		if (tmp[i + 1] && ((tmp[i] == '\n' && ft_isdigit(tmp[i + 1])) || ft_isdigit(tmp[0])))
+			return (tmp = ft_substr(tmp, i + 1, len));
+		i++;
+	}
+	return (NULL);
+}
+char **map(int fd)
 {
 	char	*tmp;
 	char	*line;
 	char 	**tab;
-	//int		i = 0;
-	
+	int		i;
+
+	i = 0;
 	tab = NULL;
 	line = NULL;
 	tmp = ft_strdup("");
 	while (get_next_line(fd, &line) > 0)
 	{
 		line  = ft_strtrim(line, " 	");
-		if (line[0] == '1')
-		{
-			tmp = ft_strjoin(tmp, line);
-		}
-		//free(line);
+		tmp = ft_strjoin(tmp, line);
+		free(line);
 	}
-	tab = ft_split((char *)tmp, "\n");
+	tmp = only_map(tmp);
+	tab = ft_split((char *)tmp, '\n');
 	free(tmp);
 	return(tab);
 }
 
-void	print_tab(char **tab)
+int	pars_file(int fd, char **tab)
 {
-	int	i;
-	int	j;
+	tab = map(fd);
+	print_tab(tab);
+	if (pars_map(tab) == -1)
+		return (-1);
+	return (0);
 
-	i = 0;
-	j = 0;
-	while(tab[i])
-	{
-		while (tab[i][j])
-		{
-			printf("%c", tab[i][j]);
-			j++;
-		}
-		printf("\n");
-		j = 0;
-		i++;
-	}
 }
 
 int main (int ac, char *av[])
 {
 	(void)ac;
-	char 	**tab;
-	int 	fd_map = open(av[1], O_RDONLY);
+	char 	**tab = NULL;
+	int 	fd = open(av[1], O_RDONLY);
 
-	if ((tab = pars_map(fd_map)) == NULL)
+	if (pars_file(fd, tab) == -1)
 	{
-		printf("error in the grill\n");
+		printf("mauvais format de map\n");
 		return (0);
 	}
-	print_tab(tab);
-	close(fd_map);
+	close(fd);
 	return (0);
 }

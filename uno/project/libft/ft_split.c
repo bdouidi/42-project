@@ -6,93 +6,112 @@
 /*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 17:49:43 by idouidi           #+#    #+#             */
-/*   Updated: 2020/05/28 17:53:15 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/05/30 22:28:11 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		str_chr(char c, char *charset)
-{
-	int	i;
-
-	i = 0;
-	while (charset[i])
-	{
-		if (charset[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int		count_word(char *str, char *charset)
+static int	get_words(char *str, char c)
 {
 	int		i;
-	int		count;
+	int		word;
+	int		wflag;
 
 	i = 0;
-	count = 0;
+	word = 0;
+	wflag = 0;
 	while (str[i])
 	{
-		while (str[i] && str_chr(str[i], charset))
-			i++;
-		if (str[i])
-			count++;
-		while (str[i] && !str_chr(str[i], charset))
-			i++;
-	}
-	return (count);
-}
-
-char	*ft_strncpy(char *dest, char *src, unsigned int n)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (src[i] && i < n)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-int		word_length(char *str, char *charset)
-{
-	int		i;
-
-	i = 0;
-	while (str[i] && !str_chr(str[i], charset))
-		i++;
-	return (i);
-}
-
-char	**ft_split(char *str, char *charset)
-{
-	char	**tab;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	if (!(tab = (char**)malloc(sizeof(char*) * count_word(str, charset) + 1)))
-		return (0);
-	while (str[i])
-	{
-		if (!str_chr(str[i], charset))
+		if (str[i] != c)
 		{
-			if (!(tab[j] = (char*)malloc(sizeof(char) *
-							word_length(str, charset) + 1)))
-				return (0);
-			tab[j] = ft_strncpy(tab[j], &str[i], word_length(&str[i], charset));
-			i += word_length(&str[i], charset);
-			j++;
+			if (!wflag)
+			{
+				wflag = 1;
+				word++;
+			}
 		}
 		else
-			i++;
+			wflag = 0;
+		i++;
 	}
-	tab[j] = 0;
+	return (word);
+}
+
+static char	*cut_word(char *str, char c)
+{
+	int		i;
+	int		j;
+	char	*str_return;
+
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	j = i;
+	i = 0;
+	if ((str_return = (char*)malloc(sizeof(char) * j + 1)) == NULL)
+		return (NULL);
+	while (i < j)
+	{
+		str_return[i] = str[i];
+		i++;
+	}
+	str_return[i] = '\0';
+	return (str_return);
+}
+
+static char	*get_word(char *str, int w, char c)
+{
+	int		i;
+	int		word;
+	int		wflag;
+
+	i = 0;
+	word = 0;
+	wflag = 0;
+	while (str[i])
+	{
+		if (str[i] != c)
+		{
+			if (!wflag)
+			{
+				wflag = 1;
+				word++;
+				if (word == w)
+					return (cut_word(&str[i], c));
+			}
+		}
+		else
+			wflag = 0;
+		i++;
+	}
+	return (&str[i]);
+}
+
+char		**ft_split(char const *str, char c)
+{
+	int		i;
+	int		k;
+	char	*newstr;
+	char	**tab;
+
+	i = 0;
+	if (!str || (tab = (char**)malloc(sizeof(char*) *
+					(get_words((char *)str, c) + 1)))
+			== NULL)
+		return (NULL);
+	while (i < get_words((char *)str, c))
+	{
+		k = 0;
+		newstr = get_word((char *)str, i + 1, c);
+		while (newstr[k])
+			k++;
+		if ((tab[i] = (char*)malloc(sizeof(char) * k + 1)) == NULL)
+			return (NULL);
+		tab[i] = newstr;
+		tab[i][k] = '\0';
+		i++;
+	}
+	tab[i] = NULL;
 	return (tab);
 }
