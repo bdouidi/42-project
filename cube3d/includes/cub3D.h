@@ -18,23 +18,29 @@
 
 typedef struct  s_data
 {
+    char	**map;
     void        *img;
     char        *addr;
+    char	*tmp;
+    char        *resolution;
+    char        *floor;
+    char        *ceiling;
+    char	*sprite;
+    char	*north;
+    char	*east;
+    char	*south;
+    char	*west;
     int         bits_per_pixel;
-    int         line_length;
     int         endian;
-    int         resolution[2];
-    int         Floor[3];
-    int         Ceiling[3];
     
-    }               t_data;
+}		t_data;
 
-typedef struct s_player
+typedef struct	s_player
 {
-    int         eye_height;
-    int         *pos;
-    int         fov;
-    int         wall_distance;
+	int         eye_height;	
+	int         *pos;
+    	int         fov;
+    	int         wall_distance;
 }               t_player;
 
 int		ft_pars(char **av);
