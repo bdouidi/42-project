@@ -12,6 +12,12 @@
 
 #include "../../includes/cub3D.h"
 
+int	is_blank(char c)
+{
+	if (c == ' ' || c == '	')
+		return (0);
+	return (-1);
+}
 void print_tab(char **tab)
 {
 	int i = 0;
@@ -29,14 +35,14 @@ int		is_present(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] != '1' && str[i] != ' ' &&  str[i] != '	')
+		if (str[i] != '1' && is_blank(str[i]) == -1)
 			return (-1);
 		i++;
 	}
 	return (0);
 }
 
-int		check_map_content(char **tab, int len)
+/*int		check_map_content(char **tab, int len)
 {
 	int		i;
 	int		j;
@@ -49,7 +55,9 @@ int		check_map_content(char **tab, int len)
 	{
 		while(tab[i][j])
 		{
-			if (tab[i][j] != '1' && tab[i][j] != '2' && tab[i][j] != '0' && tab[i][j] != 'N' && tab[i][j] != 'S' && tab[i][j] != 'E' && tab[i][j] != 'W' && tab[i][j] != ' ' && tab[i][j] != '	')
+			if (tab[i][j] != '1' && tab[i][j] != '2' && tab[i][j] != '0' 
+				&& tab[i][j] != 'N' && tab[i][j] != 'S' && tab[i][j] != 'E' 
+				&& tab[i][j] != 'W' && is_blank(tab[i][j]) == -1)
 				return (-1);
 			if (tab[i][j] == 'N' || tab[i][j] == 'S' || tab[i][j] == 'E' || tab[i][j] == 'W')
 			{
@@ -65,8 +73,9 @@ int		check_map_content(char **tab, int len)
 	if (check != 1)
 		return (-1);
 	return (0);
-}
-int		pars_map(char **tab)
+}*/
+
+/*int		pars_map(char **tab)
 {
 	int	i;
 	int	j;
@@ -88,7 +97,7 @@ int		pars_map(char **tab)
 		k = i;
 		while (tab[k][j])
 		{
-			if (tab[k][j] == ' ' || tab[k][j] == '	')
+			if (is_blank(tab[k][j] == 0))
 			{
 				if ((tab[k][j - 1] == '2' || tab[k][j - 1] == '0') || (tab[k][j + 1] == '2' || tab[k][j + 1] == '0'))
 					return (-1);
@@ -103,52 +112,101 @@ int		pars_map(char **tab)
 		j = 0;
 	}
 	return (0);
+}*/
+
+t_data 	*info_map(t_data *d, int i)
+{
+	int	j;
+	j = i;
+	while (d->tmp[j] && d->tmp[j] != '\n')
+		j++;
+	if (d->tmp[i] == 'R')
+		d->resolution = ft_substr(d->tmp, i, j--);
+	if (d->tmp[i] == 'F')
+		d->floor = ft_substr(d->tmp, i, j--);
+	if (d->tmp[i] == 'S')
+		d->sprite = ft_substr(d->tmp, i, j--);
+	if (d->tmp[i] == 'C')
+		d->ceiling = ft_substr(d->tmp, i, j--);
+	if (d->tmp[i + 1] && d->tmp[i] == 'N' && is_blank(d->tmp[i + 2]) == 0)
+		d->north = ft_substr(d->tmp, i, j--);
+	if (d->tmp[i + 1] && d->tmp[i] == 'E' && is_blank(d->tmp[i + 2]) == 0)
+		d->east = ft_substr(d->tmp, i, j--);
+	if (d->tmp[i + 1] && d->tmp[i] == 'S' && is_blank(d->tmp[i + 2]) == 0)
+		d->south = ft_substr(d->tmp, i, j--);
+	if (d->tmp[i + 1] && d->tmp[i] == 'W' && is_blank(d->tmp[i + 2]) == 0)
+		d->west = ft_substr(d->tmp, i, j--);
+	return (d);
 }
 
-char	*only_map(char *tmp)
+int config_map(t_data *d)
 {
 	int		i;
-	int		len;
+	int		j;
+	int		stock;
+	char		*s;
+	int		check;
 
+	j = 0;
 	i = 0;
-	len = ft_strlen(tmp) - 1;
-	while (tmp[i])
+	stock = 0;
+	s = d->tmp;
+	check = 0;
+	while (s[i])
 	{
-		if (tmp[i + 1] && ((tmp[i] == '\n' && ft_isdigit(tmp[i + 1])) || ft_isdigit(tmp[0])))
-			return (tmp = ft_substr(tmp, i + 1, len));
+		if (s[i + 1] && ((s[i] == '\n' && ft_isdigit(s[i + 1])) || ft_isdigit(s[0])) && check == 0)
+		{
+			stock = (ft_isdigit(s[0])) ? i : i + 1;
+			j = stock;
+			while(s[j] && (ft_isdigit(s[j]) == 1 || s[j] == 'N' || s[j] == 'S' ||
+				 s[j] == 'E' || s[j] == 'W' || s[j] == '\n' || s[j] == ' ' || s[j] == '	'))
+				j++;
+			d->tmp = ft_substr(s, stock, j--);
+			i = (i < j) ? j : i;
+			check = 1;
+		}
+		/*if (s[i + 1] && (((s[i] == 'R' || s[i] == 'F' || s[i] == 'R' || s[i] == 'C' ||
+			 s[i] == 'S') && (s[j] == ' ' || s[j] == '	')) || (s[i] == 'N' && s[i + 1] == 'O')
+			  || (s[i] == 'E' && s[i + 1] == 'A') || (s[i] == 'S' && s[i + 1] == 'O') ||
+			   (s[i] == 'W' && s[i + 1] == 'E')))*/
+		if (s[i] == 'R' || s[i] == 'F')
+			d = info_map(d, i);
 		i++;
 	}
-	return (NULL);
+	free(s);
+	s = NULL;
+	return (0);
 }
-char **map(int fd)
-{
-	char	*tmp;
-	char	*line;
-	char 	**tab;
-	int		i;
 
-	i = 0;
-	tab = NULL;
+void map(int fd, t_data *data)
+{
+	char	*line;
+
 	line = NULL;
-	tmp = ft_strdup("");
+	data->map = NULL;
+	data->tmp = ft_strdup("");
 	while (get_next_line(fd, &line) > 0)
 	{
 		line  = ft_strtrim(line, " 	");
-		tmp = ft_strjoin(tmp, line);
+		data->tmp = ft_strjoin(data->tmp, line);
 		free(line);
 	}
-	tmp = only_map(tmp);
-	tab = ft_split((char *)tmp, '\n');
-	free(tmp);
-	return(tab);
+	config_map(data);
+	data->map = ft_split((char *)data->tmp, '\n');
+	free(data->tmp);
+	data->tmp = NULL;
 }
 
-int	pars_file(int fd, char **tab)
+int	pars_file(int fd)
 {
-	tab = map(fd);
-	print_tab(tab);
-	if (pars_map(tab) == -1)
-		return (-1);
+	t_data data;
+	
+	map(fd, &data);
+	print_tab(data.map);
+	printf("%s\n", data.resolution);
+	printf("%s\n", data.floor);
+	/*if (pars_map(tab) == -1)
+		return (-1);*/
 	return (0);
 
 }
@@ -156,10 +214,9 @@ int	pars_file(int fd, char **tab)
 int main (int ac, char *av[])
 {
 	(void)ac;
-	char 	**tab = NULL;
 	int 	fd = open(av[1], O_RDONLY);
 
-	if (pars_file(fd, tab) == -1)
+	if (pars_file(fd) == -1)
 	{
 		printf("mauvais format de map\n");
 		return (0);
