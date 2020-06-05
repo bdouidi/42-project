@@ -20,7 +20,7 @@
 # include <limits.h>
 # include <fcntl.h>
 
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 32
 
 void			*ft_memset(void *str, int c, size_t n);
 void			ft_bzero(void *s, size_t n);
@@ -42,6 +42,7 @@ int				ft_toupper(int c);
 int				ft_tolower(int c);
 int				ft_strnew(char **str);
 int				get_next_line(int fd, char **line);
+char			*ft_epur(char *s);
 char			*ft_strchr(const char *str, int c);
 char			*ft_strrchr(const char *str, int c);
 char			*ft_substr(char const *s, unsigned int start, size_t len);

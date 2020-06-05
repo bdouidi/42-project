@@ -39,14 +39,14 @@ char	*read_fd(int fd, int ret, char *buf, char *save)
 
 int		get_next_line(int fd, char **line)
 {
-	static char	*save[OPEN_MAX];
+	static char	*save[FOPEN_MAX];
 	char		buf[BUFFER_SIZE + 1];
 	int			ret;
 	int			i;
 
 	i = 0;
 	ret = 0;
-	if (fd < 0 || fd >= OPEN_MAX || !line || BUFFER_SIZE <= 0
+	if (fd < 0 || fd >= FOPEN_MAX || !line || BUFFER_SIZE <= 0
 		|| read(fd, buf, 0))
 		return (-1);
 	if (!save[fd])

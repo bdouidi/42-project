@@ -12,12 +12,6 @@
 
 #include "../../includes/cub3D.h"
 
-int	is_blank(char c)
-{
-	if (c == ' ' || c == '	')
-		return (0);
-	return (-1);
-}
 void print_tab(char **tab)
 {
 	int i = 0;
@@ -28,21 +22,21 @@ void print_tab(char **tab)
 	}
 }
 
-int		is_present(char *str)
+int		is_pres(char *str)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] != '1' && is_blank(str[i]) == -1)
+		if (str[i] != '1' && str[i] != ' ' && str[i] != '	')
 			return (-1);
 		i++;
 	}
 	return (0);
 }
 
-/*int		check_map_content(char **tab, int len)
+int		m_content(char **m, int len)
 {
 	int		i;
 	int		j;
@@ -51,15 +45,17 @@ int		is_present(char *str)
 	i = 0;
 	j = 0;
 	check = 0;
-	while (tab[i])
+	while (m[i])
 	{
-		while(tab[i][j])
+		while(m[i][j])
 		{
-			if (tab[i][j] != '1' && tab[i][j] != '2' && tab[i][j] != '0' 
-				&& tab[i][j] != 'N' && tab[i][j] != 'S' && tab[i][j] != 'E' 
-				&& tab[i][j] != 'W' && is_blank(tab[i][j]) == -1)
+			if (m[i][j] != '1' && m[i][j] != '2' && m[i][j] != '0' 
+				&& m[i][j] != 'N' && m[i][j] != 'S' && m[i][j]
+				 != 'E' && m[i][j] != 'W' && m[i][j] != ' ' &&
+				  m[i][j] != '	')
 				return (-1);
-			if (tab[i][j] == 'N' || tab[i][j] == 'S' || tab[i][j] == 'E' || tab[i][j] == 'W')
+			if (m[i][j] == 'N' || m[i][j] == 'S' || m[i][j] == 'E'
+				 || m[i][j] == 'W')
 			{
 				if (i == 0 || i == len)
 					return (-1);
@@ -73,108 +69,140 @@ int		is_present(char *str)
 	if (check != 1)
 		return (-1);
 	return (0);
-}*/
+}
 
-/*int		pars_map(char **tab)
+int		pars_map(char **m, int len)
 {
-	int	i;
-	int	j;
-	int k;
-	int	len;
+	int		i;
+	unsigned int	j;
+	int 		k;
 
 	i = 0;
-	while (tab[i])
-		i++;
-	len = i - 1;
-	if (is_present(tab[0]) == -1 || is_present(tab[len]) == -1 || check_map_content(tab, len) == -1)
-		return (-1);
-	j = 0;
+	j = 1;
 	i = 0;
-	while (tab[i])
+	if (is_pres(m[0]) == -1 || is_pres(m[len]) == -1 ||
+		 m_content(m, len) == -1)
+		return (-1);
+	while (m[i])
 	{
-		if (tab[i][0] != '1' || tab[i][ft_strlen(tab[i]) - 1] != '1')
+		if (m[i][0] != '1' || m[i][ft_strlen(m[i]) - 1] != '1')
 			return (-1);
 		k = i;
-		while (tab[k][j])
+		while (m[k][j] && j < (ft_strlen(m[k]) - 1))
 		{
-			if (is_blank(tab[k][j] == 0))
+			if (m[k][j] == ' ' || m[k][j] == '	')
 			{
-				if ((tab[k][j - 1] == '2' || tab[k][j - 1] == '0') || (tab[k][j + 1] == '2' || tab[k][j + 1] == '0'))
+				if ((m[k][j - 1] == '2' || m[k][j - 1] == '0')
+					 || (m[k][j + 1] == '2' || m[k][j + 1]
+					  == '0'))
 					return (-1);
-				if (k == 0 && (tab[k + 1][j] == '2' || tab[k + 1][j] == '0'))
+				if (k == 0 && (m[k + 1][j] == '2' || m[k + 1][j]
+					 == '0'))
 					return (-1);
-				if (k == len && (tab[k - 1][j] == '2' || tab[k - 1][j] == '0')) 
+				if (k == len && (m[k - 1][j] == '2' || m[k - 1]
+					[j] == '0')) 
 					return (-1);
 			}
 			j++;
 		}
 		i++;
-		j = 0;
+		j = 1;
 	}
 	return (0);
-}*/
-
-t_data 	*info_map(t_data *d, int i)
-{
-	int	j;
-	j = i;
-	while (d->tmp[j] && d->tmp[j] != '\n')
-		j++;
-	if (d->tmp[i] == 'R')
-		d->resolution = ft_substr(d->tmp, i, j--);
-	if (d->tmp[i] == 'F')
-		d->floor = ft_substr(d->tmp, i, j--);
-	if (d->tmp[i] == 'S')
-		d->sprite = ft_substr(d->tmp, i, j--);
-	if (d->tmp[i] == 'C')
-		d->ceiling = ft_substr(d->tmp, i, j--);
-	if (d->tmp[i + 1] && d->tmp[i] == 'N' && is_blank(d->tmp[i + 2]) == 0)
-		d->north = ft_substr(d->tmp, i, j--);
-	if (d->tmp[i + 1] && d->tmp[i] == 'E' && is_blank(d->tmp[i + 2]) == 0)
-		d->east = ft_substr(d->tmp, i, j--);
-	if (d->tmp[i + 1] && d->tmp[i] == 'S' && is_blank(d->tmp[i + 2]) == 0)
-		d->south = ft_substr(d->tmp, i, j--);
-	if (d->tmp[i + 1] && d->tmp[i] == 'W' && is_blank(d->tmp[i + 2]) == 0)
-		d->west = ft_substr(d->tmp, i, j--);
-	return (d);
 }
 
-int config_map(t_data *d)
+int	flags(char c)
 {
-	int		i;
-	int		j;
-	int		stock;
-	char		*s;
-	int		check;
+	if (c == 'R'|| c == 'F' || c == 'S' || c == 'C' || c == 'N' || c == 'W'
+		 || c == 'E') 
+		return (0);
+	return (-1);
+}
+void	leak(char *str)
+{
+	free(str);
+	str = NULL;
+}
 
-	j = 0;
+char *fill_str(char *s1, char *s2, int i, int j)
+{
+	int	k;
+
+	k = 0;
+	if(!(s2 = (char *)malloc(sizeof(char) * j)))
+		return (NULL);
+	while(i < j)
+	{
+		s2[k] = s1[i];
+		i++;
+		k++;
+	}
+	s2[k] = '\0';
+	return(s2);
+}
+
+void info_map(t_data *d, char *s, int i)
+{
+	int	j;
+
+	j = i;
+	while(s[j] && s[j] != '\n')
+		j++;
+	if (s[i] == 'R')
+		d->resolution = fill_str(s, d->resolution, i, j);
+	if (s[i] == 'F')
+		d->floor = fill_str(s, d->resolution, i, j);
+	if (s[i] == 'C')
+		d->ceiling = fill_str(s, d->ceiling, i, j);
+	if (s[i] == 'N')
+		d->north = fill_str(s, d->north, i, j);
+	if (s[i] == 'W')
+		d->west = fill_str(s, d->west, i, j);
+	if (s[i] == 'E')
+		d->east = fill_str(s, d->east, i, j);
+	if (s[i] == 'S')
+	{
+		if (s[i + 1] == 'O')
+			d->south = fill_str(s, d->south, i, j);
+		else
+			d->sprite = fill_str(s, d->sprite, i, j);
+	}
+}
+
+int	is_flags(char *s, int i)
+{
+	if (flags(s[i]) == 0)
+	{
+		if (s[i + 1] == ' ' || s[i + 1] == '	')
+			return (0);
+		if ((s[i + 1] == 'O' || s[i + 1] == 'E' || s[i + 1] == 'A') &&
+			 (s[i + 2] == ' ' || s[i + 2] == '	'))
+			return (0);
+	}
+	return (-1);
+}
+
+int	config_map(t_data *d)
+{
+	int	i;
+	char	*s;
+	int	check;
+
 	i = 0;
-	stock = 0;
-	s = d->tmp;
 	check = 0;
+	s = d->tmp;
 	while (s[i])
 	{
-		if (s[i + 1] && ((s[i] == '\n' && ft_isdigit(s[i + 1])) || ft_isdigit(s[0])) && check == 0)
+		if (s[i + 1] && s[i + 2] && is_flags(s, i) == 0)
+			info_map(d, s, i);
+		if (s[i + 1] && s[i] == '\n' && ft_isdigit(s[i + 1]) &&
+			 check == 0)
 		{
-			stock = (ft_isdigit(s[0])) ? i : i + 1;
-			j = stock;
-			while(s[j] && (ft_isdigit(s[j]) == 1 || s[j] == 'N' || s[j] == 'S' ||
-				 s[j] == 'E' || s[j] == 'W' || s[j] == '\n' || s[j] == ' ' || s[j] == '	'))
-				j++;
-			d->tmp = ft_substr(s, stock, j--);
-			i = (i < j) ? j : i;
+			d->tmp = ft_substr(s, i + 1, ft_strlen(s));
 			check = 1;
 		}
-		/*if (s[i + 1] && (((s[i] == 'R' || s[i] == 'F' || s[i] == 'R' || s[i] == 'C' ||
-			 s[i] == 'S') && (s[j] == ' ' || s[j] == '	')) || (s[i] == 'N' && s[i + 1] == 'O')
-			  || (s[i] == 'E' && s[i + 1] == 'A') || (s[i] == 'S' && s[i + 1] == 'O') ||
-			   (s[i] == 'W' && s[i + 1] == 'E')))*/
-		if (s[i] == 'R' || s[i] == 'F')
-			d = info_map(d, i);
 		i++;
 	}
-	free(s);
-	s = NULL;
 	return (0);
 }
 
@@ -183,32 +211,90 @@ void map(int fd, t_data *data)
 	char	*line;
 
 	line = NULL;
-	data->map = NULL;
 	data->tmp = ft_strdup("");
 	while (get_next_line(fd, &line) > 0)
 	{
 		line  = ft_strtrim(line, " 	");
 		data->tmp = ft_strjoin(data->tmp, line);
-		free(line);
+		leak(line);
+
 	}
 	config_map(data);
 	data->map = ft_split((char *)data->tmp, '\n');
-	free(data->tmp);
-	data->tmp = NULL;
+	leak(data->tmp);
 }
 
+int	r_f_c(char *s)
+{
+	int	i;
+	int	check;
+	int	comma;
+
+	i = 1;
+	comma = 0;
+	check = 0;
+	while(s[i])
+	{
+		if (s[0] == 'R' && ft_isdigit(s[i]) != 1 && s[i] != ' ' &&
+			 s[i] != '	')
+			return (-1);
+		if ((s[0] == 'C' || s[0] == 'F') && (ft_isdigit(s[i]) != 1 &&
+			 s[i] != ' ' && s[i] != '	' && s[i] != ','))
+			return (-1);
+		if (ft_isdigit(s[i]) == 1)
+		{
+			check++;
+			while (s[i] && ft_isdigit(s[i]) == 1)
+				i++; 
+		}
+		if (s[i] == ',')
+			comma++;
+		i++;
+	}
+	if ((s[0] == 'R' && check != 2) || ((s[0] == 'C' || s[0] == 'F') &&
+		 (check != 3 || comma != 2)))
+			return (-1);
+	return (0);
+}
+
+int	pars_info_map(t_data *d)
+{
+	if (!d->resolution || !d->floor || !d->ceiling || !d->sprite ||
+		 !d->north || !d->east || !d->south || !d->west ||
+		  r_f_c(d->floor) == -1 || r_f_c(d->ceiling) == -1 ||
+		   r_f_c(d->resolution) == -1)
+		return (-1);
+	return (0);
+}
 int	pars_file(int fd)
 {
-	t_data data;
-	
-	map(fd, &data);
-	print_tab(data.map);
-	printf("%s\n", data.resolution);
-	printf("%s\n", data.floor);
-	/*if (pars_map(tab) == -1)
-		return (-1);*/
-	return (0);
+	t_data	data;
+	int	len;
 
+	len = 0;
+	data.map = NULL;
+	data.resolution = NULL;
+	data.floor = NULL;
+	data.ceiling = NULL;
+	data.sprite = NULL;
+	data.north = NULL;
+	data.east = NULL;
+	data.south = NULL;
+	data.west = NULL;
+	map(fd, &data);
+	while(data.map[len])
+		len++;
+	if (pars_info_map(&data) == -1)
+	{
+		ft_putstr("bad informartion to config the map\n");
+		return (-1);
+	}
+	if (pars_map(data.map, len - 1))
+	{
+		ft_putstr("bad character or wrong character's place\n");
+		return (-1);
+	}
+	return (0);
 }
 
 int main (int ac, char *av[])
@@ -218,7 +304,7 @@ int main (int ac, char *av[])
 
 	if (pars_file(fd) == -1)
 	{
-		printf("mauvais format de map\n");
+		close(fd);
 		return (0);
 	}
 	close(fd);
