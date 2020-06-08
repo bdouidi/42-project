@@ -6,27 +6,23 @@
 #    By: dsy <marvin@42.fr>                         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 17:08:38 by dsy               #+#    #+#              #
-#    Updated: 2020/02/28 19:04:03 by othabchi         ###   ########.fr        #
+#    Updated: 2020/06/08 16:26:01 by idouidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#OBJS = srcs/*\
+SRCS = srcs/ft_utils_pars.c srcs/parsing/ft_pars_info_map.c \
+	   srcs/parsing/ft_pars_map.c  srcs/parsing/ft_parsing.c \
 
-SRCS = srcs/parser/*.c \
-	   srcs/mlx_functions/*.c \
-	   srcs/utils/*.c \
-	   srcs/raycasting/raycasting_utils.c \
-#	   srcs/raycasting/raycasting.c \
-
-LIBFTPATH = includes/libft 
-LIBOBJ = includes/libft/libft.a
+LIBFTPATH = project/libft 
+LIBOBJ = project/libft/libft.a
 
 libft:
-	@echo "compiling..."
+	@echo "compiling libft..."
 	cd $(LIBFTPATH) && make
 
-all: libft
-	gcc -Wall -Werror -Wextra $(SRCS) main.c -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit $(LIBOBJ) -o Cub3D
+all: libft 
+	@echo "compiling cube3D..."
+	gcc -Wall -Werror -Wextra $(SRCS) $(LIBOBJ) main.c
 
 clean:
 	@cd $(LIBFTPATH) && make clean

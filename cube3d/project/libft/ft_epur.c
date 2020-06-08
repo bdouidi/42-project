@@ -34,6 +34,7 @@ static char	*fill_str(char *tmp, char *s)
 	int	j;
 
 	i = 0;
+	j = 0;
 	while (s[i])
 	{
 		if (s[i] && s[i] != ' ' && s[i] != '\t')
