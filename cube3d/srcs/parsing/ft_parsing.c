@@ -103,5 +103,12 @@ int			pars_file(int fd)
 		return (-1);
 	if (pars_map(data.map, len - 1))
 		return (-1);
+	adjust_map(&data);
+	int	i = 0;
+	while (data.map[i])
+	{
+		printf("%s\n", data.map[i]);
+		i++;
+	}
 	return (0);
 }

@@ -34,7 +34,7 @@ int			r_f_c(char *s)
 	{
 		if (check_rfc_content(s, i) != 0)
 			return (-1);
-		if (ft_isdigit(s[i]) == 1)
+		if (ft_isdigit(s[i]) == 1 && s[i])
 		{
 			check++;
 			while (s[i] && ft_isdigit(s[i]) == 1)
@@ -42,7 +42,8 @@ int			r_f_c(char *s)
 		}
 		if (s[i] == ',')
 			comma++;
-		i++;
+		if (s[i])
+			i++;
 	}
 	if ((s[0] == 'R' && check != 2) || ((s[0] == 'C' || s[0] == 'F') &&
 				(check != 3 || comma != 2)))

@@ -51,6 +51,7 @@ char		*fill_str(char *s1, char *s2, int i, int j);
 int			pars_info_map(t_data *d);
 int			pars_map(char **map, int len);
 int			pars_file(int fd);
+void			adjust_map(t_data *d);
 /***                                                                        ***/
 void		leak(char *str);
 int			create_trgb(int t, int r, int g, int b);
