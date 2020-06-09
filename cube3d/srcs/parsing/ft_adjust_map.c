@@ -19,12 +19,17 @@ char	*adjust_str(char *tmp, char *m, int stock)
 	int	k;
 
 	k = 0;
+	if (!(tmp = malloc(sizeof(char) * stock + 1)))
+		return NULL;
+	while (m[k])
+	{
+		tmp[k] = m[k];
+		k++;
+		stock--;
+	}
 	while (stock)
 	{
-		if (m[k])
-			tmp[k] = m[k];
-		else
-			tmp[k] = '1';
+		tmp[k] = '*';
 		k++;
 		stock--;
 	}
@@ -34,36 +39,33 @@ char	*adjust_str(char *tmp, char *m, int stock)
 
 void 	adjust_map(t_data *d)
 {
-	int 		i;
+	int 			i;
 	unsigned int	stock;
-	char		**tmp;
-	int		j;
-	char		**m = d->map;
+	char			**tmp;
+	int				j;
 
 	i = 0;
 	j = 0;
 	stock = 0;
-	while (m[i])
+	while (d->map[i])
 	{
-		m[i] = noblank(m[i]);
-		stock = (stock > ft_strlen(m[i])) ? stock : ft_strlen(m[i]);
+		stock = (stock > ft_strlen(d->map[i])) ? stock : ft_strlen(d->map[i]);
 		i++;
 	}
-	if (!(tmp = malloc(sizeof(char*) * i)))
+	printf("stock : [%d] \n i : [%d]\n", stock , i);
+	if (!(tmp = calloc(i + 1, sizeof(char*))))
 		return ;
 	while (j < i)
 	{
-		if (!(tmp[j] = malloc(sizeof(char) * stock)))
-			return ;
-		tmp[j] = adjust_str(tmp[j], m[j], stock);
+		tmp[j] = adjust_str(tmp[j], d->map[j], stock);
 		j++;
 	}
 	tmp[i] = NULL;
 	i = 0;
-	while (m[i])
+	while (d->map[i])
 	{
-		free(m[i]);
-		m[i] = NULL;
+		free(d->map[i]);
+		d->map[i] = NULL;
 		i++;
 	}
 	d->map = tmp;

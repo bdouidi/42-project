@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/08 16:40:29 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/06/09 21:12:47 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ static int	config_map(t_data *d)
 	char	*s;
 	int		check;
 
+			/* 
+			ici prendre en compte le cas où les 1eres lignes de la map
+ 			commencent par des espaces	
+	 		*/
 	i = 0;
 	check = 0;
 	s = d->tmp;
@@ -72,12 +76,13 @@ void		map(int fd, t_data *data)
 	data->tmp = ft_strdup("");
 	while (get_next_line(fd, &line) > 0)
 	{
-		line = ft_strtrim(line, " 	");
+		// line = ft_strtrim(line, " 	");
 		data->tmp = ft_strjoin(data->tmp, line);
 		leak(line);
 	}
 	config_map(data);
 	data->map = ft_split((char *)data->tmp, '\n');
+	adjust_map(data);
 	leak(data->tmp);
 }
 
@@ -97,18 +102,19 @@ int			pars_file(int fd)
 	data.south = NULL;
 	data.west = NULL;
 	map(fd, &data);
+	int	i = 0;
+	while (data.map[i])
+	{
+		ft_putstr(data.map[i]);
+		ft_putchar('\n');
+		i++;
+	}
 	while (data.map[len])
 		len++;
+	printf("len = [%d]\n", len);
 	if (pars_info_map(&data) == -1)
 		return (-1);
 	if (pars_map(data.map, len - 1))
 		return (-1);
-	adjust_map(&data);
-	int	i = 0;
-	while (data.map[i])
-	{
-		printf("%s\n", data.map[i]);
-		i++;
-	}
 	return (0);
 }

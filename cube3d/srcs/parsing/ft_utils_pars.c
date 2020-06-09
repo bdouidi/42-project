@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_pars.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 15:18:13 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/08 18:40:53 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/06/09 18:14:43 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char		*fill_str(char *s1, char *s2, int i, int j)
 	int	k;
 
 	k = 0;
-	if (!(s2 = (char *)malloc(sizeof(char) * j)))
+	if (!(s2 = (char *)malloc(sizeof(char) * j + 1)))
 		return (NULL);
 	while (i < j)
 	{
