@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 15:02:00 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/10 17:40:12 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/10 19:53:57 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int		check_m_content(char **m, int i, int j)
 {
 	if (m[i][j] != '1' && m[i][j] != '2' && m[i][j] != '0' && m[i][j] != 'N'
 			&& m[i][j] != 'S' && m[i][j] != 'E' && m[i][j] != 'W'
-			&& m[i][j] != '*') 
+			&& m[i][j] != '*')
 		return (-1);
 	return (0);
 }
@@ -46,7 +46,7 @@ static int		m_content(char **m, int len, int check)
 	{
 		while (m[i][++j])
 		{
-			if (check_m_content(m, i, j) != 0)	
+			if (check_m_content(m, i, j) != 0)
 				return (-1);
 			if (m[i][j] == 'N' || m[i][j] == 'S' || m[i][j] == 'E' ||
 					m[i][j] == 'W')
@@ -68,15 +68,19 @@ static int		check_pars_map(char **m, int i, int j, int len)
 	if (m[i][j] == '*')
 	{
 		if (i > 0 && i < len)
-			if (m[i - 1][j] && m[i + 1][j] && m[i][j - 1] && m[i][j + 1] && 
-				((m[i][j - 1] == '2' || m[i][j - 1] == '0' || ft_isalpha(m[i][j - 1])) ||
-				(m[i][j + 1] == '2' || m[i][j + 1] == '0' || ft_isalpha(m[i][j + 1])) ||
-				(m[i - 1][j] == '2' || m[i - 1][j] == '0' || ft_isalpha(m[i - 1][j])) ||
-				(m[i + 1][j] == '2' || m[i + 1][j] == '0' || ft_isalpha(m[i + 1][j]))))
+			if (m[i - 1][j] && m[i + 1][j] && m[i][j - 1] && m[i][j + 1] &&
+				((m[i][j - 1] == '2' || m[i][j - 1] == '0' ||
+				ft_isalpha(m[i][j - 1])) || (m[i][j + 1] == '2' ||
+				m[i][j + 1] == '0' || ft_isalpha(m[i][j + 1])) ||
+				(m[i - 1][j] == '2' || m[i - 1][j] == '0' ||
+				ft_isalpha(m[i - 1][j])) || (m[i + 1][j] == '2' ||
+				m[i + 1][j] == '0' || ft_isalpha(m[i + 1][j]))))
 				return (-1);
-		if (i == 0 && (m[i + 1][j] == '2' || m[i + 1][j] == '0' || ft_isalpha(m[i + 1][j])))
+		if (i == 0 && (m[i + 1][j] == '2' || m[i + 1][j] == '0' ||
+		ft_isalpha(m[i + 1][j])))
 			return (-1);
-		if (i == len && (m[i - 1][j] == '2' || m[i - 1][j] == '0' || ft_isalpha(m[i - 1][j])))
+		if (i == len && (m[i - 1][j] == '2' || m[i - 1][j] == '0' ||
+		ft_isalpha(m[i - 1][j])))
 			return (-1);
 	}
 	return (0);

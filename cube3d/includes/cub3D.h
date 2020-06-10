@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/06/10 17:02:37 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/06/10 20:16:27 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int			pars_file(int fd);
 void		adjust_map(t_data *d);
 int			border(char *s);
 char 		*noblank(char *s, int c);
+char 		**noblank_2(char **s, int c, char *set);
 /***                                                                        ***/
 void		leak(char *str);
 int			create_trgb(int t, int r, int g, int b);

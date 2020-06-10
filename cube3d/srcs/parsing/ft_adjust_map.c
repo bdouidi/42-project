@@ -1,26 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_adjust_map.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/10 19:43:27 by othabchi          #+#    #+#             */
+/*   Updated: 2020/06/10 20:19:03 by othabchi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3D.h"
 
-char	*noblank(char *s, int c)
+char		**noblank_2(char **s, int c, char *set)
+{
+	int	i;
+	int j;
+	int k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (s[k])
+	{
+		i = 0;
+		while (s[k][i])
+		{
+			j = 0;
+			while (set[j])
+			{
+				if (s[k][i] == set[j])
+					s[k][i] = c;
+				j++;
+			}
+			i++;
+		}
+		k++;
+	}
+	return (s);
+}
+
+char		*noblank(char *s, int c)
 {
 	int	i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 	{
-		if (s[i] == ' ' || s[i] == '\t')
+		if (s[i] == ' ')
 			s[i] = c;
 		i++;
 	}
 	return (s);
 }
 
-char	*adjust_str(char *tmp, char *m, int stock)
+char		*adjust_str(char *tmp, char *m, int stock)
 {
 	int	k;
 
 	k = 0;
 	if (!(tmp = malloc(sizeof(char) * stock + 1)))
-		return NULL;
+		return (NULL);
 	while (m[k])
 	{
 		tmp[k] = m[k];
@@ -37,9 +77,22 @@ char	*adjust_str(char *tmp, char *m, int stock)
 	return (tmp);
 }
 
-void 	adjust_map(t_data *d)
+static void	leak_2(char **map)
 {
-	int 			i;
+	int i;
+
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		map[i] = NULL;
+		i++;
+	}
+}
+
+void		adjust_map(t_data *d)
+{
+	int				i;
 	unsigned int	stock;
 	char			**tmp;
 	int				j;
@@ -61,12 +114,6 @@ void 	adjust_map(t_data *d)
 		j++;
 	}
 	tmp[i] = NULL;
-	i = 0;
-	while (d->map[i])
-	{
-		free(d->map[i]);
-		d->map[i] = NULL;
-		i++;
-	}
+	leak_2(d->map);
 	d->map = tmp;
 }
