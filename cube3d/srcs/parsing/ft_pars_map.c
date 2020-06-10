@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 15:02:00 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/09 21:13:08 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/10 17:14:25 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		p(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] != '1' && str[i] != ' ' && str[i] != '*')
+		if (str[i] != '1' && str[i] != '*')
 			return (-1);
 		i++;
 	}
@@ -30,7 +30,7 @@ static int		check_m_content(char **m, int i, int j)
 {
 	if (m[i][j] != '1' && m[i][j] != '2' && m[i][j] != '0' && m[i][j] != 'N'
 			&& m[i][j] != 'S' && m[i][j] != 'E' && m[i][j] != 'W'
-			&& m[i][j] != ' ' && m[i][j] != '\t' && m[i][j] != '*') 
+			&& m[i][j] != '*') 
 		return (-1);
 	return (0);
 }
@@ -65,13 +65,13 @@ static int		m_content(char **m, int len, int check)
 
 static int		check_pars_map(char **m, int i, int j, int len)
 {
-	if (m[i][j] == ' ' || m[i][j] == '*')
+	if (m[i][j] == '*')
 	{
-		if (i != 0 && i != len)
-			if ((m[i][j - 1] == '2' || m[i][j - 1] == '0' || ft_isalpha(m[i][j - 1])) ||
+		if (i > 0)
+			if (m[i][j - 1] && m[i][j + 1] && ((m[i][j - 1] == '2' || m[i][j - 1] == '0' || ft_isalpha(m[i][j - 1])) ||
 					(m[i][j + 1] == '2' || m[i][j + 1] == '0' || ft_isalpha(m[i][j + 1])) ||
 					(m[i - 1][j] == '2' || m[i - 1][j] == '0' || ft_isalpha(m[i - 1][j])) ||
-					(m[i + 1][j] == '2' || m[i + 1][j] == '0' || ft_isalpha(m[i + 1][j])))
+					(m[i + 1][j] == '2' || m[i + 1][j] == '0' || ft_isalpha(m[i + 1][j]))))
 				return (-1);
 		if (i == 0 && (m[i + 1][j] == '2' || m[i + 1][j] == '0' || ft_isalpha(m[i + 1][j])))
 			return (-1);
@@ -88,7 +88,7 @@ int				pars_map(char **m, int len)
 	int				check;
 
 	i = 0;
-	j = 1;
+	j = 0;
 	check = 0;
 	if (p(m[0]) != 0 || p(m[len]) != 0 || m_content(m, len, check) != 0)
 	{
@@ -97,20 +97,9 @@ int				pars_map(char **m, int len)
 	}
 	while (m[i])
 	{
-		if ((m[i][0] != '1' && m[i][0] != ' ') || (m[i][ft_strlen(m[i]) - 1] != '1' 
-		&& m[i][ft_strlen(m[i]) - 1] != ' ' && m[i][ft_strlen(m[i]) - 1] != '*'))
-		{
-			printf("la\n");
+		if (border(m[i]) != 0)
 			return (-1);
-		}
-		/* 
-		if (m[i][ft_strlen(m[i]) - 1] == '*')
-		{
-			check la string a l'envers if 1er char apres '*' != '1'
-			return(-1)
-		} 
-		*/
-		while (m[i][j] && j < (ft_strlen(m[i]) - 1))
+		while (m[i][j])
 		{
 			if (check_pars_map(m, i, j, len) != 0)
 			{
@@ -120,7 +109,7 @@ int				pars_map(char **m, int len)
 			j++;
 		}
 		i++;
-		j = 1;
+		j = 0;
 	}
 	return (0);
 }

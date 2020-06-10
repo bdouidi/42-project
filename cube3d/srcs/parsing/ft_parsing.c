@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/09 21:12:47 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/10 17:04:50 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,32 +40,31 @@ void		info_map(t_data *d, char *s, int i)
 	}
 }
 
-static int	config_map(t_data *d)
+static void	config_map(t_data *d)
 {
 	int		i;
 	char	*s;
 	int		check;
 
-			/* 
-			ici prendre en compte le cas où les 1eres lignes de la map
- 			commencent par des espaces	
-	 		*/
 	i = 0;
-	check = 0;
 	s = d->tmp;
+	check = 0;
 	while (s[i])
 	{
 		if (s[i + 1] && s[i + 2] && is_flags(s, i) == 0)
-			info_map(d, s, i);
-		if (s[i + 1] && s[i] == '\n' && ft_isdigit(s[i + 1]) &&
-				check == 0)
 		{
+			info_map(d, s, i);
+			check++;
+		}
+		if (check == 9)
+		{
+			while (s[i] && s[i] != '\n')
+				i++;
 			d->tmp = ft_substr(s, i + 1, ft_strlen(s));
-			check = 1;
+			return ;
 		}
 		i++;
 	}
-	return (0);
 }
 
 void		map(int fd, t_data *data)
@@ -76,7 +75,6 @@ void		map(int fd, t_data *data)
 	data->tmp = ft_strdup("");
 	while (get_next_line(fd, &line) > 0)
 	{
-		// line = ft_strtrim(line, " 	");
 		data->tmp = ft_strjoin(data->tmp, line);
 		leak(line);
 	}
@@ -111,9 +109,8 @@ int			pars_file(int fd)
 	}
 	while (data.map[len])
 		len++;
-	printf("len = [%d]\n", len);
-	if (pars_info_map(&data) == -1)
-		return (-1);
+	/*if (pars_info_map(&data) == -1)
+		return (-1);*/
 	if (pars_map(data.map, len - 1))
 		return (-1);
 	return (0);

@@ -1,6 +1,6 @@
 #include "../../includes/cub3D.h"
 
-char	*noblank(char *s)
+char	*noblank(char *s, int c)
 {
 	int	i;
 
@@ -8,7 +8,7 @@ char	*noblank(char *s)
 	while(s[i])
 	{
 		if (s[i] == ' ' || s[i] == '\t')
-			s[i] = '1';
+			s[i] = c;
 		i++;
 	}
 	return (s);
@@ -52,12 +52,12 @@ void 	adjust_map(t_data *d)
 		stock = (stock > ft_strlen(d->map[i])) ? stock : ft_strlen(d->map[i]);
 		i++;
 	}
-	printf("stock : [%d] \n i : [%d]\n", stock , i);
 	if (!(tmp = calloc(i + 1, sizeof(char*))))
 		return ;
 	while (j < i)
 	{
 		tmp[j] = adjust_str(tmp[j], d->map[j], stock);
+		tmp[j] = noblank(tmp[j], '*');
 		j++;
 	}
 	tmp[i] = NULL;

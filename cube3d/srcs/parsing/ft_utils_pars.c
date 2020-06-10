@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 15:18:13 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/09 18:14:43 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/10 17:02:40 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,27 @@ int			is_flags(char *s, int i)
 			return (0);
 		if ((s[i + 1] == 'O' || s[i + 1] == 'E' || s[i + 1] == 'A') &&
 				(s[i + 2] == ' ' || s[i + 2] == '	'))
+			return (0);
+	}
+	return (-1);
+}
+
+int			border(char *s)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = ft_strlen(s) - 1;
+	if (s[i] == '1' && s[j] == '1')
+		return (0);
+	if (s[i] == '*' && s[i] == '*')
+	{
+		while (s[i] && s[i] == '*')
+			i++;
+		while (s[j] && s[j] == '*')
+			j--;
+		if (s[i] == '1' && s[j] == '1')
 			return (0);
 	}
 	return (-1);
