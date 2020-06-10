@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/10 17:04:50 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/06/10 18:09:29 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static void	config_map(t_data *d)
 			info_map(d, s, i);
 			check++;
 		}
-		if (check == 9)
+		printf("check[%d]", check);
+		if (check == 8)
 		{
 			while (s[i] && s[i] != '\n')
 				i++;
@@ -109,8 +110,10 @@ int			pars_file(int fd)
 	}
 	while (data.map[len])
 		len++;
-	/*if (pars_info_map(&data) == -1)
-		return (-1);*/
+	if (pars_info_map(&data) == -1)
+{		printf("test");
+		return (-1);
+}
 	if (pars_map(data.map, len - 1))
 		return (-1);
 	return (0);
