@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 17:14:11 by dsy               #+#    #+#             */
-/*   Updated: 2020/06/11 14:06:16 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/11 19:23:46 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ size_t			ft_strlcpy(char *dest, const char *src, size_t dstsize);
 size_t			ft_strlcat(char *dest, const char *src, size_t size);
 char			*ft_strnstr(char const *haystack,
 				const char *needle, size_t len);
-int				ft_atoi(const char *str);
+long				ft_atoi(const char *str);
 char			*ft_itoa(int n);
 void			*ft_calloc(size_t nitems, size_t size);
 void			ft_putchar(char c);

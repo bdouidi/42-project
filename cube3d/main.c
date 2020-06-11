@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:00:55 by othabchi          #+#    #+#             */
-/*   Updated: 2020/06/11 13:46:26 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/11 18:26:35 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main (int ac, char *av[])
 
 	if (cub3d(fd) == -1)
 	{
-		printf("fail");
+		printf("\nfail");
 		close(fd);
 		return (0);
 	}

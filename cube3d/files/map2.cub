@@ -1,12 +1,12 @@
 NO ./textures/texture1
 EA ./textures/texture4
 WE ./textures/texture3
-R 1280 1024
+R  20 139400000000000
 SO ./textures/texture2
 S ./textures/texture5 
 
-F 25     ,               185 , 03
-C 225,255,30
+F 105     ,              100, 255
+C 255, 0000000001,  255
 
            1111111  111111111111111
  1 11111111000000011000000000000001

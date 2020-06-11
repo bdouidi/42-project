@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/06/11 14:47:21 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/11 19:22:34 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@
 
 typedef struct  s_data
 {
-    char		**map;
     void		*img;
     char		*addr;
+    int         line_length;
+    int			bits_per_pixel;
+    int 		endian;
+    char		**map;
     char		*tmp;
     char		*resolution;
-    int         res[2];
+    long         res[2];
     char		*floor;
     int         f_color;
     char		*ceiling;
@@ -33,9 +36,6 @@ typedef struct  s_data
     char		*east;
     char		*south;
     char		*west;
-    int			bits_per_pixel;
-    int 		endian;
-    int         error;
 }				t_data;
 
 typedef struct	s_player
@@ -59,9 +59,10 @@ int			border(char *s);
 char 		*noblank(char *s, int c);
 char 		**noblank_2(char **s, int c, char *set);
 /***                    function to set display                             ***/
-void	    set_rfc(t_data *d);
-/***                    function to display                         ***/
+int	        set_rfc(t_data *d);
+/***                       function to display                         ***/
 int         cub3d(int fd);
+void        window(t_data *d);
 /***                                                                        ***/
 void		leak(char *str);
 int			create_trgb(int t, int r, int g, int b);
