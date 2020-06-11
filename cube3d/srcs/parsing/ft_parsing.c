@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/10 20:28:46 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/11 13:53:47 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,30 +84,29 @@ void		map(int fd, t_data *data)
 	leak(data->tmp);
 }
 
-int			pars_file(int fd)
+int			pars_file(int fd, t_data *data)
 {
-	t_data	data;
 	int		len;
 	int		i;
 
 	len = 0;
 	i = 0;
-	data.map = NULL;
-	data.resolution = NULL;
-	data.floor = NULL;
-	data.ceiling = NULL;
-	data.sprite = NULL;
-	data.north = NULL;
-	data.east = NULL;
-	data.south = NULL;
-	data.west = NULL;
-	map(fd, &data);
-	while (data.map[len])
+	data->map = NULL;
+	data->resolution = NULL;
+	data->floor = NULL;
+	data->ceiling = NULL;
+	data->sprite = NULL;
+	data->north = NULL;
+	data->east = NULL;
+	data->south = NULL;
+	data->west = NULL;
+	map(fd, data);
+	while (data->map[len])
 		len++;
-	if (pars_info_map(&data) == -1)
+	if (pars_info_map(data) == -1)
 		return (-1);
-	if (pars_map(data.map, len - 1))
+	if (pars_map(data->map, len - 1))
 		return (-1);
-	data.map = noblank_2(data.map, '1', "*");
+	data->map = noblank_2(data->map, '1', "*");
 	return (0);
 }

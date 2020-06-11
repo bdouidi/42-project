@@ -1,33 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_set_info_map.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/11 14:49:35 by othabchi          #+#    #+#             */
+/*   Updated: 2020/06/11 14:49:36 by othabchi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3D.h"
 
-int	*set_resolution(t_data *d, int *r)
+static int	f_c_loop(char *str)
 {
-	char	*tmp_r;
-	/*char	*tmp;
-	int	i;
+	int i;
+	int fc[3];
 
-	i = 2*/;
-	tmp_r = ft_epur(d->resolution);
-	printf("%s\n", tmp_r);
-	/*if (ft_isdigit(tmp_r[i]) == 1)
-		while(tmp_r[i] && (ft_isdigit(tmp_r[i]) == 1))
-			i++;
-	tmp = ft_substr(tmp_r, 2, i - 1);
-	r[0] = ft_atoi(tmp);
-	tmp = ft_substr(tmp_r, i + 1, ft_strlen(tmp_r) - 1);
-	r[1] = ft_atoi(tmp);*/
-	return (r);
+	i = 0;
+	while (!ft_isdigit(str[i]))
+		i++;
+	fc[0] = ft_atoi(str + i);
+	i += ft_nbrlen(fc[0]);
+	while (!ft_isdigit(str[i]))
+		i++;
+	fc[1] = ft_atoi(str + i);
+	i += ft_nbrlen(fc[1]);
+	while (!ft_isdigit(str[i]))
+		i++;
+	fc[2] = ft_atoi(str + i);
+	return (create_trgb(1, fc[0], fc[1], fc[2]));
 }
 
-/*void	set_info_map(t_data *d)
+void		set_rfc(t_data *d)
 {
-	int	r[2];
-	int	fc[3];
+	int i;
 
-	r = set_resolution(d->resolution);
-	fonction mlx pour res;
-	fc = set_floor_ceiling(d->floor);
-	fonction mlx pour floor;
-	fc = set_floor_ceiling(d->ceiling);
-	fonction mlx pour ceilling;
-}*/
+	i = 0;
+	while (!ft_isdigit(d->resolution[i]))
+		i++;
+	d->res[0] = ft_atoi((d->resolution) + i);
+	i += ft_nbrlen(d->res[0]);
+	d->res[1] = ft_atoi((d->resolution) + i);
+	d->f_color = f_c_loop(d->floor);
+	d->c_color = f_c_loop(d->ceiling);
+	printf("[%x]\n[%x]", d->f_color, d->c_color);
+}
