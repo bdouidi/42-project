@@ -1,7 +1,7 @@
 NO ./textures/texture1
 EA ./textures/texture4
 WE ./textures/texture3
-R  20 139400000000000
+R  1000 1000
 SO ./textures/texture2
 S ./textures/texture5 
 

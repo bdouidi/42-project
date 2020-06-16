@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/06/11 19:22:34 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/16 17:59:54 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 typedef struct  s_data
 {
+	void	    *mlx;
+	void	    *win;
     void		*img;
     char		*addr;
     int         line_length;
