@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/06/16 17:59:54 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/16 20:45:45 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,25 @@
 # include "../project/libft/libft.h"
 # include "../mlx/mlx.h"
 
-typedef struct  s_data
+typedef struct  s_vars
 {
 	void	    *mlx;
 	void	    *win;
+}               t_vars;
+
+typedef struct	s_player
+{
+	int         eye_height;	
+	int         *pos;
+	int         fov;
+	int         wall_distance;
+}               t_player;
+
+typedef struct  s_data
+{
+    t_vars      vars;
     void		*img;
+    // void		*imgtmp;
     char		*addr;
     int         line_length;
     int			bits_per_pixel;
@@ -39,14 +53,6 @@ typedef struct  s_data
     char		*south;
     char		*west;
 }				t_data;
-
-typedef struct	s_player
-{
-	int         eye_height;	
-	int         *pos;
-	int         fov;
-	int         wall_distance;
-}               t_player;
 
 /***          			fucntion to pars                                    ***/
 int			flags(char c);
