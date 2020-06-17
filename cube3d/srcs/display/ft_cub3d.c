@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 14:49:39 by othabchi          #+#    #+#             */
-/*   Updated: 2020/06/11 19:29:04 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/17 03:28:04 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	cub3d(int fd)
 
 	if (fd < 0 || pars_file(fd, &d) == -1 || set_rfc(&d) == -1)
 		return (-1);
-	window(&d);
+	raycasting(&d);
+	//window(&d);
 	return (0);
 }
