@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/06/17 19:59:17 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/23 01:27:08 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ typedef struct	s_player
 {
 	double      height;
 	double		fov;
-/*j'ai changé  en int*/	int			pos_x; //position du joueur
-/*pour un test*/		int			pos_y;
+	int			pos_x; //position du joueur
+	int			pos_y;	
 	double		dir_x; 		//direction du joueur
 	double		dir_y;
 	double		plan_x;		//le plan de camera du joueur
@@ -66,8 +66,8 @@ typedef struct	s_ray
 
 typedef	struct	s_square // Utilisé de base pour faire des test mais possibile de l'utiliser pour les sprites ("2" dans la map)
 {
-	int			width;
-	int			height;
+	float		width;
+	float			height;
 	int			imgx;
 	int			imgy;
 	// int			color;
@@ -85,6 +85,7 @@ typedef struct  s_data
     int         line_length;
     int			bits_per_pixel;
     int 		endian;
+	int			*len_map;
     char		**map;
     char		*tmp;
     char		*resolution;
@@ -98,6 +99,7 @@ typedef struct  s_data
     char		*east;
     char		*south;
     char		*west;
+	int			len;
 }				t_data;
 
 /***          			fucntion to pars                                    ***/
