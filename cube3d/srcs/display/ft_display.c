@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 19:30:36 by othabchi          #+#    #+#             */
-/*   Updated: 2020/06/23 03:28:45 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/06/23 06:07:25 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ static int		handlekeys(int keycode, t_data *d)
 	int			*x;
 	int			*y;
 
-	*x = &d->player.pos_x;
-	*y = &d->player.pos_y;
+	x = &(d->player.pos_x);
+	y = &(d->player.pos_y);
 	if (keycode == 53)
 	{
 		mlx_destroy_window(d->vars.mlx, d->vars.win);
