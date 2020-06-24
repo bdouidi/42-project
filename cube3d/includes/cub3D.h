@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/06/23 01:27:08 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/06/24 20:43:16 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,21 @@ typedef struct	s_ray
 
 typedef	struct	s_square // Utilisé de base pour faire des test mais possibile de l'utiliser pour les sprites ("2" dans la map)
 {
-	float		width;
-	float			height;
+	int		width;
+	int		height;
 	int			imgx;
 	int			imgy;
 	// int			color;
 }				t_square;
 
+typedef	struct	 s_img
+{
+    void		*ptr[2];
+    char		*addr[2];
+    int         line_length;
+    int			bits_per_pixel;
+    int 		endian;
+}				t_img;
 
 typedef struct  s_data
 {
@@ -80,11 +88,7 @@ typedef struct  s_data
     t_vars      vars;
 	t_player	player;
 	t_ray		r;
-    void		*img[3];
-    char		*addr;
-    int         line_length;
-    int			bits_per_pixel;
-    int 		endian;
+	t_img		img;
 	int			*len_map;
     char		**map;
     char		*tmp;
@@ -100,6 +104,8 @@ typedef struct  s_data
     char		*south;
     char		*west;
 	int			len;
+	int			x;
+	int			y;
 }				t_data;
 
 /***          			fucntion to pars                                    ***/
@@ -123,6 +129,6 @@ void		raycasting(t_data *d);
 /***                                                                        ***/
 void		leak(char *str);
 int			create_trgb(int t, int r, int g, int b);
-void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		my_mlx_pixel_put(t_data *data, int i, int color);
 
 #endif
