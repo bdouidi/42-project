@@ -6,7 +6,7 @@
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/06/24 20:43:16 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/06/24 22:00:23 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,10 @@ int	        set_rfc(t_data *d);
 int         cub3d(int fd);
 void        window(t_data *d);
 void		raycasting(t_data *d);
+void		set_position(t_data *d);
+void		my_mlx_pixel_put(t_data *d, int i, int color);
+void		drawsquare(t_data *d, int i, int color);
+void    	create_img(t_data *d, int i, int width, int height);
 /***                                                                        ***/
 void		leak(char *str);
 int			create_trgb(int t, int r, int g, int b);

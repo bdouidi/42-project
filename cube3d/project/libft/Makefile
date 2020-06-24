@@ -21,7 +21,7 @@ OBJS = ft_islower.o ft_memcpy.o ft_putstr_fd.o ft_strlen.o ft_tolower.o \
 	   ft_strjoin.o ft_strrchr.o ft_isascii.o ft_memchr.o \
 	   ft_putnbr.o ft_strlcat.o ft_strtrim.o ft_isdigit.o \
 	   ft_memcmp.o ft_putnbr_fd.o ft_strlcpy.o ft_substr.o \
-	   ft_nbrlen.o ft_putstr.o get_next_line.o ft_strnew.o ft_epur.o \
+	   ft_nbrlen.o ft_putstr.o get_next_line.o ft_strnew.o ft_epur.o ft_swap.o\
 
 SRCS = ft_islower.c ft_memcpy.c ft_putstr_fd.c ft_strlen.c ft_tolower.c \
 	   ft_atoi.c ft_isprint.c ft_memmove.c  ft_strmapi.c ft_toupper.c \
@@ -32,7 +32,7 @@ SRCS = ft_islower.c ft_memcpy.c ft_putstr_fd.c ft_strlen.c ft_tolower.c \
 	   ft_strjoin.c ft_strrchr.c ft_isascii.c ft_memchr.c \
 	   ft_putnbr.c ft_strlcat.c ft_strtrim.c ft_isdigit.c \
 	   ft_memcmp.c ft_putnbr_fd.c ft_strlcpy.c ft_substr.c \
-	   ft_nbrlen.c ft_putstr.c get_next_line.c ft_strnew.c ft_epur.c \
+	   ft_nbrlen.c ft_putstr.c get_next_line.c ft_strnew.c ft_epur.c ft_swap.c \
 
 all: $(NAME)
 
