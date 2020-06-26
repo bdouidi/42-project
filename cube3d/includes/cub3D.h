@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/06/24 22:00:23 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/06/26 07:11:55 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ typedef struct	s_player
 {
 	double      height;
 	double		fov;
-	int			pos_x; //position du joueur
-	int			pos_y;	
-	double		dir_x; 		//direction du joueur
-	double		dir_y;
+	char		letter;
+	double		pos_x; //position du joueur
+	double		pos_y;	
+	int			map_x;  // la case dans laquelle on se trouve
+	int			map_y;
+	double		dir; 		//direction du joueur
 	double		plan_x;		//le plan de camera du joueur
 	double		plan_y;
 	int         wall_distance;
@@ -39,17 +41,15 @@ typedef struct	s_player
 typedef struct	s_ray
 {
 	double		camera_x;
-	double		ray_dir_x;
-	double		ray_dir_y;
-
-	int			map_x;  // la case dans laquelle on se trouve
-	int			map_y;
+	double		dir;
+	double		x;
+	double		y;
 
 	double		side_dist_x; // longueur du rayon de la position actuelle jusqu'a la prochaine intersection x ou y
 	double		side_dist_y;
 
-	double		delta_dist_x; // longueur d'un rayon jusqu'a lq prochaine intersection x ou y;
-	double		delta_dist_y;
+	double		delta_x; // longueur d'un rayon jusqu'a lq prochaine intersection x ou y;
+	double		delta_y;
 	double		perp_wall_dist;
 
 	int			step_x; // dans quelle direction on se deplace ( 1 ou -1);
@@ -66,8 +66,8 @@ typedef struct	s_ray
 
 typedef	struct	s_square // Utilisé de base pour faire des test mais possibile de l'utiliser pour les sprites ("2" dans la map)
 {
-	int		width;
-	int		height;
+	int			width;
+	int			height;
 	int			imgx;
 	int			imgy;
 	// int			color;
@@ -75,8 +75,8 @@ typedef	struct	s_square // Utilisé de base pour faire des test mais possibile d
 
 typedef	struct	 s_img
 {
-    void		*ptr[2];
-    char		*addr[2];
+    void		*ptr[3];
+    char		*addr[3];
     int         line_length;
     int			bits_per_pixel;
     int 		endian;
@@ -87,7 +87,7 @@ typedef struct  s_data
 	t_square	square;
     t_vars      vars;
 	t_player	player;
-	t_ray		r;
+	t_ray		ray;
 	t_img		img;
 	int			*len_map;
     char		**map;
@@ -123,16 +123,17 @@ char 		**noblank_2(char **s, int c, char *set);
 /***                    function to set display                             ***/
 int	        set_rfc(t_data *d);
 /***                       function to display                         ***/
+void		init_player(t_data *d);
 int         cub3d(int fd);
 void        window(t_data *d);
 void		raycasting(t_data *d);
 void		set_position(t_data *d);
-void		my_mlx_pixel_put(t_data *d, int i, int color);
-void		drawsquare(t_data *d, int i, int color);
+void		my_mlx_pixel_put(t_data *d, int color);
+void		drawline(t_data *d, int color);
+void		drawsquare(t_data *d, int color);
 void    	create_img(t_data *d, int i, int width, int height);
 /***                                                                        ***/
 void		leak(char *str);
 int			create_trgb(int t, int r, int g, int b);
-void		my_mlx_pixel_put(t_data *data, int i, int color);
 
 #endif

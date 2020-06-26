@@ -3,81 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_raycasting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 03:12:26 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/17 07:58:43 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/06/26 07:12:15 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-char	set_first_pos(t_data *d, char set, int *i, int *j)
-{
-	while (d->map[*i])
-	{
-		while(d->map[*i][*j] && ft_isalpha(d->map[*i][*j]) != 1)
-			(*j)++;
-		if (ft_isalpha(d->map[*i][*j]) == 1)
-		{
-			set = d->map[*i][*j];
-			return (set);
-		}
-		*j = 0;
-		(*i)++;
-	}
-	return (0);
-}
-
-char	init_player(t_data *d)
-{
-	char 	set;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	set = 0;
-	d->player.height = 0.5 * d->res[1];
-	d->player.fov = (M_PI / 3) * (180 / M_PI);
-	set = set_first_pos(d, set, &i, &j);
-	d->player.pos_x = (double)j;
-	d->player.pos_y = (double)i;
-	if (set == 'N')
-	{
-		d->player.dir_x = 0;
-		d->player.dir_y = 1;
-	}
-	if (set == 'E')
-	{
-		d->player.dir_x = 1;
-		d->player.dir_y = 0;
-
-	}
-	if (set == 'S')
-	{
-		d->player.dir_x = 0;
-		d->player.dir_y = -1;
-
-	}
-	if (set == 'W')
-	{	
-		d->player.dir_x = -1;
-		d->player.dir_y = 0;
-	}
-	d->player.plan_x = 0;
-	d->player.plan_y = d->player.height;
-	return (set);
-}
+// void	init_player(t_data *d)
+// {
+// 	d->player.height = 0.5 * d->res[1];
+// 	d->player.fov = (M_PI / 3) * (180 / M_PI);
+// 	if (d->player.letter == 'N')
+// 		d->player.dir = M_PI / 2;
+// 	else if (d->player.letter == 'E')
+// 		d->player.dir = 0;
+// 	else if (d->player.letter == 'S')
+// 		d->player.dir = (3 * M_PI) / 2;
+// 	else if (d->player.letter == 'W')
+// 		d->player.dir = M_PI;
+// }
 
 void	raycasting(t_data *d)
 {
 	int		x;
-	char	set;
 
 	x = 0;
-	set = init_player(d);
-	d->r.hit = 0;
+	d= 0;
+	// init_player(d);
+	// d->ray.dir = d->player.dir;
+
+	/*d->r.hit = 0;
 	while (x < d->res[0])
 	{
 		d->r.camera_x = 2 * x / (double)d->res[0] - 1;
@@ -136,7 +94,7 @@ void	raycasting(t_data *d)
 		d->r.drawstart = 0;
 	d->r.drawend = d->r.line_height / 2 + d->res[1] / 2;
 	if (d->r.drawend > d->res[1])
-		d->r.drawend = d->res[1] - 1;
+		d->r.drawend = d->res[1] - 1;*/
 }
 
 //tqt pas meme moi j'ai presque pas compris mais apparement le raycasting c'est ca loooool
