@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/06/26 07:11:55 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/29 22:48:19 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct  s_vars
 typedef struct	s_player
 {
 	double      height;
-	double		fov;
+	double		fov[2];
 	char		letter;
 	double		pos_x; //position du joueur
 	double		pos_y;	
@@ -104,8 +104,8 @@ typedef struct  s_data
     char		*south;
     char		*west;
 	int			len;
-	int			x;
-	int			y;
+	float			x;
+	float			y;
 }				t_data;
 
 /***          			fucntion to pars                                    ***/
@@ -129,7 +129,9 @@ void        window(t_data *d);
 void		raycasting(t_data *d);
 void		set_position(t_data *d);
 void		my_mlx_pixel_put(t_data *d, int color);
-void		drawline(t_data *d, int color);
+void		drawfov(t_data *d, int color);
+void		drawline(t_data *d, double dir, int color);
+void		drawplayer(t_data *d, int keycode);
 void		drawsquare(t_data *d, int color);
 void    	create_img(t_data *d, int i, int width, int height);
 /***                                                                        ***/

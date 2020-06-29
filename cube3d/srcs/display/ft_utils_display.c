@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 21:39:55 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/26 07:04:13 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/29 22:37:52 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,22 @@ void	my_mlx_pixel_put(t_data *d, int color)
 {
 	char *dst;
 
-	dst = d->img.addr[0] + (d->y * d->img.line_length + d->x *
+	dst = d->img.addr[0] + ((int)d->y * d->img.line_length + (int)d->x *
 	(d->img.bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
+}
+
+void	init_player(t_data *d)
+{
+	d->player.height = 0.5 * d->res[1];
+	if (d->player.letter == 'N')
+		d->player.dir = M_PI / 2;
+	else if (d->player.letter == 'E')
+		d->player.dir = 0;
+	else if (d->player.letter == 'S')
+		d->player.dir = (3 * M_PI) / 2;
+	else if (d->player.letter == 'W')
+		d->player.dir = M_PI;
 }
 
 void	set_position(t_data *d)
@@ -44,64 +57,6 @@ void	set_position(t_data *d)
 		d->len++;
 	}
 	d->len--;
-}
-
-void	drawline(t_data *d, int color)
-{
-	int count;
-	double *dir;
-
-	count = 0;
-	dir = &d->player.dir;
-	d->x = d->square.imgx + d->square.width / 2;
-	d->y = d->square.imgy + d->square.height / 2;
-	while (count < 35)
-	{
-		my_mlx_pixel_put(d, color);
-		if (*dir >= 0 && *dir <= M_PI)
-		{
-			if (*dir >= 0 && *dir <= (M_PI / 2))
-			{
-				d->x += cos(*dir);
-				d->y -= sin(*dir);
-			}
-			else
-			{
-				d->x -= cos(*dir);
-				d->y -= sin(*dir);
-			}
-		}
-		else
-		{
-			if (*dir >= M_PI && *dir <= (3 * M_PI / 2))
-			{
-				d->x -= cos(*dir);
-				d->y += sin(*dir);
-			}
-			else
-			{
-				d->x += cos(*dir);
-				d->y += sin(*dir);
-			}
-		}
-		count++;
-	}
-}
-
-void	drawsquare(t_data *d, int color)
-{
-	d->x = d->square.imgx;
-	d->y = d->square.imgy;
-	while (d->y < (d->square.height + d->square.imgy))
-	{
-		while (d->x < (d->square.width + d->square.imgx))
-		{
-			my_mlx_pixel_put(d, color);
-			d->x++;
-		}
-		d->y++;
-		d->x = d->square.imgx;
-	}
 }
 
 void	create_img(t_data *d, int i, int width, int height)

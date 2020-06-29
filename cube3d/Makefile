@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+         #
+#    By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 17:08:38 by dsy               #+#    #+#              #
-#    Updated: 2020/06/24 21:53:16 by idouidi          ###   ########.fr        #
+#    Updated: 2020/06/29 22:34:51 by othabchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRCS = srcs/parsing/ft_utils_pars.c srcs/parsing/ft_pars_info_map.c \
 	   srcs/parsing/ft_adjust_map.c srcs/display/ft_cub3d.c \
 	   srcs/display/ft_set_info_map.c srcs/display/trgb.c \
 	   srcs/display/ft_display.c srcs/display/ft_raycasting.c \
-	   srcs/display/ft_utils_display.c
+	   srcs/display/ft_utils_display.c \
+	   srcs/display/ft_utils_display2.c \
 
 LIBFTPATH	= project/libft 
 LIBOBJ		= project/libft/libft.a
