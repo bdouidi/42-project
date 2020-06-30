@@ -1,7 +1,7 @@
 NO ./textures/texture1
 EA ./textures/texture4
 WE ./textures/texture3
-R  1000 1000
+R  1500 1000
 SO ./textures/texture2
 S ./textures/texture5 
 
@@ -24,4 +24,6 @@ C 0,128,255
 1000000001  10002111011120001111111
 1111101111  10000000000000001     111
     1N1     11111111111111111     111
-    111                               1
+    111                                                   1
+
+

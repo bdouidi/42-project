@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 22:31:39 by othabchi          #+#    #+#             */
-/*   Updated: 2020/06/29 22:48:03 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/30 02:55:19 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	drawline(t_data *d, double dir, int color)
 	size = 0;
 	d->x = d->square.imgx + d->square.width / 2;
 	d->y = d->square.imgy + d->square.height / 2;
-	while (size < 50)
+	while (size < 100)
 	{
 		d->x -= cos(dir);
 		d->y -= sin(dir);
@@ -59,9 +59,9 @@ void	drawsquare(t_data *d, int color)
 {
 	d->x = d->square.imgx;
 	d->y = d->square.imgy;
-	while (d->y < (d->square.height + d->square.imgy))
+	while (d->y < (d->square.height + d->square.imgy - 1))
 	{
-		while (d->x < (d->square.width + d->square.imgx))
+		while (d->x < (d->square.width + d->square.imgx - 1))
 		{
 			my_mlx_pixel_put(d, color);
 			d->x++;

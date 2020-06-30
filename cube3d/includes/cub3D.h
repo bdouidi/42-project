@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/06/29 22:48:19 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/30 02:56:15 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void		my_mlx_pixel_put(t_data *d, int color);
 void		drawfov(t_data *d, int color);
 void		drawline(t_data *d, double dir, int color);
 void		drawplayer(t_data *d, int keycode);
+void 		which_dir2(t_data *d, float spd, int keycode);
 void		drawsquare(t_data *d, int color);
 void    	create_img(t_data *d, int i, int width, int height);
 /***                                                                        ***/

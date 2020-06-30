@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 21:39:55 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/29 22:37:52 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/30 03:01:22 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,33 @@ void	init_player(t_data *d)
 		d->player.dir = (3 * M_PI) / 2;
 	else if (d->player.letter == 'W')
 		d->player.dir = M_PI;
+}
+
+void	which_dir2(t_data *d, float spd, int keycode)
+{
+	int	x;
+	int	y;
+
+	if (keycode == 125)
+	{
+		x = (int)(d->player.pos_x + cos(d->player.dir) * spd);
+		y = (int)(d->player.pos_y + sin(d->player.dir) * spd);
+		if (d->map[y][x] && d->map[y][x] == '0')
+		{
+			d->player.pos_x += cos(d->player.dir) * spd;
+			d->player.pos_y += sin(d->player.dir) * spd;
+		}
+	}
+	if (keycode == 126)
+	{
+		x = (int)(d->player.pos_x - cos(d->player.dir) * spd);
+		y = (int)(d->player.pos_y - sin(d->player.dir) * spd);
+		if (d->map[y][x] && d->map[y][x] == '0')
+		{
+			d->player.pos_x -= cos(d->player.dir) * spd;
+			d->player.pos_y -= sin(d->player.dir) * spd;
+		}
+	}
 }
 
 void	set_position(t_data *d)

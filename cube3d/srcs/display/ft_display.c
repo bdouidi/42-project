@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 19:30:36 by othabchi          #+#    #+#             */
-/*   Updated: 2020/06/29 22:53:19 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/06/30 03:02:02 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@ void			drawmap2d(t_data *d)
 	x = 0;
 	y = 0;
 	d->square.width = ((d->res[0] * .45) / ft_strlen(d->map[0]));
-	d->square.height = ((d->res[1] * .45) / ft_strlen(d->map[0]));
+	d->square.height = d->square.width;
 	while (d->map[y])
 	{
 		while (d->map[y][x])
 		{
 			d->square.imgx = x * d->square.width;
 			d->square.imgy = y * d->square.height;
+			if (d->map[y][x] == '1')
+				drawsquare(d, 0x0);
 			if (d->map[y][x] == '0')
 				drawsquare(d, 0xFFFFFF);
 			else if (d->map[y][x] == '2')
@@ -43,22 +45,27 @@ void			which_dir(t_data *d, float spd, int keycode)
 	int		x;
 	int		y;
 
-	x = d->player.map_x;
-	y = d->player.map_y;
-	if (keycode == 123 && (d->player.map_x = (int)((d->player.pos_x) - spd)))
+	if (keycode == 123)
+	{
+		x = (int)(d->player.pos_x + cos(d->player.dir + M_PI_2) * spd);
+		y = (int)(d->player.pos_y + sin(d->player.dir + M_PI_2) * spd);
 		if (d->map[y][x] && d->map[y][x] == '0')
-			d->player.pos_x -= spd;
-	if (keycode == 124 && (d->player.map_x = (int)((d->player.pos_x) + spd)))
+		{
+			d->player.pos_x += cos(d->player.dir + M_PI_2) * spd;
+			d->player.pos_y += sin(d->player.dir + M_PI_2) * spd;
+		}
+	}
+	if (keycode == 124)
+	{
+		x = (int)(d->player.pos_x - cos(d->player.dir + M_PI_2) * spd);
+		y = (int)(d->player.pos_y - sin(d->player.dir + M_PI_2) * spd);
 		if (d->map[y][x] && d->map[y][x] == '0')
-			d->player.pos_x += spd;
-	if (keycode == 125 && (d->player.map_y = (int)((d->player.pos_y) + spd)))
-		if (d->map[y][x] && d->map[y][x] == '0')
-			d->player.pos_y += spd;
-	if (keycode == 126 && (d->player.map_y = (int)(((d->player.pos_y * 10) -
-			(spd * 10)) / 10)))
-		if (d->map[y][x] && d->map[y][x] == '0')
-			d->player.pos_y -= spd;
-	printf("[%f][%f]\n", d->player.pos_x, d->player.pos_y);
+		{
+			d->player.pos_x -= cos(d->player.dir + M_PI_2) * spd;
+			d->player.pos_y -= sin(d->player.dir + M_PI_2) * spd;
+		}
+	}
+	which_dir2(d, spd, keycode);
 }
 
 static void		display_floor_ceiling(t_data *d)
@@ -81,6 +88,7 @@ static void		display_floor_ceiling(t_data *d)
 		d->y++;
 		d->x = 0;
 	}
+	raycasting(d);
 }
 
 static int		handlekeys(int keycode, t_data *d)
@@ -88,7 +96,7 @@ static int		handlekeys(int keycode, t_data *d)
 	static int	check = 0;
 	float		spd;
 
-	spd = .075;
+	spd = .1;
 	if (keycode == 53)
 	{
 		mlx_destroy_window(d->vars.mlx, d->vars.win);
