@@ -6,95 +6,106 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 03:12:26 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/26 07:12:15 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/01 21:04:00 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-// void	init_player(t_data *d)
-// {
-// 	d->player.height = 0.5 * d->res[1];
-// 	d->player.fov = (M_PI / 3) * (180 / M_PI);
-// 	if (d->player.letter == 'N')
-// 		d->player.dir = M_PI / 2;
-// 	else if (d->player.letter == 'E')
-// 		d->player.dir = 0;
-// 	else if (d->player.letter == 'S')
-// 		d->player.dir = (3 * M_PI) / 2;
-// 	else if (d->player.letter == 'W')
-// 		d->player.dir = M_PI;
+void	get_ray_size(t_data *d)
+{
+        // side = 0;
+        d->ray.hit = 0;
+		d->ray.x = cos(d->player.fov[0]);
+		d->ray.y = sin(d->player.fov[0]);
+		d->ray.delta_x = fabs(1 / d->ray.x);
+		d->ray.delta_y = fabs(1 / d->ray.y);
+        if (d->ray_x < 0)
+        {
+            d->ray.step_x = -1;
+            d->ray.side_dist_x = (d->player.pos_x - (int)d->player.pos_x) * d->ray.delta_x;
+        }
+        else
+        {
+            d->ray.step_x = 1;
+            d->ray.side_dist_x = (d->player.pos_x - + 1 - (int)d->player.pos_x)* d->ray.delta_x;
+        }
+        if (d->ray.y < 0)
+        {
+			d->ray.step_y = -1;
+			d->ray.side_dist_y = (d->player.pos_y - (int)d->player.pos_y);
+        }
+        else
+        {
+			d->ray.step_x = 1;
+			d->ray.side_dist_y = (d->player.pos_y + 1 - (int)d->player.pos_y) * d->ray.delta_y; 
+        }
+		while (d->ray.hit == 0)
+        {
+            if (d->ray.side_dist_x < d->ray.side_dist_y)
+            {
+				d->ray.side_dist_x += d->ray.x;
+				(int)d->player.pos_x += d->ray.step_x;
+                side = 0;
+            }
+            else
+            {
+				d->ray.side_dist_y += d->ray.y;
+				(int)d->player.pos_y += d->ray.step_y;
+                data.mapY += data.stepY;
+                side = 1;
+            }
+            if (map[(int)data.mapY][(int)data.mapX] == ‘1’ )
+                hit = 1;
+        }
+}
+	// int count;
+	// float xoffset, yoffset, aTan;
+
+	// d->ray.dir = d->player.fov[0];
+	// count = 0;
+	// aTan = -1 / tan(d->ray.dir);
+	// d->square.width = ((d->res[0] * .45) / ft_strlen(d->map[0]));
+	// if (d->ray.dir > M_PI) // regarde en bas
+	// {
+	// 	d->ray.y = (d->player.pos_y - (int)d->player.pos_y) < .5 ? (int)d->player.pos_y  : (int)d->player.pos_y + 1; 
+	// 	d->ray.x = (d->player.pos_y - d->ray.y) * aTan + d->player.pos_x;
+	// 	yoffset = -1;
+	// 	xoffset = -yoffset * aTan;
+	// }
+	// if (d->ray.dir < M_PI) // regarde en haut
+	// {
+	// 	d->ray.y = (d->player.pos_y - (int)d->player.pos_y) < .5 ? (int)d->player.pos_y  : (int)d->player.pos_y + 1;
+	// 	d->ray.x = (d->player.pos_y - d->ray.y) * aTan + d->player.pos_x;
+	// 	printf("ici %f %f\n", d->ray.y, d->ray.x);
+	// 	yoffset = 1;
+	// 	xoffset = -yoffset * aTan;
+	// }
+	// if (d->ray.dir == 0 || d->ray.dir == M_PI)
+	// {
+	// 	d->ray.y = d->player.pos_y;
+	// 	d->ray.x = d->player.pos_x;
+	// 	count = d->mapY;
+	// }
+	// while (count < d->mapY)
+	// {
+	// 	if (d->map[(int)d->ray.y][(int)d->ray.x] &&
+	// 		d->map[(int)d->ray.y][(int)d->ray.x] == '1')
+	// 	{
+	// 		count = d->mapY;
+	// 	}
+	// 	else
+	// 	{
+	// 		d->ray.y -= yoffset;
+	// 		d->ray.x += xoffset;
+	// 		count++;
+	// 	}
+	// }
+	// printf("ici %d %d %f\n", (int)d->ray.y, (int)d->ray.x, yoffset);
+	// drawline(d, d->ray.dir, 0x0FF0000);
 // }
 
 void	raycasting(t_data *d)
 {
-	int		x;
-
-	x = 0;
-	d= 0;
-	// init_player(d);
-	// d->ray.dir = d->player.dir;
-
-	/*d->r.hit = 0;
-	while (x < d->res[0])
-	{
-		d->r.camera_x = 2 * x / (double)d->res[0] - 1;
-		d->r.ray_dir_x = d->player.dir_x + d->player.plan_x * d->r.camera_x;
-		d->r.ray_dir_y = d->player.dir_y + d->player.plan_y * d->r.camera_x;
-		x++;
-	}
-	d->r.map_x = (int)d->player.pos_x;
-	d->r.map_y = (int)d->player.pos_y;
-	d->r.delta_dist_x = sqrt(1+ ((d->r.ray_dir_y * d->r.ray_dir_y) / (d->r.ray_dir_y * d->r.ray_dir_y)));
-	d->r.delta_dist_y = sqrt(1+ ((d->r.ray_dir_y * d->r.ray_dir_y) / (d->r.ray_dir_y * d->r.ray_dir_y)));
-	if (d->r.ray_dir_x < 0)
-	{
-		d->r.step_x = -1;
-		d->r.side_dist_x = (d->player.pos_x - d->r.map_x) * d->r.delta_dist_x;
-	}
-	else
-	{
-		d->r.step_x = 1;
-		d->r.side_dist_x = (d->r.map_x + 1.0 - d->player.pos_x) * d->r.delta_dist_x;
-	}
-	if (d->r.ray_dir_y < 0)
-	{
-		d->r.step_y = -1;
-		d->r.side_dist_y = (d->player.pos_y - d->r.map_y) * d->r.delta_dist_y;
-	}
-	else
-	{
-		d->r.step_y = 1;
-		d->r.side_dist_y = (d->r.map_y + 1.0 - d->player.pos_y) * d->r.delta_dist_y;
-	}
-	while (d->r.hit == 0)
-	{
-		if (d->r.side_dist_x < d->r.side_dist_y)
-		{
-			d->r.side_dist_x += d->r.delta_dist_x;
-			d->r.map_x += d->r.step_x;
-			d->r.hit_side = 0;
-		}
-		else
-		{
-			d->r.side_dist_y += d->r.delta_dist_y;
-			d->r.map_y += d->r.step_y;
-			d->r.hit_side = 1;
-		}
-		if (d->map[d->r.map_x][d->r.map_y] != '0' || d->map[d->r.map_x][d->r.map_y] != '2' || d->map[d->r.map_x][d->r.map_y] != set)
-			d->r.hit = 1;
-	}
-	if (d->r.hit_side == 0)
-		d->r.perp_wall_dist = (d->r.map_x - d->player.pos_x + (1 - d->r.step_x) / 2) / d->r.ray_dir_x;
-	else
-		d->r.perp_wall_dist = (d->r.map_y - d->player.pos_y + (1 - d->r.step_y) / 2) / d->r.ray_dir_y;
-	d->r.line_height = (int)(d->res[1] / d->r.perp_wall_dist);
-	d->r.drawstart = -d->r.line_height / 2 + d->res[1] / 2;
-	if (d->r.drawstart < 0)
-		d->r.drawstart = 0;
-	d->r.drawend = d->r.line_height / 2 + d->res[1] / 2;
-	if (d->r.drawend > d->res[1])
-		d->r.drawend = d->res[1] - 1;*/
+	get_ray_size(d);
 }
-
-//tqt pas meme moi j'ai presque pas compris mais apparement le raycasting c'est ca loooool

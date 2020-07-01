@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/06/30 02:56:15 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/01 16:28:55 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,9 @@ typedef struct  s_data
 	t_player	player;
 	t_ray		ray;
 	t_img		img;
-	int			*len_map;
     char		**map;
+	int			mapX;
+	int			mapY;
     char		*tmp;
     char		*resolution;
     long        res[2];
@@ -103,9 +104,8 @@ typedef struct  s_data
     char		*east;
     char		*south;
     char		*west;
-	int			len;
-	float			x;
-	float			y;
+	float		x;
+	float		y;
 }				t_data;
 
 /***          			fucntion to pars                                    ***/

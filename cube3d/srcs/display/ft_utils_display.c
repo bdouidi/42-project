@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 21:39:55 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/30 03:01:22 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/01 16:31:05 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,25 @@ void	set_position(t_data *d)
 	int	i;
 
 	i = 0;
-	d->len = 0;
-	while (d->map[d->len])
+	d->mapY = 0;
+	while (d->map[d->mapY])
 	{
-		while (d->map[d->len][i])
+		while (d->map[d->mapY][i])
 		{
-			if (ft_isalpha(d->map[d->len][i]) == 1)
+			if (ft_isalpha(d->map[d->mapY][i]) == 1)
 			{
-				d->player.pos_y = d->len + .5;
+				d->player.pos_y = d->mapY + .5;
 				d->player.pos_x = i + .5;
-				d->player.letter = d->map[d->len][i];
-				d->map[d->len][i] = '0';
+				d->player.letter = d->map[d->mapY][i];
+				d->map[d->mapY][i] = '0';
 			}
 			i++;
 		}
+		d->mapX = i;
 		i = 0;
-		d->len++;
+		d->mapY++;
 	}
-	d->len--;
+	d->mapY--;
 }
 
 void	create_img(t_data *d, int i, int width, int height)

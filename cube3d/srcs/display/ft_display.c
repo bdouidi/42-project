@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 19:30:36 by othabchi          #+#    #+#             */
-/*   Updated: 2020/06/30 03:02:02 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/01 16:50:01 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void		display_floor_ceiling(t_data *d)
 		d->y++;
 		d->x = 0;
 	}
-	raycasting(d);
+	//raycasting(d);
 }
 
 static int		handlekeys(int keycode, t_data *d)
@@ -113,6 +113,7 @@ static int		handlekeys(int keycode, t_data *d)
 		display_floor_ceiling(d);
 		drawmap2d(d);
 		drawplayer(d, keycode);
+		// raycasting(d);
 	}
 	else
 		display_floor_ceiling(d);
