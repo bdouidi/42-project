@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/07/01 16:28:55 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/03 06:43:13 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef struct	s_ray
 {
 	double		camera_x;
 	double		dir;
-	double		x;
-	double		y;
+	double		x[2];
+	double		y[2];
 
 	double		side_dist_x; // longueur du rayon de la position actuelle jusqu'a la prochaine intersection x ou y
 	double		side_dist_y;
@@ -130,7 +130,7 @@ void		raycasting(t_data *d);
 void		set_position(t_data *d);
 void		my_mlx_pixel_put(t_data *d, int color);
 void		drawfov(t_data *d, int color);
-void		drawline(t_data *d, double dir, int color);
+void		drawline(t_data *d, double dir, int i, int color);
 void		drawplayer(t_data *d, int keycode);
 void 		which_dir2(t_data *d, float spd, int keycode);
 void		drawsquare(t_data *d, int color);

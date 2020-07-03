@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 21:39:55 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/01 16:31:05 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/03 03:53:13 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@ void	my_mlx_pixel_put(t_data *d, int color)
 {
 	char *dst;
 
-	dst = d->img.addr[0] + ((int)d->y * d->img.line_length + (int)d->x *
-	(d->img.bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	if (d->x >= 0 && d->y >= 0 && d->x < d->img.line_length)
+	{
+		dst = d->img.addr[0] + ((int)d->y * d->img.line_length + (int)d->x *
+		(d->img.bits_per_pixel / 8));
+		*(unsigned int*)dst = color;
+	}
+	
 }
 
 void	init_player(t_data *d)
@@ -27,11 +31,11 @@ void	init_player(t_data *d)
 	if (d->player.letter == 'N')
 		d->player.dir = M_PI / 2;
 	else if (d->player.letter == 'E')
-		d->player.dir = 0;
-	else if (d->player.letter == 'S')
-		d->player.dir = (3 * M_PI) / 2;
-	else if (d->player.letter == 'W')
 		d->player.dir = M_PI;
+	else if (d->player.letter == 'S')
+		d->player.dir = 3 * M_PI_2;
+	else if (d->player.letter == 'W')
+		d->player.dir = 0;
 }
 
 void	which_dir2(t_data *d, float spd, int keycode)
