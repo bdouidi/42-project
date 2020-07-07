@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 03:12:26 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/06 21:04:34 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/07 19:03:09 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	get_ray_size(t_data *d)
 	d->ray.dir = d->player.fov[0];
 	aTan = -1 / tan(d->ray.dir);
 	d->square.width = ((d->res[0] * .45) / ft_strlen(d->map[0]));
-	printf("-{%f | %f}-\n", d->ray.dir, d->player.dir);
 	if ((d->ray.dir > -0.01 && d->ray.dir < 0.01) ||
 		(d->ray.dir > 3.13 && d->ray.dir < 3.15))
 	{
@@ -34,7 +33,7 @@ void	get_ray_size(t_data *d)
 	{
 		d->ray.y[0] = (int)d->player.pos_y + 1;
 		d->ray.x[0] = (d->player.pos_y - d->ray.y[0]) * aTan + d->player.pos_x;
-		printf("ray_y/x[%f, %f]\ni = %d\n", d->ray.y[i], d->ray.x[i], i);
+		// printf("ray_y/x[%f, %f]\ni = %d\n", d->ray.y[i], d->ray.x[i], i);
 		yoffset = 1;
 		xoffset = -yoffset * aTan;
 	}
@@ -45,7 +44,7 @@ void	get_ray_size(t_data *d)
 		yoffset = -1;
 		xoffset = -yoffset * aTan;
 	}
-	while (d->ray.hit == 0 &&  d->ray.x[0] > 0 && d->ray.x[0] < d->mapX)
+	while (d->ray.hit == 0 &&  d->ray.x[0] > 1 && d->ray.x[0] < d->mapX)
 	{
 		if ((d->map[(int)d->ray.y[0]][(int)d->ray.x[0]] &&
 			d->map[(int)d->ray.y[0]][(int)d->ray.x[0]] == '1') ||
@@ -85,7 +84,7 @@ void	get_ray_size(t_data *d)
 		yoffset = -xoffset * nTan;
 	}
 	// printf("0 : [%f, %f]\n1 : [%f, %f]\n -------------------- \n", d->ray.y[0], d->ray.x[0], d->ray.y[1], d->ray.x[1]);
-	while (d->ray.hit == 0 &&  d->ray.y[1] > 0 && d->ray.y[1] < d->mapY)
+	while (d->ray.hit == 0 &&  d->ray.y[1] > 1 && d->ray.y[1] < d->mapY)
 	{
 		if ((d->map[(int)d->ray.y[1]][(int)d->ray.x[1]] &&
 			d->map[(int)d->ray.y[1]][(int)d->ray.x[1]] == '1') ||
@@ -109,6 +108,7 @@ void	get_ray_size(t_data *d)
 	if (i != 2 && dist1 > dist2)
 		i = 1;
 	i = (i == 2 ? 0 : i);
+	// printf("-{%f | %f}-\ni = %d\n", d->ray.dir, d->player.dir, i);
 	drawline(d, d->ray.dir, i, 0x422180);
 }
 

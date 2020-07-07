@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/07/03 06:43:13 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/07 18:46:40 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void        window(t_data *d);
 void		raycasting(t_data *d);
 void		set_position(t_data *d);
 void		my_mlx_pixel_put(t_data *d, int color);
-void		drawfov(t_data *d, int color);
+void		drawfov(t_data *d);
 void		drawline(t_data *d, double dir, int i, int color);
 void		drawplayer(t_data *d, int keycode);
 void 		which_dir2(t_data *d, float spd, int keycode);
