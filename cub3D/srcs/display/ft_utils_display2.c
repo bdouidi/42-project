@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_display2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 22:31:39 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/08 05:35:19 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/07/08 07:32:37 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,46 +16,46 @@ void	rotation(t_data *d, int keycode)
 {
 	if (keycode == 12)
 	{
-		d->player.dir -= (M_PI / 180);
+		d->player.dir -= (M_PI / 180) * 3;
 		if (d->player.dir < 0)
 			d->player.dir = 2 * M_PI;
 	}
 	if (keycode == 14)
 	{
-		d->player.dir += (M_PI / 180);
+		d->player.dir += (M_PI / 180) * 3;
 		if (d->player.dir > 2 * M_PI)
 			d->player.dir = 0;
 	}
 }
 
-void	drawline(t_data *d, double dir, int i, int color)
-{
-	d->x = d->player.pos_x * d->square.width;
-	d->y = d->player.pos_y * d->square.width;
-	if (i == 1)
-		color = 0x0FF0000;
-	while ((int)d->x != (int)(d->ray.x[i] * d->square.width))
-	{
-		my_mlx_pixel_put(d, color);
-		d->x -= cos(dir);
-		d->y -= sin(dir);
-	}
-}
+// void	drawline(t_data *d, double dir, int i, int color)
+// {
+// 	d->x = d->player.pos_x * d->square.width;
+// 	d->y = d->player.pos_y * d->square.width;
+// 	if (i == 1)
+// 		color = 0x0FF0000;
+// 	while ((int)d->x != (int)(d->ray.x[i] * d->square.width))
+// 	{
+// 		my_mlx_pixel_put(d, color);
+// 		d->x -= cos(dir);
+// 		d->y -= sin(dir);
+// 	}
+// }
 
-void    drawfov(t_data *d, int keycode)
+void    drawfov(t_data *d)
 {
     int	fov;
 
     fov = d->res[0];
-    d->player.fov[0] = d->player.dir - (M_PI / 6);
+    d->player.fov = d->player.dir - (M_PI / 6);
     while (fov--)
     {
-        if (d->player.fov[0] < 0)
-            d->player.fov[0] += 2 * M_PI;
-        if (d->player.fov[0] > 2 * M_PI)
-            d->player.fov[0] -= 2 * M_PI;
-        raycasting(d, keycode);
-        d->player.fov[0] += ((M_PI / 3) / d->res[0]);
+		if (d->player.fov < 0)
+			d->player.fov += 2 * M_PI;
+		if (d->player.fov > 2 * M_PI)
+			d->player.fov -= 2 * M_PI;
+        raycasting(d);
+        d->player.fov += ((M_PI / 3) / d->res[0]);
     }
 }
 

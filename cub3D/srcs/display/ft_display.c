@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_display.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 19:30:36 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/08 05:31:48 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/07/08 07:40:02 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void			drawmap2d(t_data *d)
 			d->square.imgx = x * d->square.width;
 			d->square.imgy = y * d->square.height;
 			if (d->map[y][x] == '1')
-				drawsquare(d, 0x0);
+				drawsquare(d, 0x00458A);
 			if (d->map[y][x] == '0')
-				drawsquare(d, 0xFFFFFF);
+				drawsquare(d, 0x83C0FC);
 			else if (d->map[y][x] == '2')
 				drawsquare(d, 0xFF0000);
 			x++;
@@ -106,18 +106,20 @@ static int		handlekeys(int keycode, t_data *d)
 	if (keycode == 123 || keycode == 124 || keycode == 125
 		|| keycode == 126)
 		which_dir(d, spd, keycode);
+	if (keycode == 12 || keycode == 14)
+		rotation(d, keycode);
 	if (check % 2 != 0)
 	{
 		mlx_clear_window(d->vars.mlx, d->vars.win);
 		display_floor_ceiling(d);
-		drawfov(d, keycode);
+		drawfov(d);
 		drawmap2d(d);
 		drawplayer(d);
 	}
 	else
 	{
 		display_floor_ceiling(d);
-		drawfov(d, keycode);
+		drawfov(d);
 	}
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);
 	return (0);
@@ -132,6 +134,7 @@ void			window(t_data *d)
 		create_img(d, 0, d->res[0], d->res[1]);
 	init_player(d);
 	display_floor_ceiling(d);
+	drawfov(d);
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);
 	mlx_hook(d->vars.win, 2, (1L << 0), handlekeys, d);
 	mlx_loop(d->vars.mlx);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dda.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 02:08:43 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/08 05:24:17 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/07/08 08:21:20 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ int		look_top_botom(t_data *d, int i)
 
 int		look_left_right(t_data *d, int i)
 {
-	d->ray.hit = 0;
-	d->ray.t = -tan(d->ray.dir);
 	if ((d->ray.dir > 1.56 && d->ray.dir < 1.58) ||
 		(d->ray.dir > 4.70 && d->ray.dir < 4.72))
 	{
@@ -101,15 +99,17 @@ int		look_left_right(t_data *d, int i)
 
 void	get_ray_size(t_data *d)
 {
-	int		i;
-	double	dist1;
-	double	dist2;
-	static	int tmp_x = - 1;
+	int			i;
+	double		dist1;
+	double		dist2;
+	static int	tmp_x = -1;
 
 	i = 0;
-	d->ray.dir = d->player.fov[0];
+	d->ray.dir = d->player.fov;
 	d->square.width = ((d->res[0] * .45) / ft_strlen(d->map[0]));
 	i = look_top_botom(d, i);
+	d->ray.hit = 0;
+	d->ray.t = -tan(d->ray.dir);
 	i = look_left_right(d, i);
 	dist1 = sqrt((d->ray.x[0] - d->player.pos_x) * (d->ray.x[0] -
 	d->player.pos_x)
