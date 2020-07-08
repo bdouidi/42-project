@@ -6,7 +6,7 @@
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 19:30:36 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/08 02:38:22 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/07/08 05:31:48 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,15 @@ static int		handlekeys(int keycode, t_data *d)
 	{
 		mlx_clear_window(d->vars.mlx, d->vars.win);
 		display_floor_ceiling(d);
+		drawfov(d, keycode);
 		drawmap2d(d);
-		drawplayer(d, keycode);
+		drawplayer(d);
 	}
 	else
+	{
 		display_floor_ceiling(d);
+		drawfov(d, keycode);
+	}
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);
 	return (0);
 }

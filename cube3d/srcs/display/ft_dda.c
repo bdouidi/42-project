@@ -6,7 +6,7 @@
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 02:08:43 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/08 02:33:00 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/07/08 05:24:17 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	get_ray_size(t_data *d)
 	int		i;
 	double	dist1;
 	double	dist2;
+	static	int tmp_x = - 1;
 
 	i = 0;
 	d->ray.dir = d->player.fov[0];
@@ -118,5 +119,7 @@ void	get_ray_size(t_data *d)
 	+ (d->ray.y[1] - d->player.pos_y) * (d->ray.y[1] - d->player.pos_y));
 	i = (i != 2 && dist1 > dist2) ? 1 : i;
 	i = (i == 2 ? 0 : i);
-	drawline(d, d->ray.dir, i, 0x422180);
+	tmp_x = (tmp_x == d->res[0]) ? 0 : tmp_x;
+	i == 0 ? draw_wall(d, dist1, i, tmp_x) : draw_wall(d, dist2, i, tmp_x);
+	tmp_x++;
 }

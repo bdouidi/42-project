@@ -6,7 +6,7 @@
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/07/08 02:04:58 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/07/08 05:33:25 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,16 +114,18 @@ int	        set_rfc(t_data *d);
 void		init_player(t_data *d);
 int         cub3d(int fd);
 void        window(t_data *d);
-void		raycasting(t_data *d);
+void		raycasting(t_data *d, int keycode);
 void		set_position(t_data *d);
 void		my_mlx_pixel_put(t_data *d, int color);
-void		drawfov(t_data *d);
+void		drawfov(t_data *d, int keycode);
 void		drawline(t_data *d, double dir, int i, int color);
-void		drawplayer(t_data *d, int keycode);
+void		drawplayer(t_data *d);
 void 		which_dir2(t_data *d, float spd, int keycode);
 void		drawsquare(t_data *d, int color);
 void    	create_img(t_data *d, int i, int width, int height);
 void		get_ray_size(t_data *d);
+void		rotation(t_data *d, int keycode);
+void    	draw_wall(t_data *d, float raydist, int i, int tmp_x);
 /***                                                                        ***/
 void		leak(char *str);
 int			create_trgb(int t, int r, int g, int b);
