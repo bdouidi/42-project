@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_display2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 22:31:39 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/07 19:13:34 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/08 02:37:36 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,11 @@ void	drawline(t_data *d, double dir, int i, int color)
 	d->y = d->player.pos_y * d->square.width;
 	if (i == 1)
 		color = 0x0FF0000;
-	// printf("x/y[%f, %f]\nrayx/y[%d, %d]\n", d->x, d->y, (int)(d->ray.x[i] * d->square.width), (int)(d->ray.y[i] * d->square.width));
-	printf("\n\nDebut du rayon\n");
 	while ((int)d->x != (int)(d->ray.x[i] * d->square.width))
-	// for (int size = 0; size < 50; size++)
 	{
-		if (d->x < 0)
-			break;
-		// printf("[d->y :%f != d->ray.y :%f]\n[d->x :%f != d->ray.x :%f]\n------------------------\n", 
-		// d->y, d->ray.y[i] * d->square.width, d->x, d->ray.x[i] * d->square.width);
-		// printf("[%f != %f]\n", d->x, d->ray.x[i] * d->square.width);
 		my_mlx_pixel_put(d, color);
 		d->x -= cos(dir);
 		d->y -= sin(dir);
-
 	}
 }
 
@@ -56,9 +47,8 @@ void	drawfov(t_data *d)
 	int count;
 
 	count = 60;
-	d->player.fov[0] = ((d->player.dir - (M_PI / 6)) < 0) ? (11 * M_PI / 6) + d->player.dir :
-	d->player.dir - (M_PI / 6);
-	printf("-{%f | %f}-\n", d->player.fov[0], d->player.dir);
+	d->player.fov[0] = ((d->player.dir - (M_PI / 6)) < 0) ? (11 * M_PI / 6) +
+	d->player.dir : d->player.dir - (M_PI / 6);
 	while (count--)
 	{
 		d->player.fov[0] = (d->player.fov[0] > 2 * M_PI) ? 0 : d->player.fov[0];
@@ -75,7 +65,6 @@ void	drawsquare(t_data *d, int color)
 	{
 		while (d->x < (d->square.width + d->square.imgx - 1))
 		{
-			//mlx_pixel_put(d->vars.mlx, d->vars.win, d->x, d->y, color);
 			my_mlx_pixel_put(d, color);
 			d->x++;
 		}
@@ -97,11 +86,7 @@ void	drawplayer(t_data *d, int keycode)
 	{
 		rotation(d, keycode);
 		drawfov(d);
-		// drawline(d, d->player.dir, 0x0FF0000);
 	}
 	else
-	{
 		drawfov(d);
-		// drawline(d, d->player.dir, 0x0FF0000);
-	}
 }

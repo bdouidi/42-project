@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_display.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 21:39:55 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/03 03:53:13 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/08 02:34:23 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	my_mlx_pixel_put(t_data *d, int color)
 		(d->img.bits_per_pixel / 8));
 		*(unsigned int*)dst = color;
 	}
-	
 }
 
 void	init_player(t_data *d)

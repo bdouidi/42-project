@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/07/07 18:46:40 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/08 02:04:58 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,15 @@ typedef struct	s_player
 
 typedef struct	s_ray
 {
-	double		camera_x;
 	double		dir;
 	double		x[2];
 	double		y[2];
-
-	double		side_dist_x; // longueur du rayon de la position actuelle jusqu'a la prochaine intersection x ou y
-	double		side_dist_y;
-
-	double		delta_x; // longueur d'un rayon jusqu'a lq prochaine intersection x ou y;
-	double		delta_y;
-	double		perp_wall_dist;
-
-	int			step_x; // dans quelle direction on se deplace ( 1 ou -1);
-	int			step_y;
-
+	float		xoffset;
+	float		yoffset;
+	float		t; //tangente mais tu coco la norme
 	int			hit; // savoir si  on a touche un mur ou non;
 	int			hit_side; // savoir dans quelle direction on a touche un mur (N, S, E, W);
-
 	int			line_height; // hauteur de la ligne a dessiner sur l'ecran
-	int			drawstart;
-	int			drawend;
 
 }				t_ray;		
 
@@ -135,6 +123,7 @@ void		drawplayer(t_data *d, int keycode);
 void 		which_dir2(t_data *d, float spd, int keycode);
 void		drawsquare(t_data *d, int color);
 void    	create_img(t_data *d, int i, int width, int height);
+void		get_ray_size(t_data *d);
 /***                                                                        ***/
 void		leak(char *str);
 int			create_trgb(int t, int r, int g, int b);
