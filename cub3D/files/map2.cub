@@ -1,9 +1,9 @@
-NO ./textures/texture1
-EA ./textures/texture4
-WE ./textures/texture3
+NO ./files/textures/purplestone.xpm
+EA ./files/textures/wood.xpm
+WE ./files/textures/purplestone.xpm
 R 800 600
-SO ./textures/texture2
-S ./textures/texture5 
+SO ./files/textures/wood.xpm
+S ./files/textures/barrel.xpm
 
 F 144,139,139
 C 0,128,255

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/07/13 14:54:40 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/07/13 16:59:16 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,17 @@ typedef	struct	s_square // Utilisé de base pour faire des test mais possibile d
 	int			imgy;
 }				t_square;
 
-typedef	struct	 s_img
+typedef	struct	s_texture
 {
     void 		*tex[4];
-	void		*ptr[3];
-    char		*addr[3];
 	int			width;
 	int			height;
+}				t_texture;
+
+typedef	struct	 s_img
+{
+	void		*ptr[3];
+    char		*addr[3];
     int         line_length;
     int			bits_per_pixel;
     int 		endian;
@@ -75,6 +79,7 @@ typedef struct  s_data
 	t_player	player;
 	t_ray		ray;
 	t_img		img;
+	t_texture	texture;		
     char		**map;
 	int			mapX;
 	int			mapY;
