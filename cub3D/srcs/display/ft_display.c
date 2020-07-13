@@ -127,7 +127,7 @@ static int		handlekeys(int keycode, t_data *d)
 
 void load_texture(t_data *d, char *tex_path)
 {
-	d->img.ptr[0] = mlx_xpm_file_to_image(d->vars.mlx, tex_path,
+	d->img.tex[0] = mlx_xpm_file_to_image(d->vars.mlx, tex_path,
 					&d->img.width, &d->img.height);
 }
 
@@ -142,10 +142,10 @@ void			window(t_data *d)
 	display_floor_ceiling(d);
 	//open xpm
 	load_texture(d, "/Users/dsy/42-project/cub3D/files/textures/colorstone.xpm");
-	printf("width : %i height : %i\n", d->img.width, d->img.height);
 	//open xpm
 	drawfov(d);
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);
+	//mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.tex[0], 0, 0);
 	mlx_hook(d->vars.win, 2, (1L << 0), handlekeys, d);
 	mlx_loop(d->vars.mlx);
 }
