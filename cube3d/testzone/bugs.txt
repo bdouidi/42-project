@@ -1,9 +1,0 @@
-//1. LA NEIGE
-
-//2. Mouvement bloqué en position initiale
-
-3(optionel). perso qui depasse un peu trop de la map visuellement
-
-revoir le parsing avec un \n en plein milieu de map
-
-angle 45 degre choix du rayon du plus court incorecte
