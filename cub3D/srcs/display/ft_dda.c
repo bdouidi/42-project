@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dda.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 02:08:43 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/13 15:08:23 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/07/13 16:09:13 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	loop_lr(t_data *d)
 	}
 }
 
-void		look_top_botom(t_data *d, int *i)
+void	look_top_botom(t_data *d, int *i)
 {
 	d->ray.hit = 0;
 	d->ray.t = -1 / tan(d->ray.dir);
@@ -66,7 +66,7 @@ void		look_top_botom(t_data *d, int *i)
 	loop_tb(d);
 }
 
-void		look_left_right(t_data *d, int *i)
+void	look_left_right(t_data *d, int *i)
 {
 	if ((d->ray.dir > 1.56 && d->ray.dir < 1.58) ||
 		(d->ray.dir > 4.70 && d->ray.dir < 4.72))
