@@ -6,7 +6,7 @@
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 21:39:55 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/08 02:34:23 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/07/13 14:55:16 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	my_mlx_pixel_put(t_data *d, int color)
 
 void	init_player(t_data *d)
 {
-	d->player.height = 0.5 * d->res[1];
+	d->player.sp = .1;
 	if (d->player.letter == 'N')
 		d->player.dir = M_PI / 2;
 	else if (d->player.letter == 'E')
@@ -37,29 +37,29 @@ void	init_player(t_data *d)
 		d->player.dir = 0;
 }
 
-void	which_dir2(t_data *d, float spd, int keycode)
+void	which_dir2(t_data *d, int keycode)
 {
 	int	x;
 	int	y;
 
 	if (keycode == 125)
 	{
-		x = (int)(d->player.pos_x + cos(d->player.dir) * spd);
-		y = (int)(d->player.pos_y + sin(d->player.dir) * spd);
+		x = (int)(d->player.pos_x + cos(d->player.dir) * d->player.sp);
+		y = (int)(d->player.pos_y + sin(d->player.dir) * d->player.sp);
 		if (d->map[y][x] && d->map[y][x] == '0')
 		{
-			d->player.pos_x += cos(d->player.dir) * spd;
-			d->player.pos_y += sin(d->player.dir) * spd;
+			d->player.pos_x += cos(d->player.dir) * d->player.sp;
+			d->player.pos_y += sin(d->player.dir) * d->player.sp;
 		}
 	}
 	if (keycode == 126)
 	{
-		x = (int)(d->player.pos_x - cos(d->player.dir) * spd);
-		y = (int)(d->player.pos_y - sin(d->player.dir) * spd);
+		x = (int)(d->player.pos_x - cos(d->player.dir) * d->player.sp);
+		y = (int)(d->player.pos_y - sin(d->player.dir) * d->player.sp);
 		if (d->map[y][x] && d->map[y][x] == '0')
 		{
-			d->player.pos_x -= cos(d->player.dir) * spd;
-			d->player.pos_y -= sin(d->player.dir) * spd;
+			d->player.pos_x -= cos(d->player.dir) * d->player.sp;
+			d->player.pos_y -= sin(d->player.dir) * d->player.sp;
 		}
 	}
 }

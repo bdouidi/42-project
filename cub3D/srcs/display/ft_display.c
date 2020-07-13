@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_display.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 19:30:36 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/08 07:40:02 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/13 14:57:09 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,32 +40,32 @@ void			drawmap2d(t_data *d)
 	}
 }
 
-void			which_dir(t_data *d, float spd, int keycode)
+void			which_dir(t_data *d, int keycode)
 {
 	int		x;
 	int		y;
 
 	if (keycode == 123)
 	{
-		x = (int)(d->player.pos_x + cos(d->player.dir + M_PI_2) * spd);
-		y = (int)(d->player.pos_y + sin(d->player.dir + M_PI_2) * spd);
+		x = (int)(d->player.pos_x + cos(d->player.dir + M_PI_2) * d->player.sp);
+		y = (int)(d->player.pos_y + sin(d->player.dir + M_PI_2) * d->player.sp);
 		if (d->map[y][x] && d->map[y][x] == '0')
 		{
-			d->player.pos_x += cos(d->player.dir + M_PI_2) * spd;
-			d->player.pos_y += sin(d->player.dir + M_PI_2) * spd;
+			d->player.pos_x += cos(d->player.dir + M_PI_2) * d->player.sp;
+			d->player.pos_y += sin(d->player.dir + M_PI_2) * d->player.sp;
 		}
 	}
 	if (keycode == 124)
 	{
-		x = (int)(d->player.pos_x - cos(d->player.dir + M_PI_2) * spd);
-		y = (int)(d->player.pos_y - sin(d->player.dir + M_PI_2) * spd);
+		x = (int)(d->player.pos_x - cos(d->player.dir + M_PI_2) * d->player.sp);
+		y = (int)(d->player.pos_y - sin(d->player.dir + M_PI_2) * d->player.sp);
 		if (d->map[y][x] && d->map[y][x] == '0')
 		{
-			d->player.pos_x -= cos(d->player.dir + M_PI_2) * spd;
-			d->player.pos_y -= sin(d->player.dir + M_PI_2) * spd;
+			d->player.pos_x -= cos(d->player.dir + M_PI_2) * d->player.sp;
+			d->player.pos_y -= sin(d->player.dir + M_PI_2) * d->player.sp;
 		}
 	}
-	which_dir2(d, spd, keycode);
+	which_dir2(d, keycode);
 }
 
 static void		display_floor_ceiling(t_data *d)
@@ -88,14 +88,13 @@ static void		display_floor_ceiling(t_data *d)
 		d->y++;
 		d->x = 0;
 	}
+	drawfov(d);
 }
 
 static int		handlekeys(int keycode, t_data *d)
 {
 	static int	check = 0;
-	float		spd;
 
-	spd = .1;
 	if (keycode == 53)
 	{
 		mlx_destroy_window(d->vars.mlx, d->vars.win);
@@ -105,27 +104,23 @@ static int		handlekeys(int keycode, t_data *d)
 		check++;
 	if (keycode == 123 || keycode == 124 || keycode == 125
 		|| keycode == 126)
-		which_dir(d, spd, keycode);
+		which_dir(d, keycode);
 	if (keycode == 12 || keycode == 14)
 		rotation(d, keycode);
 	if (check % 2 != 0)
 	{
 		mlx_clear_window(d->vars.mlx, d->vars.win);
 		display_floor_ceiling(d);
-		drawfov(d);
 		drawmap2d(d);
 		drawplayer(d);
 	}
 	else
-	{
 		display_floor_ceiling(d);
-		drawfov(d);
-	}
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);
 	return (0);
 }
 
-void load_texture(t_data *d, char *tex_path)
+void			load_texture(t_data *d, char *tex_path)
 {
 	d->img.tex[0] = mlx_xpm_file_to_image(d->vars.mlx, tex_path,
 					&d->img.width, &d->img.height);
@@ -140,9 +135,7 @@ void			window(t_data *d)
 		create_img(d, 0, d->res[0], d->res[1]);
 	init_player(d);
 	display_floor_ceiling(d);
-	//open xpm
 	load_texture(d, "/Users/dsy/42-project/cub3D/files/textures/colorstone.xpm");
-	//open xpm
 	drawfov(d);
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);
 	//mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.tex[0], 0, 0);

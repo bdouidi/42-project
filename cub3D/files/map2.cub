@@ -1,7 +1,7 @@
 NO ./textures/texture1
 EA ./textures/texture4
 WE ./textures/texture3
-R  5000 5000
+R 800 600
 SO ./textures/texture2
 S ./textures/texture5 
 

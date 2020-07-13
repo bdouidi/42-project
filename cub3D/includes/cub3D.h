@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/07/08 07:31:16 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/13 14:54:40 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,14 @@ typedef struct  s_vars
 
 typedef struct	s_player
 {
-	double      height;
 	double		fov;
-	char		letter;
+	char		letter; // position de base
 	double		pos_x; //position du joueur
 	double		pos_y;	
 	int			map_x;  // la case dans laquelle on se trouve
 	int			map_y;
 	double		dir; 		//direction du joueur
-	double		plan_x;		//le plan de camera du joueur
-	double		plan_y;
-	int         wall_distance;
+	float		sp; // vitesse de deplacement
 }               t_player;
 
 typedef struct	s_ray
@@ -49,7 +46,6 @@ typedef struct	s_ray
 	int			hit; // savoir si  on a touche un mur ou non;
 	int			hit_side; // savoir dans quelle direction on a touche un mur (N, S, E, W);
 	int			line_height; // hauteur de la ligne a dessiner sur l'ecran
-
 }				t_ray;		
 
 typedef	struct	s_square // Utilisé de base pour faire des test mais possibile de l'utiliser pour les sprites ("2" dans la map)
@@ -58,7 +54,6 @@ typedef	struct	s_square // Utilisé de base pour faire des test mais possibile d
 	int			height;
 	int			imgx;
 	int			imgy;
-	// int			color;
 }				t_square;
 
 typedef	struct	 s_img
@@ -123,7 +118,7 @@ void		my_mlx_pixel_put(t_data *d, int color);
 void		drawfov(t_data *d);
 void		drawline(t_data *d, double dir, int i, int color);
 void		drawplayer(t_data *d);
-void 		which_dir2(t_data *d, float spd, int keycode);
+void 		which_dir2(t_data *d, int keycode);
 void		drawsquare(t_data *d, int color);
 void    	create_img(t_data *d, int i, int width, int height);
 void		get_ray_size(t_data *d);
