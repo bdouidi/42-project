@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_display.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 19:30:36 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/13 17:48:14 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/13 14:57:09 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,17 +120,17 @@ static int		handlekeys(int keycode, t_data *d)
 	return (0);
 }
 
-void			load_texture(t_data *d, char *tex_path)
+void			load_texture(t_data *d, char *tex_path, int i)
 {
-	d->texture.tex[0] = mlx_xpm_file_to_image(d->vars.mlx, tex_path,
+	d->texture.tex[i] = mlx_xpm_file_to_image(d->vars.mlx, tex_path,
 					&d->texture.width, &d->texture.height);
+	d->texture.addr[i] = mlx_get_data_addr(d->texture.tex[i], 
+						&d->img.bits_per_pixel, &d->img.line_length,
+						&d->img.endian);
 }
 
 void			window(t_data *d)
 {
-	int fd;
-
-	fd = 0;
 	d->vars.mlx = mlx_init();
 	d->vars.win = mlx_new_window(d->vars.mlx, d->res[0], d->res[1],
 			"PAYPAL/BDOUIDI");
@@ -138,11 +138,9 @@ void			window(t_data *d)
 		create_img(d, 0, d->res[0], d->res[1]);
 	init_player(d);
 	display_floor_ceiling(d);
-	fd = open(d->north, fd, O_RDONLY);
-	load_texture(d, d->north);
-	drawfov(d);
+//	load_texture(d, "/Users/dsy/42-project/cub3D/files/textures/colorstone.xpm");
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);
-	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->texture.tex[0], 0, 0);
+	//mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.tex[0], 0, 0);
 	mlx_hook(d->vars.win, 2, (1L << 0), handlekeys, d);
 	mlx_loop(d->vars.mlx);
 }

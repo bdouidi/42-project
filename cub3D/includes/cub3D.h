@@ -59,6 +59,7 @@ typedef	struct	s_square // Utilisé de base pour faire des test mais possibile d
 typedef	struct	s_texture
 {
     void 		*tex[4];
+	void		*addr[4];
 	int			width;
 	int			height;
 }				t_texture;
