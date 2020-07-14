@@ -62,6 +62,9 @@ typedef	struct	s_texture
 	void		*addr[4];
 	int			width;
 	int			height;
+	int			bpp;//bits per pixel
+	int			szl;//sizeline
+	int			endian;
 }				t_texture;
 
 typedef	struct	 s_img
