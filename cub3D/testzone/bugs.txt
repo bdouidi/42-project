@@ -4,6 +4,8 @@
 
 3(optionel). perso qui depasse un peu trop de la map visuellement
 
-revoir le parsing avec un \n en plein milieu de map
+4.revoir le parsing avec un \n en plein milieu de map
 
-angle 45 degre choix du rayon du plus court incorecte
+//5.angle 45 degre choix du rayon du plus court incorecte
+
+6. texture buguee en biais

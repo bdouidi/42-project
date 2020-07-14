@@ -1,8 +1,8 @@
-NO ./files/textures/wood.xpm
-EA ./files/textures/greystone.xpm
-WE ./files/textures/purplestone.xpm
-R 200 200
-SO ./files/textures/redbrick.xpm
+NO ./files/textures/diamond_block.xpm
+EA ./files/textures/fire_coral_block.xpm
+WE ./files/textures/gold_block.xpm
+R 1280 1080
+SO ./files/textures/emerald_block.xpm
 S ./files/textures/barrel.xpm
 
 F 144,139,139

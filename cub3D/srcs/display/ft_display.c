@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 19:30:36 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/14 18:51:22 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/14 20:04:48 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void			drawmap2d(t_data *d)
 		{
 			d->square.imgx = x * d->square.width;
 			d->square.imgy = y * d->square.height;
-			if (d->map[y][x] == '1')
-				drawsquare(d, 0x00458A);
+			// if (d->map[y][x] == '1')
+			// 	drawsquare(d, 0x00458A);
 			if (d->map[y][x] == '0')
-				drawsquare(d, 0x83C0FC);
+				drawsquare(d, 0xFFFFFF);
 			else if (d->map[y][x] == '2')
 				drawsquare(d, 0xFF0000);
 			x++;
@@ -120,6 +120,12 @@ static int		handlekeys(int keycode, t_data *d)
 	return (0);
 }
 
+int cross_window(void)
+{
+	ft_putstr("Exit.\n");
+	exit(EXIT_SUCCESS);
+}
+
 void			load_texture(t_data *d, char *tex_path, int i)
 {
 	d->texture.tex[i] = mlx_xpm_file_to_image(d->vars.mlx, tex_path,
@@ -144,7 +150,7 @@ void			window(t_data *d)
 	init_player(d);
 	display_floor_ceiling(d);
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);
-	//mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.tex[0], 0, 0);
 	mlx_hook(d->vars.win, 2, (1L << 0), handlekeys, d);
+	mlx_hook(d->vars.win, 17, 0, cross_window, d);
 	mlx_loop(d->vars.mlx);
 }

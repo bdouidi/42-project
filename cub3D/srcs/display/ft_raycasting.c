@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 03:12:26 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/14 18:57:56 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/14 20:17:56 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,7 @@ void	draw_wall(t_data *d, double raydist, int i, int tmp_x)
 		y = ((d->player.pos_x - d->ray.x[1]) > 0) ? 3 : 4;
 	while (d->y <= d->ray.line_height + tmp_y)
 	{
-		my_mlx_pixel_put(d, get_tex_color(d, i, y));
-		// if (y == 1 || y == 2)
-		// 	y == 1 ? my_mlx_pixel_put(d, get_tex_color(d, i, y)) :
-		// 	my_mlx_pixel_put(d, 0x144F2D);
-		// else if (y == 3 || y == 4)
-		// 	y == 3 ? my_mlx_pixel_put(d, 0xeff542) :
-		// 	my_mlx_pixel_put(d, 0xf59642);
+		my_mlx_pixel_put(d, get_tex_color(d, i, y));// y doit redevenir i;
 		d->y++;
 	}
 }
