@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 21:39:55 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/14 16:04:29 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/14 19:00:57 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	my_mlx_pixel_put(t_data *d, int color)
 
 void	init_player(t_data *d)
 {
-	d->player.sp = .1;
+	d->player.sp = .25;
 	if (d->player.letter == 'N')
 		d->player.dir = M_PI / 2;
 	else if (d->player.letter == 'E')

@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 03:12:26 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/14 16:27:03 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/14 18:57:56 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,35 @@ double	fisheye(t_data *d, double raydist)
 	return (raydist * cos(new_angle));
 }
 
-int		get_tex_color(t_data *d, int i, int tmp_y)
+int		get_tex_color(t_data *d, int i, int y)
 {
 	char	*dst;
-	double	ratio;
 	double	posy;
 	double	posx;
+	int		color;
 
-	ratio = d->ray.line_height / d->texture.height;
-	posy = (d->y - tmp_y) / ratio;
-	ratio = 200 / d->texture.width;
-	posx = d->x / ratio;
-	dst = d->texture.addr[i] + ((int)posy * d->texture.height + (int)posx *
-	(d->texture.width / 8));
-	// printf("%u\n", *(unsigned int*)dst);
-	return (*(unsigned int*)dst);
+	dst = NULL;
+	posx = 0;
+	if (d->ray.line_height > d->texture.height[y])
+		posy = (d->y * 2 - d->res[1] + d->ray.line_height) * (d->texture.height[y] / 2)
+	/ d->ray.line_height;
+	else
+		posy = (d->y * 2 - d->res[1] + d->ray.line_height) / (d->texture.height[y])
+	/ d->ray.line_height;
+	if (i == 0)
+		posx = d->texture.width[y] - ((d->ray.x[i] - (int)d->ray.x[i]) * d->texture.width[y]) - 1;
+	else if (i == 1)
+		posx = d->texture.width[y] - ((d->ray.y[i] - (int)d->ray.y[i]) * d->texture.width[y]) - 1;
+	if (d->texture.addr[y] + ((int)posy * d->texture.szl + (int)posx * (d->texture.bpp / 8)))
+		dst = d->texture.addr[y] + ((int)posy * d->texture.szl + (int)posx * (d->texture.bpp / 8));
+	color = *(unsigned int*)dst;
+	return (color);
 }
 
 void	draw_wall(t_data *d, double raydist, int i, int tmp_x)
 {
 	double	tmp_y;
+	int		y;
 
 	raydist = fisheye(d, raydist);
 	d->x = tmp_x;
@@ -53,17 +62,18 @@ void	draw_wall(t_data *d, double raydist, int i, int tmp_x)
 	d->y = (d->res[1] / 2 - d->ray.line_height / 2) - 1;
 	tmp_y = d->y;
 	if (i == 0)
-		i = ((d->player.pos_y - d->ray.y[0]) > 0) ? 1 : 2;
+		y = ((d->player.pos_y - d->ray.y[0]) > 0) ? 1 : 2;
 	else if (i == 1)
-		i = ((d->player.pos_x - d->ray.x[1]) > 0) ? 3 : 4;
+		y = ((d->player.pos_x - d->ray.x[1]) > 0) ? 3 : 4;
 	while (d->y <= d->ray.line_height + tmp_y)
 	{
-		if (i == 1 || i == 2)
-			i == 1 ? my_mlx_pixel_put(d, get_tex_color(d, i, tmp_y)) :
-			my_mlx_pixel_put(d, 0x144F2D);
-		else if (i == 3 || i == 4)
-			i == 3 ? my_mlx_pixel_put(d, 0xeff542) :
-			my_mlx_pixel_put(d, 0xf59642);
+		my_mlx_pixel_put(d, get_tex_color(d, i, y));
+		// if (y == 1 || y == 2)
+		// 	y == 1 ? my_mlx_pixel_put(d, get_tex_color(d, i, y)) :
+		// 	my_mlx_pixel_put(d, 0x144F2D);
+		// else if (y == 3 || y == 4)
+		// 	y == 3 ? my_mlx_pixel_put(d, 0xeff542) :
+		// 	my_mlx_pixel_put(d, 0xf59642);
 		d->y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/07/13 16:59:16 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/14 18:48:58 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ typedef	struct	s_square // Utilisé de base pour faire des test mais possibile d
 
 typedef	struct	s_texture
 {
-    void 		*tex[4];
-	void		*addr[4];
-	int			width;
-	int			height;
+    void 		*tex[5];
+	void		*addr[5];
+	int			width[5];
+	int			height[5];
 	int			bpp;//bits per pixel
 	int			szl;//sizeline
 	int			endian;

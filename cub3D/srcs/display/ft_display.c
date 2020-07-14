@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 19:30:36 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/14 16:17:04 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/14 18:51:22 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ static int		handlekeys(int keycode, t_data *d)
 void			load_texture(t_data *d, char *tex_path, int i)
 {
 	d->texture.tex[i] = mlx_xpm_file_to_image(d->vars.mlx, tex_path,
-					&d->texture.width, &d->texture.height);
+					&d->texture.width[i], &d->texture.height[i]);
 	d->texture.addr[i] = mlx_get_data_addr(d->texture.tex[i], 
 						&d->texture.bpp, &d->texture.szl,
 						&d->texture.endian);
@@ -136,8 +136,11 @@ void			window(t_data *d)
 			"PAYPAL/BDOUIDI");
 	if (!d->img.ptr[0])
 		create_img(d, 0, d->res[0], d->res[1]);
+	load_texture(d, d->sprite, 0);
 	load_texture(d, d->north, 1);
-	printf("-%s-\n", d->north);
+	load_texture(d, d->south, 2);
+	load_texture(d, d->east, 3);
+	load_texture(d, d->west, 4);
 	init_player(d);
 	display_floor_ceiling(d);
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);
