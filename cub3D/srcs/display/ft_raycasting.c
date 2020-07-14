@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 03:12:26 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/13 16:08:41 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/14 16:27:03 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,23 @@ double	fisheye(t_data *d, double raydist)
 	if (new_angle > 2 * M_PI)
 		new_angle -= 2 * M_PI;
 	return (raydist * cos(new_angle));
+}
+
+int		get_tex_color(t_data *d, int i, int tmp_y)
+{
+	char	*dst;
+	double	ratio;
+	double	posy;
+	double	posx;
+
+	ratio = d->ray.line_height / d->texture.height;
+	posy = (d->y - tmp_y) / ratio;
+	ratio = 200 / d->texture.width;
+	posx = d->x / ratio;
+	dst = d->texture.addr[i] + ((int)posy * d->texture.height + (int)posx *
+	(d->texture.width / 8));
+	// printf("%u\n", *(unsigned int*)dst);
+	return (*(unsigned int*)dst);
 }
 
 void	draw_wall(t_data *d, double raydist, int i, int tmp_x)
@@ -42,7 +59,7 @@ void	draw_wall(t_data *d, double raydist, int i, int tmp_x)
 	while (d->y <= d->ray.line_height + tmp_y)
 	{
 		if (i == 1 || i == 2)
-			i == 1 ? my_mlx_pixel_put(d, 0x34EB83) :
+			i == 1 ? my_mlx_pixel_put(d, get_tex_color(d, i, tmp_y)) :
 			my_mlx_pixel_put(d, 0x144F2D);
 		else if (i == 3 || i == 4)
 			i == 3 ? my_mlx_pixel_put(d, 0xeff542) :

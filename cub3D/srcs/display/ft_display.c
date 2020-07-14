@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_display.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 19:30:36 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/13 14:57:09 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/07/14 16:17:04 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,10 @@ void			window(t_data *d)
 			"PAYPAL/BDOUIDI");
 	if (!d->img.ptr[0])
 		create_img(d, 0, d->res[0], d->res[1]);
+	load_texture(d, d->north, 1);
+	printf("-%s-\n", d->north);
 	init_player(d);
 	display_floor_ceiling(d);
-//	load_texture(d, "/Users/dsy/42-project/cub3D/files/textures/colorstone.xpm");
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);
 	//mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.tex[0], 0, 0);
 	mlx_hook(d->vars.win, 2, (1L << 0), handlekeys, d);
