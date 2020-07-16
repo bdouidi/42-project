@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 19:30:36 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/14 20:04:48 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/16 22:35:06 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ void			load_texture(t_data *d, char *tex_path, int i)
 	d->texture.tex[i] = mlx_xpm_file_to_image(d->vars.mlx, tex_path,
 					&d->texture.width[i], &d->texture.height[i]);
 	d->texture.addr[i] = mlx_get_data_addr(d->texture.tex[i], 
-						&d->texture.bpp, &d->texture.szl,
-						&d->texture.endian);
+						&d->texture.bpp[i], &d->texture.szl[i],
+						&d->texture.endian[i]);
 }
 
 void			window(t_data *d)

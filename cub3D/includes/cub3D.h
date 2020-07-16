@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/07/14 18:48:58 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/16 22:34:51 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ typedef	struct	s_texture
 	void		*addr[5];
 	int			width[5];
 	int			height[5];
-	int			bpp;//bits per pixel
-	int			szl;//sizeline
-	int			endian;
+	int			bpp[5];//bits per pixel
+	int			szl[5];//sizeline
+	int			endian[5];
 }				t_texture;
 
 typedef	struct	 s_img
