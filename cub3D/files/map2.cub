@@ -1,8 +1,8 @@
-NO ./files/textures/wood.xpm
-EA ./files/textures/test2.XPM
-WE ./files/textures/test3.XPM
-R 1980 1080
-SO ./files/textures/emerald_block.xpm
+NO ./files/textures/brown.xpm
+EA ./files/textures/5.xpm
+WE ./files/textures/33.xpm
+R 800 600
+SO ./files/textures/44.xpm
 S ./files/textures/barrel.xpm
 
 F 50,150,50
