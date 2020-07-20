@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pars_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 15:02:00 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/22 16:08:32 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/07/20 17:34:48 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,32 @@ static int		p(char *str)
 	return (0);
 }
 
-static int		check_m_content(char **m, int i, int j)
+static int		check_m_content(t_data *d, int i, int j)
 {
-	if (m[i][j] != '1' && m[i][j] != '2' && m[i][j] != '0' && m[i][j] != 'N'
-			&& m[i][j] != 'S' && m[i][j] != 'E' && m[i][j] != 'W'
-			&& m[i][j] != '*')
+	if (d->map[i][j] != '1' && d->map[i][j] != '2' && d->map[i][j]
+	 != '0' && d->map[i][j] != 'N' && d->map[i][j] != 'S' && d->map[i][j] != 'E'
+	  && d->map[i][j] != 'W'&& d->map[i][j] != '*')
 		return (-1);
+	if (d->map[i][j] == '2')
+		d->texture.count_spt++;
 	return (0);
 }
 
-static int		m_content(char **m, int len, int check)
+static int		m_content(t_data *d, int len, int check)
 {
 	int		j;
 	int		i;
 
 	j = 0;
 	i = 0;
-	while (m[++i])
+	while (d->map[++i])
 	{
-		while (m[i][++j])
+		while (d->map[i][++j])
 		{
-			if (check_m_content(m, i, j) != 0)
+			if (check_m_content(d, i, j) != 0)
 				return (-1);
-			if (m[i][j] == 'N' || m[i][j] == 'S' || m[i][j] == 'E' ||
-					m[i][j] == 'W')
+			if (d->map[i][j] == 'N' || d->map[i][j] == 'S'
+				|| d->map[i][j] == 'E' || d->map[i][j] == 'W')
 			{
 				if (i == 0 || i == len)
 					return (-1);
@@ -86,7 +88,7 @@ static int		check_pars_map(char **m, int i, int j, int len)
 	return (0);
 }
 
-int				pars_map(char **m, int len)
+int				pars_map(t_data *d, int len)
 {
 	int				i;
 	unsigned int	j;
@@ -95,15 +97,15 @@ int				pars_map(char **m, int len)
 	i = 0;
 	j = 1;
 	check = 0;
-	if (p(m[0]) != 0 || p(m[len]) != 0 || m_content(m, len, check) != 0)
+	if (p(d->map[0]) != 0 || p(d->map[len]) != 0 || m_content(d, len, check) != 0)
 		return (-1);
-	while (m[i])
+	while (d->map[i])
 	{
-		if (border(m[i]) != 0)
+		if (border(d->map[i]) != 0)
 			return (-1);
-		while (m[i][j])
+		while (d->map[i][j])
 		{
-			if (check_pars_map(m, i, j, len) != 0)
+			if (check_pars_map(d->map, i, j, len) != 0)
 				return (-1);
 			j++;
 		}

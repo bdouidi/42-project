@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_display.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 19:30:36 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/16 22:35:06 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/20 17:38:06 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void			drawmap2d(t_data *d)
 		{
 			d->square.imgx = x * d->square.width;
 			d->square.imgy = y * d->square.height;
-			// if (d->map[y][x] == '1')
-			// 	drawsquare(d, 0x00458A);
 			if (d->map[y][x] == '0')
 				drawsquare(d, 0xFFFFFF);
 			else if (d->map[y][x] == '2')
@@ -88,7 +86,7 @@ static void		display_floor_ceiling(t_data *d)
 		d->y++;
 		d->x = 0;
 	}
-	drawfov(d);
+	raycasting(d);
 }
 
 static int		handlekeys(int keycode, t_data *d)
@@ -120,7 +118,7 @@ static int		handlekeys(int keycode, t_data *d)
 	return (0);
 }
 
-int cross_window(void)
+int				cross_window(void)
 {
 	ft_putstr("Exit.\n");
 	exit(EXIT_SUCCESS);
@@ -130,7 +128,7 @@ void			load_texture(t_data *d, char *tex_path, int i)
 {
 	d->texture.tex[i] = mlx_xpm_file_to_image(d->vars.mlx, tex_path,
 					&d->texture.width[i], &d->texture.height[i]);
-	d->texture.addr[i] = mlx_get_data_addr(d->texture.tex[i], 
+	d->texture.addr[i] = mlx_get_data_addr(d->texture.tex[i],
 						&d->texture.bpp[i], &d->texture.szl[i],
 						&d->texture.endian[i]);
 }

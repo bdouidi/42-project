@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_raycasting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 03:12:26 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/17 02:13:10 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/20 18:07:42 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ void	draw_wall(t_data *d, double raydist, int i, int tmp_x)
 
 void	raycasting(t_data *d)
 {
-	get_ray_size(d);
+	drawfov(d);
+	//drawsprite(d);
 }

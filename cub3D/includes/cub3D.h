@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/07/16 22:34:51 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:15:28 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,17 @@ typedef	struct	s_texture
 	int			bpp[5];//bits per pixel
 	int			szl[5];//sizeline
 	int			endian[5];
+	int			count_spt;
 }				t_texture;
+
+typedef	struct s_sprite
+{
+	double	x;
+	double	y;
+	double	dist1;
+	double	dist2;
+}			t_sprite;
+
 
 typedef	struct	 s_img
 {
@@ -83,7 +93,8 @@ typedef struct  s_data
 	t_player	player;
 	t_ray		ray;
 	t_img		img;
-	t_texture	texture;		
+	t_texture	texture;
+	t_sprite	*spt;	
     char		**map;
 	int			mapX;
 	int			mapY;
@@ -109,7 +120,7 @@ int			is_flags(char *s, int i);
 int			r_f_c(char *s);
 char		*fill_str(char *s1, char *s2, int i, int j);
 int			pars_info_map(t_data *d);
-int			pars_map(char **map, int len);
+int			pars_map(t_data *d, int len);
 int			pars_file(int fd, t_data *data);
 void		adjust_map(t_data *d);
 int			border(char *s);

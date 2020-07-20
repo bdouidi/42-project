@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_display2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 22:31:39 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/14 20:01:33 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/20 17:37:12 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	drawfov(t_data *d)
 			d->player.fov += 2 * M_PI;
 		if (d->player.fov > 2 * M_PI)
 			d->player.fov -= 2 * M_PI;
-		raycasting(d);
+		get_ray_size(d);
 		d->player.fov += ((M_PI / 3) / d->res[0]);
 	}
 }

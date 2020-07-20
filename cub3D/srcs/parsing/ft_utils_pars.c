@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_pars.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 15:18:13 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/10 19:54:39 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:13:26 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ int			border(char *s)
 	{
 		while (s[i] && s[i] == '*')
 			i++;
-		while (s[j] && s[j] == '*')
+		while (j > 0 && s[j] == '*')
 			j--;
-		if (s[i] == '1' && s[j] == '1')
+		if ((s[i] == '1' && s[j] == '1') || j == 0)
 			return (0);
 	}
 	return (-1);

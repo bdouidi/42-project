@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/13 17:45:55 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:15:50 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,10 @@ int			pars_file(int fd, t_data *data)
 	map(fd, data);
 	while (data->map[len])
 		len++;
-	if (pars_info_map(data) == -1 || pars_map(data->map, len - 1) == -1 ||
+	if (pars_info_map(data) == -1 || pars_map(data, len - 1) == -1 ||
 		check_textures(data) == -1)
 		return (-1);
+	printf("%d\n", data->texture.count_spt);
 	data->map = noblank_2(data->map, '1', "*");
 	return (0);
 }
