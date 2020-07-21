@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/20 20:15:50 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/07/21 16:22:58 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,8 @@ int			pars_file(int fd, t_data *data)
 	if (pars_info_map(data) == -1 || pars_map(data, len - 1) == -1 ||
 		check_textures(data) == -1)
 		return (-1);
-	printf("%d\n", data->texture.count_spt);
+	if (!(data->spt = malloc(sizeof(t_sprite) * (data->texture.count_spt + 1))))
+		return (-1);
 	data->map = noblank_2(data->map, '1', "*");
 	return (0);
 }

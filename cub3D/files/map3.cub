@@ -1,0 +1,16 @@
+NO ./files/textures/brown.xpm
+EA ./files/textures/5.xpm
+WE ./files/textures/33.xpm
+R 800 800
+SO ./files/textures/44.xpm
+S ./files/textures/barrel.xpm
+
+F 50,150,50
+C 255,130,80
+
+11111111111111
+10000222000001
+10001111200001
+10002E00210001
+10002000000001
+11111111111111

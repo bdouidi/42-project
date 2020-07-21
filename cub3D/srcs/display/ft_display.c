@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_display.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 19:30:36 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/20 17:38:06 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/07/21 16:33:26 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void			drawmap2d(t_data *d)
 		{
 			d->square.imgx = x * d->square.width;
 			d->square.imgy = y * d->square.height;
+			if (d->map[y][x] == '1')
+				drawsquare(d, 0x0);
 			if (d->map[y][x] == '0')
 				drawsquare(d, 0xFFFFFF);
 			else if (d->map[y][x] == '2')

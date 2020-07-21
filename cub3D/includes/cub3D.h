@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/07/20 20:15:28 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/07/21 20:42:07 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,16 @@ typedef	struct	s_texture
 	int			count_spt;
 }				t_texture;
 
-typedef	struct s_sprite
+typedef	struct	s_sprite
 {
-	double	x;
-	double	y;
-	double	dist1;
-	double	dist2;
-}			t_sprite;
+	double		x[2];
+	double		y[2];
+	double		dist[2];
+	int			flag;
+}				t_sprite;
 
 
-typedef	struct	 s_img
+typedef	struct	s_img
 {
 	void		*ptr[3];
     char		*addr[3];
@@ -94,7 +94,8 @@ typedef struct  s_data
 	t_ray		ray;
 	t_img		img;
 	t_texture	texture;
-	t_sprite	*spt;	
+	t_sprite	*spt;
+	double		sprite_ray;	
     char		**map;
 	int			mapX;
 	int			mapY;
@@ -144,6 +145,7 @@ void    	create_img(t_data *d, int i, int width, int height);
 void		get_ray_size(t_data *d);
 void		rotation(t_data *d, int keycode);
 void    	draw_wall(t_data *d, double raydist, int i, int tmp_x);
+void		catch_sprite(t_data *d, int b);
 /***                                                                        ***/
 void		leak(char *str);
 int			create_trgb(int t, int r, int g, int b);
