@@ -1,9 +1,9 @@
 NO ./files/textures/brown.xpm
 EA ./files/textures/5.xpm
 WE ./files/textures/33.xpm
-R 800 800
+R 1000 1000
 SO ./files/textures/44.xpm
-S ./files/textures/barrel.xpm
+S ./files/textures/sprite.xpm
 
 F 50,150,50
 C 255,130,80

@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/07/21 20:42:07 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/23 04:48:33 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ typedef	struct	s_sprite
 	double		x[2];
 	double		y[2];
 	double		dist[2];
-	int			flag;
+	// int			wall_height;
+	double		johnny;
+	int			flag[2];
+	int			coordinate;
 }				t_sprite;
 
 

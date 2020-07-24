@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 02:08:43 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/21 20:57:08 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/24 17:14:04 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,12 @@ void	loop_tb(t_data *d)
 {
 	int sign;
 
+	sign = (d->ray.dir >= 0 && d->ray.dir <= M_PI) ? -1 : 0;
 	while (d->ray.hit == 0 && d->ray.x[0] > 1 && d->ray.x[0] < d->mapX)
 	{
-		sign = (d->ray.dir >= 0 && d->ray.dir <= M_PI) ? -1 : 0;
 		if (d->map[(int)d->ray.y[0] + sign][(int)d->ray.x[0]] &&
 			d->map[(int)d->ray.y[0] + sign][(int)d->ray.x[0]] == '2')
 				catch_sprite(d, 0);
-		if (d->map[(int)d->ray.y[0] + sign][(int)d->ray.x[0]] &&
-			d->map[(int)d->ray.y[0] + sign][(int)d->ray.x[0]] == '1')
-			d->ray.hit = 1;
 		else
 		{
 			d->ray.y[0] += d->ray.yoffset;
@@ -37,12 +34,9 @@ void	loop_lr(t_data *d)
 {
 	int sign;
 
+	sign = (d->ray.dir >= M_PI_2 && d->ray.dir <= 3 * M_PI_2) ? 0 : -1;
 	while (d->ray.hit == 0 && d->ray.y[1] > 1 && d->ray.y[1] < d->mapY)
 	{
-		sign = (d->ray.dir >= M_PI_2 && d->ray.dir <= 3 * M_PI_2) ? 0 : -1;
-		if (d->map[(int)d->ray.y[1]][(int)d->ray.x[1] + sign] &&
-			d->map[(int)d->ray.y[1]][(int)d->ray.x[1] + sign] == '2')
-			catch_sprite(d, 1);
 		if (d->map[(int)d->ray.y[1]][(int)d->ray.x[1] + sign] &&
 			d->map[(int)d->ray.y[1]][(int)d->ray.x[1] + sign] == '1')
 			d->ray.hit = 1;
@@ -108,26 +102,30 @@ void	check_dist(t_data *d, double dist)
 	int i;
 	int j;
 
-	j = 2;
+	j = 0;
 	i = 0;
-	while (j--)
+	while (j < 2)
+	{
 		while (i < d->texture.count_spt)
 		{
-			while (d->spt[i].dist[j] < 0 && i < d->texture.count_spt)
-				i++;
-			if (d->spt[i].dist[j] > dist && d->spt[i].flag == 0)
+			// while (d->spt[i].dist[j] < 0 && i < d->texture.count_spt)
+			// 	i++;
+			if (d->spt[i].dist[j] > dist && d->spt[i].flag[j] == 0)
 			{
 				d->spt[i].dist[j] = 0;
 				d->spt[i].x[j] = 0;
 				d->spt[i].y[j] = 0;
-				d->spt[i].flag = 1;
+				d->spt[i].flag[j] = 1;
 			}
 			else
 			{
-				d->spt[i].flag = 1;
+				d->spt[i].flag[j] = 1;
 				i++;
-			} 
+			}
 		}
+		i = 0;
+		j++;
+	}
 }
 
 void	get_ray_size(t_data *d)
@@ -153,11 +151,7 @@ void	get_ray_size(t_data *d)
 	i = (i != 2 && dist1 > dist2) ? 1 : i;
 	i = (i == 2 ? 0 : i);
 	tmp_x = (tmp_x == d->res[0]) ? 0 : tmp_x;
-	i == 0 ? check_dist(d, dist1) : check_dist(d, dist2);
-	for (int j = 0; j < d->texture.count_spt ; j++)
-		printf("Index %d:\n- x = [0]%f - [1]%f\n- y = [0]%f - [1]%f\n- dist = [0]%f - [1]%f\n\n ---------------- \n",
-		 j, d->spt[j].x[0], d->spt[j].x[1], d->spt[j].y[0], d->spt[j].y[1]
-		 , d->spt[j].dist[0], d->spt[j].dist[1]);
+	i == 0 ? dda_sprite(d, dist1) : dda_sprite(d, dist1); 
 	i == 0 ? draw_wall(d, dist1, i, tmp_x) : draw_wall(d, dist2, i, tmp_x);
 	tmp_x++;
 }
