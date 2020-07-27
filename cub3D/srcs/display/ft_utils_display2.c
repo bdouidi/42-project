@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 22:31:39 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/23 05:05:38 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:55:13 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,21 @@ void	rotation(t_data *d, int keycode)
 	}
 }
 
-// void	drawline(t_data *d, double dir, int i, int color)
-// {
-// 	d->x = d->player.pos_x * d->square.width;
-// 	d->y = d->player.pos_y * d->square.width;
-// 	if (i == 1)
-// 		color = 0x0FF0000;
-// 	while ((int)d->x != (int)(d->ray.x[i] * d->square.width))
-// 	{
-// 		my_mlx_pixel_put(d, color);
-// 		d->x -= cos(dir);
-// 		d->y -= sin(dir);
-// 	}
-// }
+void	drawline(t_data *d, double dir, int i, int color)
+{
+	d->x = d->player.pos_x * d->square.width;
+	d->y = d->player.pos_y * d->square.width;
+	// if (i == 1)
+	i = 0;
+	color = 0x000FF00;
+	// while ((int)d->x != (int)(d->ray.x[i] * d->square.width))
+	for (int z = 0; z < 50; z++)
+	{
+		my_mlx_pixel_put(d, color);
+		d->x -= cos(dir);
+		d->y -= sin(dir);
+	}
+}
 
 void	drawfov(t_data *d)
 {

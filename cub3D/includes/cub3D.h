@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/07/23 04:48:33 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:03:37 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct  s_data
     char		*tmp;
     char		*resolution;
     long        res[2];
+	double		*rays;
     char		*floor;
     int         f_color;
     char		*ceiling;
@@ -149,6 +150,8 @@ void		get_ray_size(t_data *d);
 void		rotation(t_data *d, int keycode);
 void    	draw_wall(t_data *d, double raydist, int i, int tmp_x);
 void		catch_sprite(t_data *d, int b);
+void		dda_sprite(t_data *d);
+void		check_dist(t_data *d,double dist);
 /***                                                                        ***/
 void		leak(char *str);
 int			create_trgb(int t, int r, int g, int b);

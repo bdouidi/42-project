@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 14:26:11 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/24 17:14:27 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/27 19:01:30 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ void	stock_sprite(t_data *d, int i, t_sprite tmp, int *check, int b, int f)
 	*check = 1;
 	d->spt[i].flag[b] = 0;
 	if (f == 0)
-	{
 		d->spt[i].johnny = d->player.fov;
-		printf("i=%d %f\n", i, d->spt[i].johnny);
-	}
 }
 
 void	catch_sprite(t_data *d, int b)

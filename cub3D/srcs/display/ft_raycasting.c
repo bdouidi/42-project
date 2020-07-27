@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 03:12:26 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/24 16:23:06 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/27 21:05:05 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,6 @@ void	struct_sort(t_data *d)
 		else
 			i++;
 	}
-	// for (int j = 0; j < d->texture.count_spt ; j++)
-	// 	printf("Index %d:\n- x = [0]%f - [1]%f\n- y = [0]%f - [1]%f\n- dist = [0]%f - [1]%f\n\n ---------------- \n",
-	// 	 j, d->spt[j].x[0], d->spt[j].x[1], d->spt[j].y[0], d->spt[j].y[1]
-	// 	 , d->spt[j].dist[0], d->spt[j].dist[1]);
 }
 
 int		get_spt_color(t_data *d, int i, int line_height)
@@ -127,13 +123,14 @@ int		get_spt_color(t_data *d, int i, int line_height)
 
 	tex_y = (d->y * 2 - d->res[1] + line_height) *
 		(d->texture.height[0] / 2) / line_height;
-	// printf("%d\n", d->spt[i].coordinate);
+	d->spt[i].y[0] -= 0.0000032;
 	if (d->spt[i].coordinate == 1)
 		tex_x = d->texture.width[0] - ((d->spt[i].y[0] - (int)d->spt[i].y[0]) *
 				d->texture.width[0]) - 1;
 	else
 		tex_x = d->texture.width[0] - ((d->spt[i].x[0] - (int)d->spt[i].x[0]) *
 				d->texture.width[0]) - 1;
+	// printf("%f\n", d->spt[i].x[0]);
 	color = d->texture.addr[0] + (abs((int)tex_y) * d->texture.szl[0] +
 	(int)tex_x * (d->texture.bpp[0] / 8));
 	return (*(unsigned int*)color);
@@ -141,27 +138,16 @@ int		get_spt_color(t_data *d, int i, int line_height)
 
 void	drawsprite(t_data *d)
 {
-	// int	i;
-
-	// i = 0;
-	// struct_sort(d);
-	// while (d->spt[i].dist[0] > 0)
-	// {
-	// 	d->x = (d->spt[i].johnny - (d->player.dir - (M_PI / 6))) /
-	// 		((M_PI / 3) / d->res[0]);
-	// 	//printf("d->x =%f, i=%d, dist=%f, jhonny=%f\n", d->x, i, d->spt[i].dist[0], d->spt[i].johnny);
-	// 	i++;
-	// }
 	int		true_height;
 	double	tmp_y;
 	int		i;
 
-	struct_sort(d);
 	i = 0;
 	while (d->spt[i].dist[0] > 0)
 	{
 		d->x = (d->spt[i].johnny - (d->player.dir - (M_PI / 6))) /
 				((M_PI / 3) / d->res[0]);
+		// printf("d->x =%f, i=%d, dist=%f, player dir=%f, johnny=%f\n", d->x, i, d->spt[i].dist[0], d->player.dir, d->spt[i].johnny);
 		d->ray.line_height = d->res[1] / d->spt[i].dist[0];
 		true_height = d->ray.line_height;
 		if (d->ray.line_height >= d->res[1])
@@ -172,11 +158,17 @@ void	drawsprite(t_data *d)
 		while (d->x <= d->ray.line_height)
 		{
 			d->y = tmp_y;
-			printf("\n ------------------ \n");
+			// printf("\n ------------------ \n");
 			while (d->y <= d->ray.line_height + tmp_y)
 			{
-				my_mlx_pixel_put(d, get_spt_color(d, i, true_height));
-				d->y++;
+				// if (dist du sprite > celle du mur)
+				// 	break;
+				// else
+				// {
+					d->spt[i].x[0] -= 0.0000032;
+					my_mlx_pixel_put(d, get_spt_color(d, i, true_height));
+					d->y++;
+				// }
 			}
 			d->x++;
 		}
@@ -198,9 +190,8 @@ void	clearstruct(t_data *d)
 			d->spt[i].x[b] = 0;
 			d->spt[i].y[b] = 0;
 			d->spt[i].dist[b] = 0;
-			d->spt[i].johnny = 0;
 			d->spt[i].flag[b] = 0;
-			d->spt->coordinate = 0;
+			d->spt[i].coordinate = 0;
 			i++;
 		}
 		i = 0;
@@ -211,10 +202,16 @@ void	clearstruct(t_data *d)
 void	raycasting(t_data *d)
 {
 	clearstruct(d);
+	// printf("-%f-\n", d->spt[0].x[0]);
 	drawfov(d);
+	struct_sort(d);
+	// for (int j = 0; j < 12 ; j++)
+	// 	printf("Index %d:\n- x = [0]%f - [1]%f\n- y = [0]%f - [1]%f\n\n ---------------- \n",
+	// 	 j, d->spt[j].x[0], d->spt[j].x[1], d->spt[j].y[0], d->spt[j].y[1]);
 	drawsprite(d);
-		// for (int j = 0; j < d->texture.count_spt ; j++)
-		// printf("Index %d:\n- x = [0]%f - [1]%f\n- y = [0]%f - [1]%f\n- dist = [0]%f - [1]%f\n\n ---------------- \n",
-		//  j, d->spt[j].x[0], d->spt[j].x[1], d->spt[j].y[0], d->spt[j].y[1]
-		//  , d->spt[j].dist[0], d->spt[j].dist[1]);
+	
 }
+
+		// printf("Index %d:\n- x = [0]%f - [1]%f\n- y = [0]%f - [1]%f\n- dist = [0]%f - [1]%f\n       johnny = %f\n\n ---------------- \n",
+		//  j, d->spt[j].x[0], d->spt[j].x[1], d->spt[j].y[0], d->spt[j].y[1]
+		//  , d->spt[j].dist[0], d->spt[j].dist[1], d->spt[j].johnny);

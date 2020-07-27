@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/21 16:22:58 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:06:54 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,8 @@ int			check_textures(t_data *d)
 int			pars_file(int fd, t_data *data)
 {
 	int		len;
-	int		i;
 
 	len = 0;
-	i = 0;
 	data->map = NULL;
 	data->resolution = NULL;
 	data->floor = NULL;
@@ -121,6 +119,8 @@ int			pars_file(int fd, t_data *data)
 	data->east = NULL;
 	data->south = NULL;
 	data->west = NULL;
+	if (!(data->rays = malloc(sizeof(double) * data->res[0])))
+		return (-1);
 	map(fd, data);
 	while (data->map[len])
 		len++;

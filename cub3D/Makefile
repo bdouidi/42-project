@@ -6,7 +6,7 @@
 #    By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 17:08:38 by dsy               #+#    #+#              #
-#    Updated: 2020/07/21 16:03:52 by othabchi         ###   ########.fr        #
+#    Updated: 2020/07/27 13:52:19 by othabchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS = srcs/parsing/ft_utils_pars.c srcs/parsing/ft_pars_info_map.c \
 	   srcs/display/ft_set_info_map.c srcs/display/trgb.c \
 	   srcs/display/ft_display.c srcs/display/ft_raycasting.c \
 	   srcs/display/ft_utils_display.c srcs/display/ft_sprite.c \
-	   srcs/display/ft_utils_display2.c  srcs/display/ft_dda.c  \
+	   srcs/display/ft_utils_display2.c  srcs/display/ft_dda.c \
+	   srcs/display/ft_dda_sprite.c
 
 LIBFTPATH	= project/libft 
 LIBOBJ		= project/libft/libft.a

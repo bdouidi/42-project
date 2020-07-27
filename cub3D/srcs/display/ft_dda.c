@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 02:08:43 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/24 17:14:04 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/27 21:03:48 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	loop_tb(t_data *d)
 	while (d->ray.hit == 0 && d->ray.x[0] > 1 && d->ray.x[0] < d->mapX)
 	{
 		if (d->map[(int)d->ray.y[0] + sign][(int)d->ray.x[0]] &&
-			d->map[(int)d->ray.y[0] + sign][(int)d->ray.x[0]] == '2')
-				catch_sprite(d, 0);
+			d->map[(int)d->ray.y[0] + sign][(int)d->ray.x[0]] == '1')
+			d->ray.hit = 1;
 		else
 		{
 			d->ray.y[0] += d->ray.yoffset;
@@ -97,36 +97,37 @@ void	look_left_right(t_data *d, int *i)
 	loop_lr(d);
 }
 
-void	check_dist(t_data *d, double dist)
-{
-	int i;
-	int j;
+// void	check_dist(t_data *d, double dist)
+// {
+// 	int i;
+// 	int j;
 
-	j = 0;
-	i = 0;
-	while (j < 2)
-	{
-		while (i < d->texture.count_spt)
-		{
-			// while (d->spt[i].dist[j] < 0 && i < d->texture.count_spt)
-			// 	i++;
-			if (d->spt[i].dist[j] > dist && d->spt[i].flag[j] == 0)
-			{
-				d->spt[i].dist[j] = 0;
-				d->spt[i].x[j] = 0;
-				d->spt[i].y[j] = 0;
-				d->spt[i].flag[j] = 1;
-			}
-			else
-			{
-				d->spt[i].flag[j] = 1;
-				i++;
-			}
-		}
-		i = 0;
-		j++;
-	}
-}
+// 	j = 0;
+// 	i = 0;
+// 	while (j < 2)
+// 	{
+// 		while (i < d->texture.count_spt)
+// 		{
+// 			// while (d->spt[i].dist[j] <= 0 && i < d->texture.count_spt)
+// 			// 	i++;
+// 			// printf("dist = %f   dist[%d] = %f\n", dist, j,d->spt[i].dist[j]);
+// 			if (d->spt[i].dist[j] > dist && d->spt[i].flag[j] == 0)
+// 			{
+// 				d->spt[i].dist[j] = 0;
+// 				d->spt[i].x[j] = 0;
+// 				d->spt[i].y[j] = 0;
+// 				d->spt[i].flag[j] = 1;
+// 			}
+// 			else
+// 			{
+// 				d->spt[i].flag[j] = 1;
+// 				i++;
+// 			}
+// 		}
+// 		i = 0;
+// 		j++;
+// 	}
+// }
 
 void	get_ray_size(t_data *d)
 {
@@ -151,7 +152,8 @@ void	get_ray_size(t_data *d)
 	i = (i != 2 && dist1 > dist2) ? 1 : i;
 	i = (i == 2 ? 0 : i);
 	tmp_x = (tmp_x == d->res[0]) ? 0 : tmp_x;
-	i == 0 ? dda_sprite(d, dist1) : dda_sprite(d, dist1); 
+	d->rays[tmp_x] = (i == 0 ? dist1 : dist2);
 	i == 0 ? draw_wall(d, dist1, i, tmp_x) : draw_wall(d, dist2, i, tmp_x);
+	dda_sprite(d);
 	tmp_x++;
 }
