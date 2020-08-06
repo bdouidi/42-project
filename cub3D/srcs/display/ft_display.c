@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 19:30:36 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/21 16:33:26 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/08/06 15:07:11 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void			which_dir(t_data *d, int keycode)
 	{
 		x = (int)(d->player.pos_x + cos(d->player.dir + M_PI_2) * d->player.sp);
 		y = (int)(d->player.pos_y + sin(d->player.dir + M_PI_2) * d->player.sp);
-		if (d->map[y][x] && d->map[y][x] == '0')
+		if (d->map[y][x] && (d->map[y][x] == '0' || d->map[y][x] == '2'))
 		{
 			d->player.pos_x += cos(d->player.dir + M_PI_2) * d->player.sp;
 			d->player.pos_y += sin(d->player.dir + M_PI_2) * d->player.sp;
@@ -59,7 +59,7 @@ void			which_dir(t_data *d, int keycode)
 	{
 		x = (int)(d->player.pos_x - cos(d->player.dir + M_PI_2) * d->player.sp);
 		y = (int)(d->player.pos_y - sin(d->player.dir + M_PI_2) * d->player.sp);
-		if (d->map[y][x] && d->map[y][x] == '0')
+		if (d->map[y][x] && (d->map[y][x] == '0' || d->map[y][x] == '2'))
 		{
 			d->player.pos_x -= cos(d->player.dir + M_PI_2) * d->player.sp;
 			d->player.pos_y -= sin(d->player.dir + M_PI_2) * d->player.sp;

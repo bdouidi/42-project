@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 02:08:43 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/27 21:03:48 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/30 04:52:32 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,9 @@ void	get_ray_size(t_data *d)
 	static int	tmp_x = 0;
 
 	i = 0;
+	if (!d->rays)
+		if (!(d->rays = malloc(sizeof(double) * d->res[0])))
+			return ;
 	d->ray.dir = d->player.fov;
 	d->square.width = ((d->res[0] * .45) / ft_strlen(d->map[0]));
 	look_top_botom(d, &i);
@@ -154,6 +157,5 @@ void	get_ray_size(t_data *d)
 	tmp_x = (tmp_x == d->res[0]) ? 0 : tmp_x;
 	d->rays[tmp_x] = (i == 0 ? dist1 : dist2);
 	i == 0 ? draw_wall(d, dist1, i, tmp_x) : draw_wall(d, dist2, i, tmp_x);
-	dda_sprite(d);
 	tmp_x++;
 }

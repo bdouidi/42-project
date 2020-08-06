@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 21:39:55 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/14 19:12:09 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/08/06 15:07:23 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ void	init_player(t_data *d)
 		d->player.dir = 3 * M_PI_2;
 	else if (d->player.letter == 'W')
 		d->player.dir = 0;
+	d->player.rayone = d->player.dir - M_PI / 6;
+	if (d->player.rayone < 0)
+		d->player.rayone += 2 * M_PI;
+	if (d->player.rayone > 2 * M_PI)
+		d->player.rayone -= 2 * M_PI;
 }
 
 void	which_dir2(t_data *d, int keycode)
@@ -46,7 +51,7 @@ void	which_dir2(t_data *d, int keycode)
 	{
 		x = (int)(d->player.pos_x + cos(d->player.dir) * d->player.sp);
 		y = (int)(d->player.pos_y + sin(d->player.dir) * d->player.sp);
-		if (d->map[y][x] && d->map[y][x] == '0')
+		if (d->map[y][x] && (d->map[y][x] == '0' || d->map[y][x] == '2'))
 		{
 			d->player.pos_x += cos(d->player.dir) * d->player.sp;
 			d->player.pos_y += sin(d->player.dir) * d->player.sp;
@@ -56,7 +61,7 @@ void	which_dir2(t_data *d, int keycode)
 	{
 		x = (int)(d->player.pos_x - cos(d->player.dir) * d->player.sp);
 		y = (int)(d->player.pos_y - sin(d->player.dir) * d->player.sp);
-		if (d->map[y][x] && d->map[y][x] == '0')
+		if (d->map[y][x] && (d->map[y][x] == '0' || d->map[y][x] == '2'))
 		{
 			d->player.pos_x -= cos(d->player.dir) * d->player.sp;
 			d->player.pos_y -= sin(d->player.dir) * d->player.sp;

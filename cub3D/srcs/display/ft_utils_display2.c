@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 22:31:39 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/27 18:55:13 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/30 04:52:57 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void	rotation(t_data *d, int keycode)
 		if (d->player.dir > 2 * M_PI)
 			d->player.dir = 0;
 	}
+	d->player.rayone = d->player.dir - M_PI / 6;
+	if (d->player.rayone < 0)
+		d->player.rayone += 2 * M_PI;
+	if (d->player.rayone > 2 * M_PI)
+		d->player.rayone -= 2 * M_PI;
 }
 
 void	drawline(t_data *d, double dir, int i, int color)
@@ -48,15 +53,17 @@ void	drawfov(t_data *d)
 {
 	int	fov;
 
-	fov = d->res[0];
-	d->player.fov = d->player.dir - (M_PI / 6);
+	fov = 1.5 * d->res[0];
+	d->player.fov = d->player.dir - M_PI_4;
 	while (fov--)
 	{
 		if (d->player.fov < 0)
 			d->player.fov += 2 * M_PI;
 		if (d->player.fov > 2 * M_PI)
 			d->player.fov -= 2 * M_PI;
-		get_ray_size(d);
+		if (fov <= d->res[0]*1.25 && fov > d->res[0] * .25)
+			get_ray_size(d);
+		dda_sprite(d);
 		d->player.fov += ((M_PI / 3) / d->res[0]);
 	}
 }

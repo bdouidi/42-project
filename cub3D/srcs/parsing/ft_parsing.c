@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/27 18:06:54 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/30 02:36:53 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,16 +119,14 @@ int			pars_file(int fd, t_data *data)
 	data->east = NULL;
 	data->south = NULL;
 	data->west = NULL;
-	if (!(data->rays = malloc(sizeof(double) * data->res[0])))
-		return (-1);
 	map(fd, data);
 	while (data->map[len])
 		len++;
 	if (pars_info_map(data) == -1 || pars_map(data, len - 1) == -1 ||
 		check_textures(data) == -1)
 		return (-1);
-	if (!(data->spt = malloc(sizeof(t_sprite) * (data->texture.count_spt + 1))))
-		return (-1);
 	data->map = noblank_2(data->map, '1', "*");
+	if (!(data->spt = malloc(sizeof(t_sprite) * (data->texture.count_spt))))
+		return (-1);
 	return (0);
 }

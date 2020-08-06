@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/07/27 18:03:37 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/07/30 04:42:43 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_player
 	int			map_x;  // la case dans laquelle on se trouve
 	int			map_y;
 	double		dir; 		//direction du joueur
+	double		rayone;
 	float		sp; // vitesse de deplacement
 }               t_player;
 
@@ -65,15 +66,16 @@ typedef	struct	s_texture
 	int			bpp[5];//bits per pixel
 	int			szl[5];//sizeline
 	int			endian[5];
-	int			count_spt;
+	int			count_spt; //mettre dans la struct data
 }				t_texture;
 
 typedef	struct	s_sprite
 {
 	double		x[2];
 	double		y[2];
+	int			height;
 	double		dist[2];
-	// int			wall_height;
+	double		gap[2];
 	double		johnny;
 	int			flag[2];
 	int			coordinate;
@@ -117,6 +119,7 @@ typedef struct  s_data
     char		*west;
 	float		x;
 	float		y;
+	double		tex_x;
 }				t_data;
 
 /***          			fucntion to pars                                    ***/
