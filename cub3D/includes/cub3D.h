@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/07/30 04:42:43 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/08/06 17:32:18 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct  s_data
 	float		x;
 	float		y;
 	double		tex_x;
+	int			save;
 }				t_data;
 
 /***          			fucntion to pars                                    ***/
@@ -138,7 +139,7 @@ char 		**noblank_2(char **s, int c, char *set);
 int	        set_rfc(t_data *d);
 /***                       function to display                         ***/
 void		init_player(t_data *d);
-int         cub3d(int fd);
+int         cub3d(int fd, t_data *d);
 void        window(t_data *d);
 void		raycasting(t_data *d);
 void		set_position(t_data *d);
@@ -155,6 +156,7 @@ void    	draw_wall(t_data *d, double raydist, int i, int tmp_x);
 void		catch_sprite(t_data *d, int b);
 void		dda_sprite(t_data *d);
 void		check_dist(t_data *d,double dist);
+void    	create_bitmap(t_data *d);
 /***                                                                        ***/
 void		leak(char *str);
 int			create_trgb(int t, int r, int g, int b);

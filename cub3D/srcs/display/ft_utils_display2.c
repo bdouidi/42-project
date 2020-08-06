@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_display2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 22:31:39 by othabchi          #+#    #+#             */
-/*   Updated: 2020/07/30 04:52:57 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/08/06 16:54:59 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,21 @@ void	rotation(t_data *d, int keycode)
 		d->player.rayone -= 2 * M_PI;
 }
 
-void	drawline(t_data *d, double dir, int i, int color)
-{
-	d->x = d->player.pos_x * d->square.width;
-	d->y = d->player.pos_y * d->square.width;
-	// if (i == 1)
-	i = 0;
-	color = 0x000FF00;
-	// while ((int)d->x != (int)(d->ray.x[i] * d->square.width))
-	for (int z = 0; z < 50; z++)
-	{
-		my_mlx_pixel_put(d, color);
-		d->x -= cos(dir);
-		d->y -= sin(dir);
-	}
-}
+// void	drawline(t_data *d, double dir, int i, int color)
+// {
+// 	d->x = d->player.pos_x * d->square.width;
+// 	d->y = d->player.pos_y * d->square.width;
+// 	// if (i == 1)
+// 	i = 0;
+// 	color = 0x000FF00;
+// 	// while ((int)d->x != (int)(d->ray.x[i] * d->square.width))
+// 	for (int z = 0; z < 50; z++)
+// 	{
+// 		my_mlx_pixel_put(d, color);
+// 		d->x -= cos(dir);
+// 		d->y -= sin(dir);
+// 	}
+// }
 
 void	drawfov(t_data *d)
 {
@@ -63,7 +63,7 @@ void	drawfov(t_data *d)
 			d->player.fov -= 2 * M_PI;
 		if (fov <= d->res[0]*1.25 && fov > d->res[0] * .25)
 			get_ray_size(d);
-		dda_sprite(d);
+		//dda_sprite(d);
 		d->player.fov += ((M_PI / 3) / d->res[0]);
 	}
 }

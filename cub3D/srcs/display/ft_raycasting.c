@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_raycasting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 03:12:26 by idouidi           #+#    #+#             */
-/*   Updated: 2020/08/06 15:07:44 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/08/06 18:35:10 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int		get_spt_color(t_data *d, int i, int line_height)
 	tex_y = (d->y * 2 - d->res[1] + line_height) *
 		(d->texture.height[0] / 2) / line_height;
 	d->tex_x = (d->spt[i].x[0] - (int)d->spt[i].x[0]) * d->texture.width[0];
-	printf("%f = (%f - %d) * %d\n", d->tex_x, d->spt[i].x[0], (int)d->spt[i].x[0], d->texture.width[0]);
+	// printf("%f = (%f - %d) * %d\n", d->tex_x, d->spt[i].x[0], (int)d->spt[i].x[0], d->texture.width[0]);
 	// d->spt[i].y[0] -= d->spt[i].gap[1];
 	// d->spt[i].x[0] -= d->spt[i].gap[0];
 	// printf("%f - %f\n", d->spt[i].gap[0], d->spt[i].gap[1]);
@@ -231,15 +231,20 @@ void	raycasting(t_data *d)
 	clearstruct(d);
 	drawfov(d);
 	struct_sort(d);
-	for (int j = 0; j < d->texture.count_spt ; j++)
-		printf("Index %d:\n- x = [0]%f - [1]%f\n- y = [0]%f - [1]%f\n\n ---------------- \n",
-		 j, d->spt[j].x[0], d->spt[j].x[1], d->spt[j].y[0], d->spt[j].y[1]);
-	while (d->spt[i].dist[0] > 0)
+	if (d->save == 1)
 	{
-	// printf("%f = (%f - %f) / (%f)\n", d->x, d->spt[i].johnny, d->player.rayone, (M_PI / 3) / d->res[0]);
-		drawsprite(d, i);
-		i++;
+		create_bitmap(d);
+		d->save = 0;
 	}
+	// for (int j = 0; j < d->texture.count_spt ; j++)
+	// 	printf("Index %d:\n- x = [0]%f - [1]%f\n- y = [0]%f - [1]%f\n\n ---------------- \n",
+	// 	 j, d->spt[j].x[0], d->spt[j].x[1], d->spt[j].y[0], d->spt[j].y[1]);
+	// while (d->spt[i].dist[0] > 0)
+	// {
+	// // printf("%f = (%f - %f) / (%f)\n", d->x, d->spt[i].johnny, d->player.rayone, (M_PI / 3) / d->res[0]);
+	// 	drawsprite(d, i);
+	// 	i++;
+	// }
 }
 
 		// printf("Index %d:\n- x = [0]%f - [1]%f\n- y = [0]%f - [1]%f\n- dist = [0]%f - [1]%f\n       johnny = %f\n\n ---------------- \n",
