@@ -6,7 +6,7 @@
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 17:02:31 by idouidi           #+#    #+#             */
-/*   Updated: 2020/08/06 20:16:02 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/08/07 14:00:14 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ static void	fill_bitmap(t_data *d, int fd)
 		x = 0;
 		while (x < d->res[0])
 		{
-			r = (int)(d->img.addr[0] + y * d->img.line_length + x * d->img.bits_per_pixel / 8);
-			g = (int)(d->img.addr[0] + y * d->img.line_length + x * d->img.bits_per_pixel / 8 + 1);
-			b = (int)(d->img.addr[0] + y * d->img.line_length + x * d->img.bits_per_pixel / 8 + 2);
+			r = (int)d->img.addr[0][y * d->img.line_length + x * d->img.bits_per_pixel / 8];
+			g = (int)d->img.addr[0][y * d->img.line_length + x * d->img.bits_per_pixel / 8 + 1];
+			b = (int)d->img.addr[0][y * d->img.line_length + x * d->img.bits_per_pixel / 8 + 2];
 			write(fd, &r, 1);
 			write(fd, &g, 1);
 			write(fd, &b, 1);
@@ -75,7 +75,7 @@ void		create_bitmap(t_data *d)
 {
 	int	fd;
 
-	if ((fd = open("POURQUOI TU SCREEN.bmp", O_WRONLY | O_CREAT, 0777 | O_TRUNC | O_APPEND)) < 0)
+	if ((fd = open("screen.bmp", O_WRONLY | O_CREAT, 0777 | O_TRUNC | O_APPEND)) < 0)
     {
         ft_putstr("imposible to create a bitmap file\n");
         exit(1);

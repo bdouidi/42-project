@@ -6,7 +6,7 @@
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/08/06 17:32:18 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/08/07 12:54:31 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ typedef	struct	s_sprite
 
 typedef	struct	s_img
 {
-	void		*ptr[3];
-    char		*addr[3];
+	void		*ptr[5];
+    char		*addr[5];
     int         line_length;
     int			bits_per_pixel;
     int 		endian;
