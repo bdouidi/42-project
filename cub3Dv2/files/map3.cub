@@ -1,0 +1,16 @@
+NO ./files/textures/brown.xpm
+EA ./files/textures/5.xpm
+WE ./files/textures/33.xpm
+R 1000 1000
+SO ./files/textures/44.xpm
+S ./files/textures/sprite.xpm
+
+F 50,150,50
+C 255,130,80
+
+11111111111111
+1000000000001
+10000000000001
+10002E02000001
+100000000000001
+11111111111111
