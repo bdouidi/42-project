@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/10/13 17:26:56 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/14 07:25:14 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ void	set_var(t_data *d)
 	d->west = NULL;
 	d->x = 0;
 	d->y = 0;
-	d->save = 0;
 	d->mapX = 0;
 	d->mapY = 0;
 	d->player.pos_x = 0;
@@ -128,17 +127,24 @@ void	set_var(t_data *d)
 
 void	set_position(t_data *d)
 {
-	
+	int i;
+
+	i = 0;
 	while (d->map[d->mapY])
 	{
 		d->mapX = 0;
 		while (d->map[d->mapY][d->mapX])
 		{
+			if (d->map[d->mapY][d->mapX] == '2')
+			{
+				d->spt[i].x = d->mapX + 0.5;
+				d->spt[i].y = d->mapY + 0.5;
+				i++;
+			}
 			if (ft_isalpha(d->map[d->mapY][d->mapX]) == 1)
 			{
 				d->player.pos_y = d->mapY + .5;
 				d->player.pos_x = d->mapX + .5;
-				// printf("%f, %f\n", d->player.pos_y, d->player.pos_x);
 				d->player.letter = d->map[d->mapY][d->mapX];
 				d->map[d->mapY][d->mapX] = '0';
 			}
@@ -147,6 +153,8 @@ void	set_position(t_data *d)
 		d->mapY++;
 	}
 	d->mapY--;
+	// for (int z = 0; z < d->count_spt; z++)
+	// 	printf("[%d](%f, %f)\n", z, d->spt[z].y, d->spt[z].x);
 }
 
 int			pars_file(int fd, t_data *data)
@@ -161,8 +169,9 @@ int			pars_file(int fd, t_data *data)
 	if (pars_info_map(data) == -1 || pars_map(data, len - 1) == -1 ||
 		check_textures(data) == -1)
 		return (-1);
+	printf("ajfaj\n");
 	data->map = noblank_2(data->map, '1', "*");
-	if (!(data->spt = malloc(sizeof(t_sprite) * (data->texture.count_spt))))
+	if (!(data->spt = malloc(sizeof(t_sprite) * (data->count_spt))))
 		return (-1);
 	set_position(data);
 	return (0);

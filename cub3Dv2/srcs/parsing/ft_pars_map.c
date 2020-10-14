@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pars_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 15:02:00 by idouidi           #+#    #+#             */
-/*   Updated: 2020/07/20 17:34:48 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/10/14 03:10:19 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int		check_m_content(t_data *d, int i, int j)
 	  && d->map[i][j] != 'W'&& d->map[i][j] != '*')
 		return (-1);
 	if (d->map[i][j] == '2')
-		d->texture.count_spt++;
+		d->count_spt++;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 14:46:21 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/13 23:20:18 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/14 03:13:01 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,15 @@ int		get_tex_color(t_data *d, int i)
 	double	wallX;
 
 	tex_y = (d->y * 2 - d->res[1] + d->ray.line_height) *
-		(d->texture.height[i] / 2) / d->ray.line_height;
-	
+		(d->texture.height[i] / 2) / d->ray.line_height;	
 	if (d->ray.hit_side == 0)
 		wallX = d->player.pos_y + d->ray.perpWallDist * d->ray.dirY;
 	else
 		wallX = d->player.pos_x + d->ray.perpWallDist * d->ray.dirX;
 	wallX -= (int)wallX;
-
 	tex_x = (int)(wallX * d->texture.width[i]);
-
 	if	((d->ray.hit_side == 0 && d->ray.dirX > 0) || (d->ray.hit_side == 1 && d->ray.dirY < 0))
 		tex_x = d->texture.width[i] - tex_x - 1;
-
-	//printf("%f, %f\n", tex_y, tex_x);
 	color = d->texture.addr[i] + (abs((int)tex_y) * d->texture.szl[i] +
 	(int)tex_x * (d->texture.bpp[i] / 8));
 	return (*(unsigned int*)color);
@@ -130,5 +125,7 @@ void	dda(t_data *d)
 		d->ray.perpWallDist = (d->player.map_x - d->player.pos_x + (1 - d->ray.stepX) / 2) / d->ray.dirX;
 	else
 		d->ray.perpWallDist = (d->player.map_y - d->player.pos_y + (1 - d->ray.stepY) / 2) / d->ray.dirY;
+	d->rays[(int)d->x] = d->ray.perpWallDist;
+	// printf("%f\n", d->rays[(int)d->x]);
 	draw_wall(d);
 }

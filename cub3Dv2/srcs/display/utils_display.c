@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:16:55 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/13 19:44:56 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/14 05:22:42 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_player(t_data *d)
 	{
 		d->player.dir_x = 0;
 		d->player.dir_y = -1;
-		d->ray.planeX = .66;
+		d->ray.planeX = .6;
 		d->ray.planeY = 0;
 	}
 	else if (d->player.letter == 'E')
@@ -73,13 +73,13 @@ void	init_player(t_data *d)
 		d->player.dir_x = 1;
 		d->player.dir_y = 0;
 		d->ray.planeX = 0;
-		d->ray.planeY = .66;
+		d->ray.planeY = .6;
 	}
 	else if (d->player.letter == 'S')
 	{
 		d->player.dir_x = 0;
 		d->player.dir_y = 1;
-		d->ray.planeX = -.66;
+		d->ray.planeX = -.6;
 		d->ray.planeY = 0;
 	}
 	else if (d->player.letter == 'W')
@@ -87,6 +87,6 @@ void	init_player(t_data *d)
 		d->player.dir_x = -1;
 		d->player.dir_y = 0;
 		d->ray.planeX = 0;
-		d->ray.planeY = -.66;
+		d->ray.planeY = -.6;
 	}
 }

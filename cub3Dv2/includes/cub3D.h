@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/10/13 19:30:48 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/14 03:47:15 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,13 @@ typedef	struct	s_texture
 	int			bpp[5];//bits per pixel
 	int			szl[5];//sizeline
 	int			endian[5];
-	int			count_spt; //mettre dans la struct data
 }				t_texture;
 
 typedef	struct	s_sprite
 {
-	double		x[2];
-	double		y[2];
-	int			height;
-	int			width;
-	double		dist[2];
-	double		johnny;
-	int			flag[2];
-	double		gap;
-	int			c;
+	float		x;
+	float		y;
+	double		dist;
 }				t_sprite;
 
 
@@ -105,29 +98,27 @@ typedef struct  s_data
 	t_img		img;
 	t_texture	texture;
 	t_sprite	*spt;
-	double		sprite_ray;	
     char		**map;
-	int			mapX;
-	int			mapY;
-    char		*tmp;
-    char		*resolution;
-    long        res[2];
-	double		*rays;
-    char		*floor;
-    char		*ceiling;
-    int         f_color;
-    int         c_color;
     char		*sprite;
     char		*north;
     char		*east;
     char		*south;
     char		*west;
+    char		*tmp;
+    char		*resolution;
+    char		*floor;
+    char		*ceiling;
+	int			count_spt;
+	int			mapX;
+	int			mapY;
+    int         f_color;
+    int         c_color;
+	int			save;
+    long        res[2];
+	double		cameraX;
+	double		*rays;
 	float		x;
 	float		y;
-	double		tex_x;
-	int			save;
-	double		cameraX;
-	double		cameraY;
 }				t_data;
 
 /***          			fucntion to pars                                    ***/
