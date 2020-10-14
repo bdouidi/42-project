@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_display2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 22:31:39 by othabchi          #+#    #+#             */
-/*   Updated: 2020/08/06 16:54:59 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/09/30 13:03:19 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	rotation(t_data *d, int keycode)
 {
 	if (keycode == 12)
 	{
-		d->player.dir -= (M_PI / 180) * 3;
+		d->player.dir -= (M_PI / 180) * 5;
 		if (d->player.dir < 0)
 			d->player.dir = 2 * M_PI;
 	}
 	if (keycode == 14)
 	{
-		d->player.dir += (M_PI / 180) * 3;
+		d->player.dir += (M_PI / 180) * 5;
 		if (d->player.dir > 2 * M_PI)
 			d->player.dir = 0;
 	}
@@ -53,18 +53,17 @@ void	drawfov(t_data *d)
 {
 	int	fov;
 
-	fov = 1.5 * d->res[0];
-	d->player.fov = d->player.dir - M_PI_4;
+	fov = d->res[0];
+	d->player.fov = d->player.dir - (M_PI / 6);
 	while (fov--)
 	{
 		if (d->player.fov < 0)
 			d->player.fov += 2 * M_PI;
 		if (d->player.fov > 2 * M_PI)
 			d->player.fov -= 2 * M_PI;
-		if (fov <= d->res[0]*1.25 && fov > d->res[0] * .25)
-			get_ray_size(d);
-		//dda_sprite(d);
-		d->player.fov += ((M_PI / 3) / d->res[0]);
+		get_ray_size(d);
+		dda_sprite(d);
+		d->player.fov += (M_PI / 3) / d->res[0];
 	}
 }
 

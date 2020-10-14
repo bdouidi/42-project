@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_display.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 21:39:55 by idouidi           #+#    #+#             */
-/*   Updated: 2020/08/07 12:54:10 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/10/05 13:33:43 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	my_mlx_pixel_put(t_data *d, int color)
 
 void	init_player(t_data *d)
 {
-	d->player.sp = .15;
+	d->player.sp = .25;
 	if (d->player.letter == 'N')
 		d->player.dir = M_PI / 2;
 	else if (d->player.letter == 'E')

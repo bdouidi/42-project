@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_raycasting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 03:12:26 by idouidi           #+#    #+#             */
-/*   Updated: 2020/08/06 18:35:10 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/10/05 13:27:07 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,19 @@ void	struct_swap(t_data *d, int i, int j)
 	tmp.y[0] = d->spt[i].y[0];
 	tmp.dist[0] = d->spt[i].dist[0];
 	tmp.johnny = d->spt[i].johnny;
+	tmp.gap = d->spt[i].gap;
 
 	d->spt[i].x[0] = d->spt[j].x[0];
 	d->spt[i].y[0] = d->spt[j].y[0];
 	d->spt[i].dist[0] = d->spt[j].dist[0];
 	d->spt[i].johnny = d->spt[j].johnny;
+	d->spt[i].gap = d->spt[j].gap;
 
 	d->spt[j].x[0] = tmp.x[0];
 	d->spt[j].y[0] = tmp.y[0];
 	d->spt[j].dist[0] = tmp.dist[0];
 	d->spt[j].johnny = tmp.johnny;
+	d->spt[i].gap = tmp.gap;
 }
 
 void	struct_sort(t_data *d)
@@ -92,8 +95,7 @@ void	struct_sort(t_data *d)
 	int i;
 	int j;
 
-	// i = -1;
-	// while (++i < d->texture.count_spt)
+	i = -1;
 	// 	if ((d->spt[i].dist[1] > 0 && d->spt[i].dist[1] < d->spt[i].dist[0]) ||
 	// 		d->spt[i].dist[0] == 0)
 	// 	{
@@ -102,6 +104,8 @@ void	struct_sort(t_data *d)
 	// 		d->spt[i].dist[0] = d->spt[i].dist[1];
 	// 		d->spt[i].coordinate = 1;
 	// 	}
+	while (++i < d->texture.count_spt)
+		d->spt[i].gap -= d->spt[i].johnny;
 	i = 0;
 	while (i < d->texture.count_spt - 1)
 	{
@@ -116,87 +120,104 @@ void	struct_sort(t_data *d)
 	}
 }
 
-int		get_spt_color(t_data *d, int i, int line_height)
+int		get_spt_color(t_data *d, int spriteHeight, int spriteWidth, int stripe, int spriteScreenX)
 {
 	char	*color;
 	double	tex_y;
+	double	tex_x;
 
-	tex_y = (d->y * 2 - d->res[1] + line_height) *
-		(d->texture.height[0] / 2) / line_height;
-	d->tex_x = (d->spt[i].x[0] - (int)d->spt[i].x[0]) * d->texture.width[0];
-	// printf("%f = (%f - %d) * %d\n", d->tex_x, d->spt[i].x[0], (int)d->spt[i].x[0], d->texture.width[0]);
-	// d->spt[i].y[0] -= d->spt[i].gap[1];
-	// d->spt[i].x[0] -= d->spt[i].gap[0];
-	// printf("%f - %f\n", d->spt[i].gap[0], d->spt[i].gap[1]);
-	// if (d->spt[i].coordinate == 1)
-	// 	d->tex_x = d->texture.width[0] - ((d->spt[i].y[0] - (int)d->spt[i].y[0]) *
-	// 			d->texture.width[0]) - 1;
-	// else
-	// 	d->tex_x = d->texture.width[0] - ((d->spt[i].x[0] - (int)d->spt[i].x[0]) *
-	// 			d->texture.width[0]) - 1;
+	tex_y = (d->y * 2 - d->res[1] + spriteHeight) *
+		(d->texture.height[0] / 2) / spriteHeight;
+	tex_x = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * d->texture.width[0] / spriteWidth) / 256;
 	color = d->texture.addr[0] + (abs((int)tex_y) * d->texture.szl[0] +
-	(int)d->tex_x * (d->texture.bpp[0] / 8));
+	(int)tex_x * (d->texture.bpp[0] / 8));
 	return (*(unsigned int*)color);
+	
+	// tex_x = d->texture.width[0] - ((d->ray.x[0] - (int)d->ray.x[0]) *
+	// 	d->texture.width[0]) - 1;
+	// int color;
+	// double	tex_y;
+
+	// tex_y = (d->y * 2 - d->res[1] + line_height) *
+	// 	(d->texture.height[0] / 2) / line_height;
+	// d->tex_x = fabs(d->spt[i].x[0] - (int)d->spt[i].x[0]) * d->texture.width[0];
+	// // d->spt[i].y[0] -= d->spt[i].gap[1];
+	// // d->spt[i].x[0] -= d->spt[i].gap[0];
+	// // printf("%f - %f\n", d->spt[i].gap[0], d->spt[i].gap[1]);
+	// // if (d->spt[i].coordinate == 1)
+	// // 	d->tex_x = d->texture.width[0] - ((d->spt[i].y[0] - (int)d->spt[i].y[0]) *
+	// // 			d->texture.width[0]) - 1;
+	// // else
+	// // 	d->tex_x = d->texture.width[0] - ((d->spt[i].x[0] - (int)d->spt[i].x[0]) *
+	// // 			d->texture.width[0]) - 1;
+	// color = (int)d->texture.addr[0][abs((int)tex_y) * d->texture.szl[0] +
+	// (int)d->tex_x * (d->texture.bpp[0] / 8)];
 }
 
-void	drawsprite(t_data *d, int i)
+void	drawsprite(t_data *d)
 {
-	int		trueheight;
-	float	tmp_y;
-	int		k;
-	float	j;
-	float	z;
-	int		def;
-	int		abc;
+	double	spriteX;
+	double	spriteY;
+	double	invDet;
+	double	transformX;
+	double	transformY;
+	int		spriteScreenX;
+	int		spriteHeight;
+	int		spriteWidth;
+	int		drawStartX;
+	int		drawEndX;
+	int		drawStartY;
+	int		drawEndY;
+	int		color = 0;
+	float	planeX, planeY, nine;
 
-	d->x = (d->spt[i].johnny - d->player.rayone) /
-			((M_PI / 3) / d->res[0]);
-	d->spt[i].height = d->res[1] / d->spt[i].dist[0];
-	trueheight = d->spt[i].height;
-	// printf("\n****************\nIndex = %d\nd->x = %f	d->y = %f\nheight = %d		trueheight = %d\n", i, d->x, d->y, d->spt[i].height, trueheight);
-	if (d->spt[i].height > d->res[1])
-		d->spt[i].height = d->res[1] - 1;
-	d->y = d->res[1] * .5 - d->spt[i].height * .5;
-	tmp_y = d->y;
-	j = (int)d->spt[i].x[0] + 1;
-	abc = d->spt[i].height / j;
-	z = (int)d->spt[i].y[0] + 1;
-	def = d->spt[i].height / z;
-	if (d->spt[i].coordinate == 0)
-		while (abc-- && d->x < d->res[0])
+	nine = d->player.dir + M_PI_2;
+	planeX = cos(nine);
+	planeY = sin(nine);
+	for (int i = 0; i < d->texture.count_spt ; i++)
+	{
+		spriteX = (int)d->spt[i].x[0] - d->player.pos_x;
+		spriteY = (int)d->spt[i].y[0] - d->player.pos_y;
+		invDet = 1 / (planeX * sin(d->player.dir) - cos(d->player.dir) * planeY);
+		transformX = invDet * (sin(d->player.dir) * spriteX - cos(d->player.dir) * spriteY);
+		transformY = invDet * (-planeY * spriteX + planeX * spriteY);
+		spriteScreenX = (int)((d->res[0] / 2) * (1 + transformX / transformY));
+		spriteHeight = abs((int)(d->res[1] / transformY));
+		spriteWidth = abs((int)(d->res[1] / transformY));
+		drawStartY = -spriteHeight / 2 + d->res[1] / 2;
+		drawEndY = spriteHeight / 2 + d->res[1] / 2;
+		drawStartX = -spriteWidth / 2 + spriteScreenX;
+		drawEndX = spriteWidth / 2 + spriteScreenX;
+		printf("planeX = %f, planeY = %f\ndir = %f | dirX = %f, dirY = %f\nstartY = %d, endY = %d\n", planeX, planeY, d->player.dir, cos(d->player.dir), sin(d->player.dir), drawStartX, drawEndY);
+		if (drawStartY < 0)
+			drawStartY = 0;
+		if (drawEndY >= d->res[1])
+			drawEndY = d->res[1] - 1;
+		if (drawStartX < 0)
+			drawStartX = 0;
+		if (drawEndX >= d->res[0])
+			drawEndX = d->res[0] - 1;
+		for	(int stripe = drawStartX; stripe < drawEndX; stripe++)
 		{
-			d->y = tmp_y;
-			k = d->spt[i].height;
-		// printf("1 - %f = (%f - %f) / ((%f) / %d)\n",
-		// d->x, d->spt[i].johnny, d->player.rayone, M_PI / 3, (int)d->res[0]);
+			d->x = stripe;
+			d->y = drawStartY;
 			if (d->x > 0 && d->spt[i].dist[0] < d->rays[(int)d->x])
-				while (k)
+			{	
+				for (int col = drawStartY; col < drawEndY; col++)
 				{
-					my_mlx_pixel_put(d, get_spt_color(d, i, trueheight));
-					d->y++;
-					k--;
+					d->y = col;
+					color = get_spt_color(d, spriteHeight, spriteWidth, stripe, spriteScreenX);
+					if (color > 5)
+					// -
+					// dans rotation ajouter fonction qui gere les vecteurs
+					// + corriger le bail de planeXY
+					// + mettre ca propre dans un .h
+					// -
+						my_mlx_pixel_put(d, color);
 				}
-			d->spt[i].x[0] += abc / j;
-			d->x++;
+			}
 		}
-	else
-		while (def-- && d->x < d->res[0])
-		{
-			d->y = tmp_y;
-			k = d->spt[i].height;
-		// printf("2 - %f = (%f - %f) / ((%f) / %d)\n",
-		// d->x, d->spt[i].johnny, d->player.rayone, M_PI / 3, (int)d->res[0]);
-			if (d->x > 0 && d->spt[i].dist[0] < d->rays[(int)d->x])
-				while (k)
-				{
-					my_mlx_pixel_put(d, get_spt_color(d, i, trueheight));
-					d->y++;
-					k--;
-				}
-			d->spt[i].y[0] += def / z;
-			d->x++;
-		}
-		
+	}
 }
 
 void	clearstruct(t_data *d)
@@ -212,10 +233,9 @@ void	clearstruct(t_data *d)
 		{
 			d->spt[i].x[b] = 0;
 			d->spt[i].y[b] = 0;
-			d->spt[i].gap[b] = 0;
 			d->spt[i].dist[b] = 0;
 			d->spt[i].flag[b] = 0;
-			d->spt[i].coordinate = 0;
+			d->spt[i].gap = 0;
 			i++;
 		}
 		i = 0;
@@ -231,22 +251,114 @@ void	raycasting(t_data *d)
 	clearstruct(d);
 	drawfov(d);
 	struct_sort(d);
+	drawsprite(d);
 	if (d->save == 1)
 	{
 		create_bitmap(d);
-		d->save = 0;
+		exit(1);
 	}
-	// for (int j = 0; j < d->texture.count_spt ; j++)
-	// 	printf("Index %d:\n- x = [0]%f - [1]%f\n- y = [0]%f - [1]%f\n\n ---------------- \n",
-	// 	 j, d->spt[j].x[0], d->spt[j].x[1], d->spt[j].y[0], d->spt[j].y[1]);
-	// while (d->spt[i].dist[0] > 0)
-	// {
-	// // printf("%f = (%f - %f) / (%f)\n", d->x, d->spt[i].johnny, d->player.rayone, (M_PI / 3) / d->res[0]);
-	// 	drawsprite(d, i);
-	// 	i++;
-	// }
 }
+	// printf("%f = (%f - %f) / (%f)\n", d->x, d->spt[i].johnny, d->player.rayone, (M_PI / 3) / d->res[0]);
+	// for (int j = 0; j < d->texture.count_spt ; j++)
+	// 	printf("Index %d:\n- x = [0]%f - [1]%f\n- y = [0]%f - [1]%f\n		%f\n\n ---------------- \n",
+	// 	 j, d->spt[j].x[0], d->spt[j].x[1], d->spt[j].y[0], d->spt[j].y[1], d->spt[i].gap);
 
 		// printf("Index %d:\n- x = [0]%f - [1]%f\n- y = [0]%f - [1]%f\n- dist = [0]%f - [1]%f\n       johnny = %f\n\n ---------------- \n",
 		//  j, d->spt[j].x[0], d->spt[j].x[1], d->spt[j].y[0], d->spt[j].y[1]
 		//  , d->spt[j].dist[0], d->spt[j].dist[1], d->spt[j].johnny);
+	
+	
+                    	/*****************************/
+
+// void	drawsprite(t_data *d, int i)
+// {
+// 	double	hx;
+// 	double	hy;
+// 	double	p;
+// 	double	sprite_screenx, sprite_screeny;
+//	double	angledir;
+	
+//	angledir = d->player.dir * (180 / M_PI);
+// 	hx = (int)d->spt[i].x[0] - (int)d->player.pos_x;
+// 	hy = (int)d->spt[i].y[0] - (int)d->player.pos_y;
+
+// 	p = atan2f(-hy, hx);
+// 	p *= (180 / M_PI);
+// 	printf("1 %f\n", p);
+// 	if (p < 0)
+// 		p += 360;
+// 	printf("2 %f\n", p);
+
+// 	if (p < 0)
+// 		p += 360;
+// 	if (p > 360)
+// 		p -= 360;
+
+// 	// if (p <= 360 && p > 270)
+// 	// 	p -= ((p - 270) * 2);
+// 	// else if (p >= 180 && p < 270)
+// 	// 	p += ((270 - p) * 2);
+// 	// else if (p < 180 && p > 90)
+// 	// 	p -= ((p - 90) * 2);
+// 	// else if (p >= 0 && p < 90)
+// 	// 	p += ((90 - p) * 2);
+		
+// 	sprite_screenx = p - (d->player.rayone * (180 / M_PI));
+// 	printf("3 %f, %f\n", p, sprite_screenx);
+
+
+// 	if (angledir > 90 && p < 270)
+// 		sprite_screenx = angledir + 30 - p + 360;
+// 	if (angledir > 270 && p < 90)
+// 		sprite_screenx = angledir + 30 - p - 360;
+// 	if (sprite_screenx < 0)
+// 		sprite_screenx += 360;
+
+// 	sprite_screeny = d->res[1] * .5;
+// 	printf("%f | %f : %f - %f\n", sprite_screenx, p, hx, hy);
+
+	
+// 	int		trueheight;
+// 	float	tmp_y;
+// 	float	tmp_x;
+// 	int		k;
+
+// 	d->spt[i].height = d->res[1] / d->spt[i].dist[0];
+// 	trueheight = d->spt[i].height;
+	
+// 	// printf("\n****************\nIndex = %d\nd->x = %f	d->y = %f\nheight = %d		trueheight = %d\n", i, d->x, d->y, d->spt[i].height, trueheight);
+	
+// 	if (d->spt[i].height > d->res[1])
+// 		d->spt[i].height = d->res[1] - 1;
+
+// 	d->x = fabs(sprite_screenx) + d->spt[i].height * .5;
+
+// 	// d->x = (d->spt[i].johnny - d->player.rayone) /
+// 	// 		((M_PI / 3) / d->res[0]);
+	
+// 	tmp_x = d->x;
+// 	d->y = d->res[1] * .5 - d->spt[i].height * .5;
+// 	d->spt[i].width = d->spt[i].height;
+// 	tmp_y = d->y;
+
+// 	// printf("[%f]	%f = %f - %f\n", d->x, sprite_screenx, d->player.rayone * (180 / M_PI), p);
+// 	while (d->x < tmp_x + d->spt[i].width && d->x < d->res[0])
+// 	{
+// 		d->y = tmp_y;
+// 		k = d->spt[i].height;
+// 	// printf("1 - %f = (%f - %f) / ((%f) / %d)\n",
+// 	// d->x, d->spt[i].johnny, d->player.rayone, M_PI / 3, (int)d->res[0]);
+// 		if (d->x > 0 && d->spt[i].dist[0] < d->rays[(int)d->x])
+// 			while (k)
+// 			{
+// 				// printf("[%d] %f = (%f - %d) * %d\n", i, d->tex_x, d->spt[i].x[0], (int)d->spt[i].x[0], d->texture.width[0]);
+// 				my_mlx_pixel_put(d, get_spt_color(d, i, trueheight));
+// 				d->y++;
+// 				k--;
+// 			}
+// 		d->spt[i].x[0] += d->spt[i].gap;
+// 		d->x++;
+// 	}
+// }
+
+                         /*********////*******************//

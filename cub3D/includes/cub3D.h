@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/08/07 12:54:31 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/08/13 15:04:10 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef	struct	s_square // Utilisé de base pour faire des test mais possibile d
 typedef	struct	s_texture
 {
     void 		*tex[5];
-	void		*addr[5];
+	char		*addr[5];
 	int			width[5];
 	int			height[5];
 	int			bpp[5];//bits per pixel
@@ -74,11 +74,12 @@ typedef	struct	s_sprite
 	double		x[2];
 	double		y[2];
 	int			height;
+	int			width;
 	double		dist[2];
-	double		gap[2];
 	double		johnny;
 	int			flag[2];
-	int			coordinate;
+	double		gap;
+	int			c;
 }				t_sprite;
 
 
@@ -160,5 +161,8 @@ void    	create_bitmap(t_data *d);
 /***                                                                        ***/
 void		leak(char *str);
 int			create_trgb(int t, int r, int g, int b);
+int			get_r(int color);
+int			get_g(int color);
+int			get_b(int color);
 
 #endif
