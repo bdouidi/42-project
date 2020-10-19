@@ -20,10 +20,11 @@ SRCS = srcs/parsing/ft_utils_pars.c srcs/parsing/ft_pars_info_map.c \
 
 LIBFTPATH	= project/libft 
 LIBOBJ		= project/libft/libft.a
-MLXPATH		= mlx/
+MLXOBJ		= mlx_linux/libmlx.a
+MLXPATH		= mlx_linux/
 @OBJS		= $(SRCS:.c=.o)
-CFLAGS		= -Wall -Wextra -Werror -g3 -fsanitize=address #-O3 -march=native -flto 
-MLXFLAGS	= -L$(MLXPATH) -lmlx -framework OpenGL -framework AppKit
+CFLAGS		= -Wall -Wextra -Werror -g3 -fsanitize=address  -march=native -flto 
+MLXFLAGS	= -L$(MLXPATH) -lm -lXext -lX11 
 NAME		= cub3D
 
 all: $(NAME)
@@ -33,7 +34,7 @@ $(NAME): $(@OBJS)
 	$(MAKE) -C $(LIBFTPATH)
 	@echo "Done."
 	@echo "Compiling cub3D..."
-	@gcc ${CFLAGS} -o ${NAME} ${@OBJS} main.c $(LIBOBJ) $(MLXFLAGS)
+	@gcc ${CFLAGS} -o ${NAME} ${@OBJS} main.c $(LIBOBJ) $(MLXOBJ) $(MLXFLAGS)
 	@echo "Done."
 
 clean:

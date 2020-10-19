@@ -29,7 +29,6 @@ int main (int ac, char **av)
 		return (0);
 	}
 	d.save = (ac == 3) ? 1 : 0;
-	printf("1%d\n", d.save);
 	fd = open(av[1], O_RDONLY);
 	if (cub3d(fd, &d) == -1)
 	{

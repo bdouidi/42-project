@@ -29,23 +29,23 @@ void		info_map(t_data *d, char *s, int i)
 
 	info_map_setup(s, i, &j, &k);
 	if (s[i] == 'R')
-		d->resolution = fill_str(s, d->resolution, i, j);
+		d->resolution = ft_substr(s, i, j);
 	if (s[i] == 'F')
-		d->floor = fill_str(s, d->floor, i, j);
+		d->floor = ft_substr(s, i, j);
 	if (s[i] == 'C')
-		d->ceiling = fill_str(s, d->ceiling, i, j);
+		d->ceiling = ft_substr(s, i, j);
 	if (s[i] == 'N')
-		d->north = fill_str(s, d->north, k, j);
+		d->north = ft_substr(s, k, j);
 	if (s[i] == 'W')
-		d->west = fill_str(s, d->west, k, j);
+		d->west = ft_substr(s, k, j);
 	if (s[i] == 'E')
-		d->east = fill_str(s, d->east, k, j);
+		d->east = ft_substr(s, k, j);
 	if (s[i] == 'S')
 	{
 		if (s[i + 1] == 'O')
-			d->south = fill_str(s, d->south, k, j);
+			d->south = ft_substr(s, k, j);
 		else
-			d->sprite = fill_str(s, d->sprite, k, j);
+			d->sprite = ft_substr(s, k, j);
 	}
 }
 
@@ -123,6 +123,7 @@ void	set_var(t_data *d)
 	d->player.pos_x = 0;
 	d->player.pos_y = 0;
 	d->player.letter = 0;
+	d->count_spt = 0;
 }
 
 void	set_position(t_data *d)
@@ -153,8 +154,6 @@ void	set_position(t_data *d)
 		d->mapY++;
 	}
 	d->mapY--;
-	// for (int z = 0; z < d->count_spt; z++)
-	// 	printf("[%d](%f, %f)\n", z, d->spt[z].y, d->spt[z].x);
 }
 
 int			pars_file(int fd, t_data *data)
@@ -169,7 +168,6 @@ int			pars_file(int fd, t_data *data)
 	if (pars_info_map(data) == -1 || pars_map(data, len - 1) == -1 ||
 		check_textures(data) == -1)
 		return (-1);
-	printf("ajfaj\n");
 	data->map = noblank_2(data->map, '1', "*");
 	if (!(data->spt = malloc(sizeof(t_sprite) * (data->count_spt))))
 		return (-1);

@@ -64,16 +64,6 @@ void	sort_sprites(t_data *d)
 void	do_sprites(t_data *d)
 {
 	int z;
-
-	z = 0;
-	while (z < d->count_spt)
-	{
-		d->spt[z].dist = (pow((d->player.pos_x - d->spt[z].x), 2) +
-						pow((d->player.pos_y - d->spt[z].y), 2));
-		z++;
-	}
-	sort_sprites(d);
-
 	double	spriteX;
 	double	spriteY;
 	double	invDet;
@@ -86,8 +76,16 @@ void	do_sprites(t_data *d)
 	int		drawEndX;
 	int		drawStartY;
 	int		drawEndY;
-	int		color = 0;
+	int		color;
 
+	z = 0;
+	while (z < d->count_spt)
+	{
+		d->spt[z].dist = (pow((d->player.pos_x - d->spt[z].x), 2) +
+						pow((d->player.pos_y - d->spt[z].y), 2));
+		z++;
+	}
+	sort_sprites(d);
 	for (int i = 0; i < d->count_spt ; i++)
 	{
 		spriteX = d->spt[i].x - d->player.pos_x;
@@ -111,8 +109,10 @@ void	do_sprites(t_data *d)
 			drawStartX = 0;
 		if (drawEndX >= d->res[0])
 			drawEndX = d->res[0] - 1;
+		color = 0;
 		for	(int stripe = drawStartX; stripe < drawEndX; stripe++)
 		{
+			printf("loop sprite\n");
 			d->x = stripe;
 			d->y = drawStartY;
 			if (transformY > 0 && stripe > 0 && stripe < d->res[0]&& transformY < d->rays[stripe])
@@ -121,7 +121,7 @@ void	do_sprites(t_data *d)
 				{
 					d->y = col;
 					color = get_spt_color(d, spriteHeight, spriteWidth, stripe, spriteScreenX);
-					if (color > 5)
+					// if (color > 5)
 						my_mlx_pixel_put(d, color);
 				}
 			}

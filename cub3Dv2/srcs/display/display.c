@@ -40,11 +40,6 @@ void			drawmap2d(t_data *d)
 	}
 }
 
-int				cross_window(void)
-{
-	ft_putstr("Exit.\n");
-	exit(EXIT_SUCCESS);
-}
 
 void			load_texture(t_data *d, char *tex_path, int i)
 {
@@ -82,16 +77,17 @@ static int		handlekeys(int keycode, t_data *d)
 {
 	static int	check = 0;
 
-	if (keycode == 53)
+	// printf("keycode = [%d, %c]\n", keycode, keycode);
+	if (keycode == 65307)
 	{
 		mlx_destroy_window(d->vars.mlx, d->vars.win);
 		exit(1);
 	}
-	if (keycode == 46)
+	if (keycode == 109)
 		check++;
-	if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
+	if (keycode == 119 || keycode == 100 || keycode == 97 || keycode == 115)
 		which_dir(d, keycode);
-	if (keycode == 12 || keycode == 14)
+	if (keycode == 101 || keycode == 113)
 		rotation(d, keycode);
 	if (check % 2 != 0)
 	{
@@ -104,6 +100,12 @@ static int		handlekeys(int keycode, t_data *d)
 		display(d);
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);
 	return (0);
+}
+
+int		cross_window(void)
+{
+	write(1,"Exit.\n",6);
+	exit(EXIT_SUCCESS);
 }
 
 void			window(t_data *d)
