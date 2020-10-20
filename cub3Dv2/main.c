@@ -12,6 +12,21 @@
 
 #include "includes/cub3D.h"
 
+void	clean(t_data *d)
+{
+	leak_2(d->map);
+	leak(d->resolution);
+	leak(d->floor);
+	leak(d->ceiling);
+	leak(d->north);
+	leak(d->south);
+	leak(d->west);
+	leak(d->east);
+	leak(d->sprite);
+	leak(d->spt);
+	leak(d->rays);
+}
+
 int main (int ac, char **av)
 {
 	int		fd;
@@ -36,6 +51,7 @@ int main (int ac, char **av)
 		close(fd);
 		return (0);
 	}
+	clean(&d);
 	close(fd);
 	return (0);
 }

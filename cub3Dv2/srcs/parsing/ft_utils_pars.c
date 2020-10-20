@@ -29,7 +29,7 @@ char		*fill_str(char *s1, char *s2, int i, int j)
 	return (s2);
 }
 
-void		leak(char *str)
+void		leak(void *str)
 {
 	free(str);
 	str = NULL;

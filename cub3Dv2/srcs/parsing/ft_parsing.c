@@ -21,32 +21,31 @@ void		info_map_setup(char *s, int i, int *j, int *k)
 	while (s[*j] && s[*j] != '\n')
 		*j += 1;
 }
-
-void		info_map(t_data *d, char *s, int i)
+void            info_map(t_data *d, char *s, int i)
 {
-	int	j;
-	int k;
+        int     j;
+        int k;
 
-	info_map_setup(s, i, &j, &k);
-	if (s[i] == 'R')
-		d->resolution = ft_substr(s, i, j);
-	if (s[i] == 'F')
-		d->floor = ft_substr(s, i, j);
-	if (s[i] == 'C')
-		d->ceiling = ft_substr(s, i, j);
-	if (s[i] == 'N')
-		d->north = ft_substr(s, k, j);
-	if (s[i] == 'W')
-		d->west = ft_substr(s, k, j);
-	if (s[i] == 'E')
-		d->east = ft_substr(s, k, j);
-	if (s[i] == 'S')
-	{
-		if (s[i + 1] == 'O')
-			d->south = ft_substr(s, k, j);
-		else
-			d->sprite = ft_substr(s, k, j);
-	}
+        info_map_setup(s, i, &j, &k);
+        if (s[i] == 'R')
+                d->resolution = fill_str(s, d->resolution, i, j);
+        if (s[i] == 'F')
+                d->floor = fill_str(s, d->floor, i, j);
+        if (s[i] == 'C')
+                d->ceiling = fill_str(s, d->ceiling, i, j);
+        if (s[i] == 'N')
+                d->north = fill_str(s, d->north, k, j);
+        if (s[i] == 'W')
+                d->west = fill_str(s, d->west, k, j);
+        if (s[i] == 'E')
+                d->east = fill_str(s, d->east, k, j);
+        if (s[i] == 'S')
+        {
+                if (s[i + 1] == 'O')
+                        d->south = fill_str(s, d->south, k, j);
+                else
+                        d->sprite = fill_str(s, d->sprite, k, j);
+        }
 }
 
 static void	config_map(t_data *d)
@@ -69,11 +68,12 @@ static void	config_map(t_data *d)
 		{
 			while (s[i] && s[i] != '\n')
 				i++;
-			d->tmp = ft_substr(s, i + 1, ft_strlen(s));
+			d->tmp1 = ft_substr(s, i + 1, ft_strlen(s));
 			return ;
 		}
 		i++;
 	}
+	free(d->tmp);
 }
 
 void		map(int fd, t_data *data)
@@ -81,16 +81,15 @@ void		map(int fd, t_data *data)
 	char	*line;
 
 	line = NULL;
-	data->tmp = ft_strdup("");
 	while (get_next_line(fd, &line) > 0)
 	{
 		data->tmp = ft_strjoin(data->tmp, line);
 		leak(line);
 	}
 	config_map(data);
-	data->map = ft_split((char *)data->tmp, '\n');
+	data->map = ft_split((char *)data->tmp1, '\n');
 	adjust_map(data);
-	leak(data->tmp);
+	leak(data->tmp1);
 }
 
 int			check_textures(t_data *d)

@@ -77,7 +77,7 @@ char		*adjust_str(char *tmp, char *m, int stock)
 	return (tmp);
 }
 
-static void	leak_2(char **map)
+void	leak_2(char **map)
 {
 	int i;
 
@@ -88,6 +88,7 @@ static void	leak_2(char **map)
 		map[i] = NULL;
 		i++;
 	}
+	map[i] = NULL;
 }
 
 void		adjust_map(t_data *d)

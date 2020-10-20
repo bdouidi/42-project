@@ -105,6 +105,7 @@ typedef struct  s_data
     char		*south;
     char		*west;
     char		*tmp;
+    char		*tmp1;
     char		*resolution;
     char		*floor;
     char		*ceiling;
@@ -158,7 +159,8 @@ void		dda_sprite(t_data *d);
 void		check_dist(t_data *d,double dist);
 void    	create_bitmap(t_data *d);
 /***                                                                        ***/
-void		leak(char *str);
+void		leak(void *str);
+void    leak_2(char **str);
 int			create_trgb(int t, int r, int g, int b);
 int			get_r(int color);
 int			get_g(int color);
