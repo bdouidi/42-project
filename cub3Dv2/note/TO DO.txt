@@ -1,0 +1,22 @@
+//1. LA NEIGE
+
+//2. Mouvement bloqué en position initiale
+
+//3. perso qui depasse un peu trop de la map visuellement
+
+4.revoir le parsing avec un \n en plein milieu de map
+
+//5.angle 45 degre choix du rayon le plus court incorecte
+
+//6. texture buguee en biais
+
+To DO:
+
+Gestion d'erreurs propre
+Free (gestion des leaks)
+/n bug #4
+limites de la minimap (bordures max)
+#taille min de la fenetre (100x100 par ex)# DONE
+norminette
+faire en sorte qu'il compile sur la VM
+bonus

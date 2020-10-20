@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:39:38 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/16 15:14:53 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:59:14 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ void raycasting(t_data *d)
 	if (d->save == 1)
 	{
 		create_bitmap(d);
+		clean(d);
 		exit(1);
 	}
 }

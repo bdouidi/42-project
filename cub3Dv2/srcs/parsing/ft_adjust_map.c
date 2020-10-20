@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 19:43:27 by othabchi          #+#    #+#             */
-/*   Updated: 2020/06/10 20:19:03 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:34:08 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,6 @@ char		*adjust_str(char *tmp, char *m, int stock)
 	}
 	tmp[k] = '\0';
 	return (tmp);
-}
-
-static void	leak_2(char **map)
-{
-	int i;
-
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		map[i] = NULL;
-		i++;
-	}
 }
 
 void		adjust_map(t_data *d)

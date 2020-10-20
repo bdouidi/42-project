@@ -6,11 +6,26 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:00:55 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/16 13:20:33 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:43:13 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3D.h"
+
+void	clean(t_data *d)
+{
+	leak_2(d->map);
+	leak(d->resolution);
+	leak(d->floor);
+	leak(d->ceiling);
+	leak(d->north);
+	leak(d->south);
+	leak(d->west);
+	leak(d->east);
+	leak(d->sprite);
+	leak(d->spt);
+	leak(d->rays);
+}
 
 int main (int ac, char **av)
 {
@@ -37,5 +52,6 @@ int main (int ac, char **av)
 		return (0);
 	}
 	close(fd);
+	clean(&d);
 	return (0);
 }

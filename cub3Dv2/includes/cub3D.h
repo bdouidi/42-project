@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/10/16 14:31:46 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:46:06 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct  s_data
     char		*south;
     char		*west;
     char		*tmp;
+	char		*tmp1;
     char		*resolution;
     char		*floor;
     char		*ceiling;
@@ -158,7 +159,9 @@ void		dda_sprite(t_data *d);
 void		check_dist(t_data *d,double dist);
 void    	create_bitmap(t_data *d);
 /***                                                                        ***/
-void		leak(char *str);
+void		leak(void *str);
+void		leak_2(char **map);
+void		clean(t_data *d);
 int			create_trgb(int t, int r, int g, int b);
 int			add_shade(t_data *d, int trgb, float dist);
 int			get_r(int color);

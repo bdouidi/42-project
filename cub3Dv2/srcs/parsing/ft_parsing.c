@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/10/16 13:18:58 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:24:26 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,28 +69,40 @@ static void	config_map(t_data *d)
 		{
 			while (s[i] && s[i] != '\n')
 				i++;
-			d->tmp = ft_substr(s, i + 1, ft_strlen(s));
+			d->tmp1 = ft_substr(s, i + 1, ft_strlen(s));
 			return ;
 		}
 		i++;
 	}
+	leak(d->tmp);
+}
+char	*my_read(int fd)
+{
+	char		*antileak;
+	char		buf[BUFFER_SIZE + 1];
+	int			ret;
+	char		*save;
+
+	ret = 0;
+	save = NULL;
+	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
+	{
+		buf[ret] = '\0';
+		if (!(antileak = ft_strjoin(save, buf)))
+			return (NULL);
+		free(save);
+		save = antileak;
+	}
+	return (save);
 }
 
 void		map(int fd, t_data *data)
 {
-	char	*line;
-
-	line = NULL;
-	data->tmp = ft_strdup("");
-	while (get_next_line(fd, &line) > 0)
-	{
-		data->tmp = ft_strjoin(data->tmp, line);
-		leak(line);
-	}
+	data->tmp = my_read(fd);
 	config_map(data);
-	data->map = ft_split((char *)data->tmp, '\n');
+	data->map = ft_split((char *)data->tmp1, '\n');
 	adjust_map(data);
-	leak(data->tmp);
+	leak(data->tmp1);
 }
 
 int			check_textures(t_data *d)
@@ -153,8 +165,7 @@ void	set_position(t_data *d)
 		d->mapY++;
 	}
 	d->mapY--;
-	// for (int z = 0; z < d->count_spt; z++)
-	// 	printf("[%d](%f, %f)\n", z, d->spt[z].y, d->spt[z].x);
+
 }
 
 int			pars_file(int fd, t_data *data)
