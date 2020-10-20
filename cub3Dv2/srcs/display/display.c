@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:28:33 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/14 02:34:56 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/16 15:52:46 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ static int		handlekeys(int keycode, t_data *d)
 		mlx_destroy_window(d->vars.mlx, d->vars.win);
 		exit(1);
 	}
+	// if (keycode == 126)
+	// 	write(1, "\a", 1);
 	if (keycode == 46)
 		check++;
 	if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)

@@ -2,6 +2,8 @@ Faits :
 1- Minimap/ HUD
 2- Collision mur
 3- Collision sprite
+4- ombres
+5- son quand on fonce dans un mur
 
 A faire : 
 Son

@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:39:38 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/14 07:25:28 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/16 15:14:53 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,12 @@ void	do_sprites(t_data *d)
 		transformX = invDet * (d->player.dir_y * spriteX - d->player.dir_x * spriteY);
 		transformY = invDet * (-d->ray.planeY * spriteX + d->ray.planeX * spriteY);
 		spriteScreenX = (int)((d->res[0] / 2) * (1 + transformX / transformY));
-		spriteHeight = abs((int)(d->res[1] / transformY)) ;
-		spriteWidth = abs((int)(d->res[1] / transformY)) / 2;
-		drawStartY = -spriteHeight / 2 + d->res[1] /2 ;
-		drawEndY = spriteHeight / 2 + d->res[1] /2 ;
+		spriteHeight = abs((int)(d->res[1] / transformY));
+		spriteWidth = abs((int)(d->res[1] / transformY));
+		drawStartY = -spriteHeight / 2 + d->res[1] /2;
+		// drawEndY = spriteHeight / 2 + d->res[1] /2;
+		// drawStartY += 10;
+		drawEndY = drawStartY + spriteHeight;
 		drawStartX = -spriteWidth / 2 + spriteScreenX;
 		drawEndX = spriteWidth / 2 + spriteScreenX;
 		// printf("planeX = %f, planeY = %f\ndir = %f | dirX = %f, dirY = %f\nstartY = %d, endY = %d\n", planeX, planeY, d->player.dir, cos(d->player.dir), sin(d->player.dir), drawStartX, drawEndY);
@@ -122,7 +124,7 @@ void	do_sprites(t_data *d)
 					d->y = col;
 					color = get_spt_color(d, spriteHeight, spriteWidth, stripe, spriteScreenX);
 					if (color > 5)
-						my_mlx_pixel_put(d, color);
+						my_mlx_pixel_put(d, add_shade(d, color, transformY));
 				}
 			}
 		}

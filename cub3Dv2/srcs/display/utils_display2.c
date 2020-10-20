@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 18:57:33 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/13 20:24:42 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/16 15:54:56 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@ void	which_dir2(t_data *d, int keycode, int x, int y)
 		y = (int)(d->player.pos_y + d->player.dir_x * d->player.sp);
 		if (d->map[(int)d->player.pos_y][x] && d->map[(int)d->player.pos_y][x] == '0')
 			d->player.pos_x -= d->player.dir_y * d->player.sp;
+		else
+			write(1, "\a", 1);
 		if (d->map[y][(int)d->player.pos_x] && d->map[y][(int)d->player.pos_x] == '0')
 			d->player.pos_y += d->player.dir_x * d->player.sp;
+		else
+			write(1, "\a", 1);
 	}
 	if (keycode == 0)
 	{
@@ -29,8 +33,12 @@ void	which_dir2(t_data *d, int keycode, int x, int y)
 		y = (int)(d->player.pos_y - d->player.dir_x * d->player.sp);
 		if (d->map[(int)d->player.pos_y][x] && d->map[(int)d->player.pos_y][x] == '0')
 			d->player.pos_x += d->player.dir_y * d->player.sp;
+		else
+			write(1, "\a", 1);
 		if (d->map[y][(int)d->player.pos_x] && d->map[y][(int)d->player.pos_x] == '0')
 			d->player.pos_y -= d->player.dir_x * d->player.sp;
+		else
+			write(1, "\a", 1);
 	}
 }
 
@@ -47,8 +55,12 @@ void which_dir(t_data *d, int keycode)
 		y = (int)(d->player.pos_y + d->player.dir_y * d->player.sp);
 		if (d->map[(int)d->player.pos_y][x] && d->map[(int)d->player.pos_y][x] == '0')
 			d->player.pos_x += d->player.dir_x * d->player.sp;
+		else
+			write(1, "\a", 1);
 		if (d->map[y][(int)d->player.pos_x] && d->map[y][(int)d->player.pos_x] == '0')
 			d->player.pos_y += d->player.dir_y * d->player.sp;
+		else
+			write(1, "\a", 1);
 	}
 	if (keycode == 1)
 	{
@@ -56,8 +68,12 @@ void which_dir(t_data *d, int keycode)
 		y = (int)(d->player.pos_y - d->player.dir_y * d->player.sp);
 		if (d->map[(int)d->player.pos_y][x] && d->map[(int)d->player.pos_y][x] == '0')
 			d->player.pos_x -= d->player.dir_x * d->player.sp;
+		else
+			write(1, "\a", 1);
 		if (d->map[y][(int)d->player.pos_x] && d->map[y][(int)d->player.pos_x] == '0')
 			d->player.pos_y -= d->player.dir_y * d->player.sp;
+		else
+			write(1, "\a", 1);
 	}
 	which_dir2(d, keycode, x, y);
 }

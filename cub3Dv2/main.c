@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:00:55 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/14 07:23:57 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/16 13:20:33 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int main (int ac, char **av)
 		return (0);
 	}
 	d.save = (ac == 3) ? 1 : 0;
-	printf("1%d\n", d.save);
 	fd = open(av[1], O_RDONLY);
 	if (cub3d(fd, &d) == -1)
 	{

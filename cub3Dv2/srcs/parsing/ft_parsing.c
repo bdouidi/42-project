@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/10/14 07:25:14 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/16 13:18:58 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,6 @@ int			pars_file(int fd, t_data *data)
 	if (pars_info_map(data) == -1 || pars_map(data, len - 1) == -1 ||
 		check_textures(data) == -1)
 		return (-1);
-	printf("ajfaj\n");
 	data->map = noblank_2(data->map, '1', "*");
 	if (!(data->spt = malloc(sizeof(t_sprite) * (data->count_spt))))
 		return (-1);

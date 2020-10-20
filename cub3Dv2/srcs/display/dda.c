@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 14:46:21 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/14 03:13:01 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/16 15:03:11 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,15 @@ void	draw_wall(t_data *d)
 	
 	side = (d->ray.hit_side == 0) ? d->player.map_x - d->player.pos_x :
 									d->player.map_y - d->player.pos_y;
-
 	while (drawStart < drawEnd)
 	{
 		d->y = drawStart;
 		if (d->ray.hit_side)
-			side < 0 ? my_mlx_pixel_put(d, get_tex_color(d, 1)) : 
-			my_mlx_pixel_put(d, get_tex_color(d, 2));
+			side < 0 ? my_mlx_pixel_put(d, add_shade(d, get_tex_color(d, 1), d->rays[(int)d->x])) : 
+			my_mlx_pixel_put(d, add_shade(d, get_tex_color(d, 2), d->rays[(int)d->x]));
 		else
-			side < 0 ?  my_mlx_pixel_put(d, get_tex_color(d, 3)) : 
-			 my_mlx_pixel_put(d, get_tex_color(d, 4));
+			side < 0 ?  my_mlx_pixel_put(d, add_shade(d, get_tex_color(d, 3), d->rays[(int)d->x])) : 
+			 my_mlx_pixel_put(d, add_shade(d, get_tex_color(d, 4), d->rays[(int)d->x]));
 		drawStart++;
 	}
 }

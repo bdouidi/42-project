@@ -15,8 +15,13 @@ To DO:
 Gestion d'erreurs propre
 Free (gestion des leaks)
 /n bug #4
-limites de la minimap (bordures max)
-#taille min de la fenetre (100x100 par ex)# DONE
-norminette
-faire en sorte qu'il compile sur la VM
-bonus
+sprites
+
+ -------------------- 
+ 
+balancer 60 rayons.
+DDA mais pour sprite (pas oublier de stopper au 1er mur).
+des qu'un touche 1 sprite stoker son x, y si dist est inferieure
+ou si pas de donnes dans la case
+(arbre a choix pour savoir où stocker les valeurs)
+avancer dans le tab de struct via un static

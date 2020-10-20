@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 14:49:35 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/13 17:25:19 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/16 13:50:03 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ int			set_rfc(t_data *d)
 	d->res[0] = ft_atoi((d->resolution) + i);
 	i += ft_nbrlen(d->res[0]);
 	d->res[0] = (d->res[0] > 2560) ? 2560 : d->res[0];
+	d->res[0] = (d->res[0] < 100) ? 100 : d->res[0];
 	d->res[1] = ft_atoi((d->resolution) + i);
 	d->res[1] = (d->res[1] > 1394) ? 1394 : d->res[1];
+	d->res[1] = (d->res[1] < 100) ? 100 : d->res[1];
 	if (((d->f_color = f_c_loop(d->floor)) == -1) ||
 		((d->c_color = f_c_loop(d->ceiling)) == -1))
 		return (-1);
