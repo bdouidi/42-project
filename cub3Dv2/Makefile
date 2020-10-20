@@ -6,7 +6,7 @@
 #    By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 17:08:38 by dsy               #+#    #+#              #
-#    Updated: 2020/10/20 17:24:57 by othabchi         ###   ########.fr        #
+#    Updated: 2020/10/20 17:31:06 by othabchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBFTPATH	= project/libft
 LIBOBJ		= project/libft/libft.a
 MLXPATH		= mlx/
 @OBJS		= $(SRCS:.c=.o)
-CFLAGS		= -Wall -Wextra -Werror -g3  -O3 -march=native -flto 
+CFLAGS		= -Wall -Wextra -Werror -O3 -march=native -flto 
 MLXFLAGS	= -L$(MLXPATH) -lmlx -framework OpenGL -framework AppKit
 NAME		= cub3D
 
