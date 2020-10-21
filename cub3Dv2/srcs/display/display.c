@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:28:33 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/20 16:50:09 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/21 15:14:06 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,40 @@ void			drawmap2d(t_data *d)
 {
 	int x;
 	int	y;
+	int dix;
+	int dix2;
 
-	x = 0;
-	y = 0;
-	d->square.width = ((d->res[0] * .45) / d->mapX);
+	dix = 0;
+	dix2 = 0;
+	x = (int)d->player.pos_x - 5;
+	x = x < 0 ? 0 : x;
+	y = (int)d->player.pos_y - 5;
+	y = y < 0 ? 0 : y; 
+	d->square.width = (d->res[0] * .80) / d->mapX;
 	d->square.height = d->square.width;
-	while (d->map[y])
+	d->square.imgx = 0;
+	d->square.imgy = 0;
+	while (dix < 10)
 	{
-		while (d->map[y][x])
+		dix2 = 0;
+		while (dix2 < 10)
 		{
-			d->square.imgx = x * d->square.width;
-			d->square.imgy = y * d->square.height;
+			d->square.imgx = dix2 * d->square.width;
+			d->square.imgy = dix * d->square.height;
 			if (d->map[y][x] == '1')
-				drawsquare(d, 0x0);
+				drawsquare(d, 0);
 			if (d->map[y][x] == '0')
 				drawsquare(d, 0xFFFFFF);
 			else if (d->map[y][x] == '2')
 				drawsquare(d, 0xFF0000);
+			// if ((int)d->player.pos_x == dix && (int)d->player.pos_y == dix2)
+			// 	drawplayer(d, dix, dix2);
 			x++;
+			dix2++;
 		}
-		x = 0;
+		x = d->player.map_x - 5;
+		x = x < 0 ? 0 : x;
+		dix++;
 		y++;
 	}
 }
@@ -85,11 +99,8 @@ static int		handlekeys(int keycode, t_data *d)
 	if (keycode == 53)
 	{
 		mlx_destroy_window(d->vars.mlx, d->vars.win);
-		clean(d);
 		exit(1);
 	}
-	// if (keycode == 126)
-	// 	write(1, "\a", 1);
 	if (keycode == 46)
 		check++;
 	if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
@@ -101,7 +112,6 @@ static int		handlekeys(int keycode, t_data *d)
 		mlx_clear_window(d->vars.mlx, d->vars.win);
 		display(d);
 		drawmap2d(d);
-		drawplayer(d);
 	}
 	else
 		display(d);
@@ -121,6 +131,7 @@ void			window(t_data *d)
 	load_texture(d, d->south, 2);
 	load_texture(d, d->east, 3);
 	load_texture(d, d->west, 4);
+	load_texture(d, "./files/textures/gun.xpm", 5);
 	init_player(d);
 	display(d);
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);

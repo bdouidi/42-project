@@ -4,9 +4,9 @@ Faits :
 3- Collision sprite
 4- ombres
 5- son quand on fonce dans un mur
+6- le pistolet a beaucoup de balles
 
-A faire : 
-Son
+A faire :
 Effet d'ombres
 Plusieurs Sprites
 Texture sol plafond voire skybox

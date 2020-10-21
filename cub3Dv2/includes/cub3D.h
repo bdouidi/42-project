@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/10/20 16:46:06 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/21 13:41:49 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ typedef	struct	s_square // Utilisé de base pour faire des test mais possibile d
 
 typedef	struct	s_texture
 {
-    void 		*tex[5];
-	char		*addr[5];
-	int			width[5];
-	int			height[5];
-	int			bpp[5];//bits per pixel
-	int			szl[5];//sizeline
-	int			endian[5];
+    void 		*tex[6];
+	char		*addr[6];
+	int			width[6];
+	int			height[6];
+	int			bpp[6];//bits per pixel
+	int			szl[6];//sizeline
+	int			endian[6];
 }				t_texture;
 
 typedef	struct	s_sprite
@@ -145,7 +145,7 @@ void		set_position(t_data *d);
 void		my_mlx_pixel_put(t_data *d, int color);
 void		drawfov(t_data *d);
 void		drawline(t_data *d, double dir, int i, int color);
-void		drawplayer(t_data *d);
+void		drawplayer(t_data *d, int y, int x);
 void		which_dir(t_data *d, int keycode);
 void 		which_dir2(t_data *d, int keycode, int x, int y);
 void		drawsquare(t_data *d, int color);

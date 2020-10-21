@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:16:55 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/14 05:22:42 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/21 14:12:55 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,23 @@ void	drawsquare(t_data *d, int color)
 	}
 }
 
-void	drawplayer(t_data *d)
+void	drawplayer(t_data *d, int y, int x)
 {
-	d->square.imgx = (d->player.pos_x * d->square.width) - ((((d->res[0] * .45)
-	/ ft_strlen(d->map[0])) / 3) / 2);
-	d->square.imgy = (d->player.pos_y * d->square.height) - ((((d->res[1] * .45)
-	/ ft_strlen(d->map[0])) / 3) / 2);
-	d->square.width = (((d->res[0] * .45) / ft_strlen(d->map[0])) / 2);
+	// d->square.imgx = (d->player.pos_x * d->square.width) - ((((d->res[0] * .45)
+	// / ft_strlen(d->map[0])) / 3) / 2);
+	// d->square.imgy = (d->player.pos_y * d->square.height) - ((((d->res[1] * .45)
+	// / ft_strlen(d->map[0])) / 3) / 2);
+
+	d->square.imgx = (x * d->square.width) + d->square.width / 2;
+	d->square.imgy = (y * d->square.height) + d->square.height / 2;
+	
+	printf("(%d, %d)", d->square.imgx, d->square.imgy);
+
+	d->square.width = ((d->res[0] * .80) / d->mapX) * .66;
 	d->square.height = d->square.width;
-	drawsquare(d, 0x0);
+	drawsquare(d, 0x00FF00);
+	d->square.width = (d->res[0] * 80) / d->mapX;
+	d->square.height = d->square.width;
 }
 
 void	init_player(t_data *d)

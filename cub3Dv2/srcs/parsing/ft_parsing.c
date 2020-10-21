@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/10/20 16:24:26 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/21 14:46:43 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,38 @@ void		info_map(t_data *d, char *s, int i)
 	}
 }
 
+char	*handlebackslash(t_data *d, int i, int len)
+{
+	char *res;
+	int j;
+
+	len = 0;
+	if (!(res = malloc(sizeof(char) * ft_strlen(d->tmp1) + 2)))
+		return (NULL);
+	j = 0;
+	while (j < i)
+	{
+		res[j] = d->tmp1[j];
+		j++;
+	}
+	res[j] = '1';
+	j++;
+	while (d->tmp1[j])
+	{
+		res[j] = d->tmp1[j - 1];
+		j++;
+	}
+	res[j] = d->tmp1[j];
+	res[j] = 0;
+	return (res);
+}
+
 static void	config_map(t_data *d)
 {
 	int		i;
 	char	*s;
 	int		check;
+	int		len;
 
 	i = 0;
 	s = d->tmp;
@@ -70,6 +97,18 @@ static void	config_map(t_data *d)
 			while (s[i] && s[i] != '\n')
 				i++;
 			d->tmp1 = ft_substr(s, i + 1, ft_strlen(s));
+			i = 0;
+			len = (int)ft_strlen(d->tmp1);
+			while (i < len)
+			{
+				if (d->tmp1[i] == '\n' && d->tmp1[i + 1] == '\n')
+				{
+					d->tmp1 = handlebackslash(d, i + 1, len);
+					i = -1;
+				}
+				i++;
+			}
+			printf("%s\n", d->tmp1);
 			return ;
 		}
 		i++;

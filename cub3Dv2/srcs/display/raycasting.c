@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:39:38 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/20 16:59:14 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/21 15:01:40 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	do_sprites(t_data *d)
 	z = 0;
 	while (z < d->count_spt)
 	{
+		// printf("%d\n", z);
 		d->spt[z].dist = (pow((d->player.pos_x - d->spt[z].x), 2) +
 						pow((d->player.pos_y - d->spt[z].y), 2));
 		z++;
@@ -99,12 +100,9 @@ void	do_sprites(t_data *d)
 		spriteHeight = abs((int)(d->res[1] / transformY));
 		spriteWidth = abs((int)(d->res[1] / transformY));
 		drawStartY = -spriteHeight / 2 + d->res[1] /2;
-		// drawEndY = spriteHeight / 2 + d->res[1] /2;
-		// drawStartY += 10;
 		drawEndY = drawStartY + spriteHeight;
 		drawStartX = -spriteWidth / 2 + spriteScreenX;
 		drawEndX = spriteWidth / 2 + spriteScreenX;
-		// printf("planeX = %f, planeY = %f\ndir = %f | dirX = %f, dirY = %f\nstartY = %d, endY = %d\n", planeX, planeY, d->player.dir, cos(d->player.dir), sin(d->player.dir), drawStartX, drawEndY);
 		if (drawStartY < 0)
 			drawStartY = 0;
 		if (drawEndY >= d->res[1])
@@ -129,18 +127,54 @@ void	do_sprites(t_data *d)
 			}
 		}
 	}	
-	// for (int z = 0; z < d->count_spt; z++)
-	// 	printf("[%d](%f)\n", z, d->spt[z].dist);
+}
+
+int		get_color(t_data *d)
+{
+	char	*color;
+	double	tex_y;
+	double	tex_x;
+
+	tex_y = d->y * d->texture.height[5] / d->res[1];	
+	tex_x = d->x * d->texture.width[5] / d->res[0];
+	color = d->texture.addr[5] + (abs((int)tex_y) * d->texture.szl[5] +
+	(int)tex_x * (d->texture.bpp[5] / 8));
+	return (*(unsigned int*)color);
+}
+
+void	do_gun(t_data *d)
+{
+	int color;
+
+	color = 0;
+	d->x = 0;
+	d->y = 0;
+	// int endx = d->x + d->texture.width[5];
+	// int endy = d->y + d->texture.height[5];
+	// printf("(%f, %f) - [%d, %d]\n", d->y, d->x, endx, endy);
+	while (d->x < d->res[0])
+	{
+		d->y = 0;
+		while (d->y < d->res[1])
+		{
+			color = get_color(d);
+			if (color != 0x980088)
+				my_mlx_pixel_put(d, color);
+			d->y++;
+		}
+		d->x++;
+	}
 }
 
 void raycasting(t_data *d)
 {
 	do_walls(d);
 	do_sprites(d);
+	do_gun(d);
 	if (d->save == 1)
 	{
 		create_bitmap(d);
-		clean(d);
+		//clean(d);
 		exit(1);
 	}
 }
