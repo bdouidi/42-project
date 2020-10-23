@@ -27,8 +27,6 @@ void			drawmap2d(t_data *d)
 		{
 			d->square.imgx = x * d->square.width;
 			d->square.imgy = y * d->square.height;
-			if (d->map[y][x] == '1')
-				drawsquare(d, 0x0);
 			if (d->map[y][x] == '0')
 				drawsquare(d, 0xFFFFFF);
 			else if (d->map[y][x] == '2')
@@ -120,6 +118,7 @@ void			window(t_data *d)
 	load_texture(d, d->south, 2);
 	load_texture(d, d->east, 3);
 	load_texture(d, d->west, 4);
+	load_texture(d, "./files/textures/hache.xpm", 5);
 	init_player(d);
 	display(d);
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);

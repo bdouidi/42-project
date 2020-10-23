@@ -21,7 +21,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	j = 0;
 	newstr = NULL;
-	if (!s1 || !(newstr = (char*)malloc(sizeof(char) *
+	if (!s1)
+		s1 = ft_strdup("");
+	if(!(newstr = (char*)malloc(sizeof(char) *
 					ft_strlen(s1) + ft_strlen(s2) + 1)))
 		return (NULL);
 	while (i < ft_strlen(s1))

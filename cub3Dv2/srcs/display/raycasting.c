@@ -112,7 +112,6 @@ void	do_sprites(t_data *d)
 		color = 0;
 		for	(int stripe = drawStartX; stripe < drawEndX; stripe++)
 		{
-			printf("loop sprite\n");
 			d->x = stripe;
 			d->y = drawStartY;
 			if (transformY > 0 && stripe > 0 && stripe < d->res[0]&& transformY < d->rays[stripe])
@@ -121,20 +120,54 @@ void	do_sprites(t_data *d)
 				{
 					d->y = col;
 					color = get_spt_color(d, spriteHeight, spriteWidth, stripe, spriteScreenX);
-					// if (color > 5)
+					 //if (color > 0)
 						my_mlx_pixel_put(d, color);
 				}
 			}
 		}
-	}	
-	// for (int z = 0; z < d->count_spt; z++)
-	// 	printf("[%d](%f)\n", z, d->spt[z].dist);
+	}
+}
+
+int		get_color(t_data *d)
+{
+	char	*color;
+	double	tex_y;
+	double	tex_x;
+
+	tex_y = d->y * d->texture.height[5] / d->res[1];
+	tex_x = d->x * d->texture.width[5] / d->res[0];
+	color = d->texture.addr[5] + (abs((int)tex_y) *
+	d->texture.szl[5] + (int)tex_x * (d->texture.bpp[5] / 8));
+	return (*(unsigned int *)color);
+}
+
+void	do_gun(t_data *d)
+{
+	int color;
+
+	color = 0;
+	d->x = 0;
+	d->y = 0;
+	while (d->x < d->res[0])
+	{
+		d->y = 0;
+		while (d->y < d->res[1])
+		{
+			color = get_color(d);
+			//printf("%d\n", color);
+			 if (color != -4453696)
+				my_mlx_pixel_put(d, color);
+			d->y++;
+		}
+		d->x++;
+	}
 }
 
 void raycasting(t_data *d)
 {
-	do_walls(d);
-	do_sprites(d);
+	 do_walls(d);
+	 do_sprites(d);
+	do_gun(d);
 	if (d->save == 1)
 	{
 		create_bitmap(d);

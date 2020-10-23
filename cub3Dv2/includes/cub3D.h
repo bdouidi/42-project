@@ -63,13 +63,13 @@ typedef	struct	s_square // Utilisé de base pour faire des test mais possibile d
 
 typedef	struct	s_texture
 {
-    void 		*tex[5];
-	char		*addr[5];
-	int			width[5];
-	int			height[5];
-	int			bpp[5];//bits per pixel
-	int			szl[5];//sizeline
-	int			endian[5];
+    void 		*tex[6];
+	char		*addr[6];
+	int			width[6];
+	int			height[6];
+	int			bpp[6];//bits per pixel
+	int			szl[6];//sizeline
+	int			endian[6];
 }				t_texture;
 
 typedef	struct	s_sprite

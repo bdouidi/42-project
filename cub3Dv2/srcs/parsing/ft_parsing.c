@@ -76,16 +76,29 @@ static void	config_map(t_data *d)
 	free(d->tmp);
 }
 
+char		*my_read(int fd)
+{
+	char	*antileak;
+	char	buf[BUFFER_SIZE + 1];
+	int		ret;
+	char	*save;
+
+	ret = 0;
+	save = NULL;
+	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
+	{
+		buf[ret] = 0;
+		if (!(antileak = ft_strjoin(save, buf)))
+			return (NULL);
+		free(save);
+		save = antileak;
+	}
+	return (save);
+}	
+
 void		map(int fd, t_data *data)
 {
-	char	*line;
-
-	line = NULL;
-	while (get_next_line(fd, &line) > 0)
-	{
-		data->tmp = ft_strjoin(data->tmp, line);
-		leak(line);
-	}
+	data->tmp = my_read(fd);
 	config_map(data);
 	data->map = ft_split((char *)data->tmp1, '\n');
 	adjust_map(data);
