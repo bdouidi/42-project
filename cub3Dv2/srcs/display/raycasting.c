@@ -120,7 +120,9 @@ void	do_sprites(t_data *d)
 				{
 					d->y = col;
 					color = get_spt_color(d, spriteHeight, spriteWidth, stripe, spriteScreenX);
-					 //if (color > 0)
+					//  printf("color=%d\n", color);
+					 
+					 if (color != 0)
 						my_mlx_pixel_put(d, color);
 				}
 			}

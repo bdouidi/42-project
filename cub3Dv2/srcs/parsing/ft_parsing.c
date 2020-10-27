@@ -96,13 +96,32 @@ char		*my_read(int fd)
 	return (save);
 }	
 
-void		map(int fd, t_data *data)
+int			check_empty_line(t_data *d)
+{
+	int 	i;
+
+	i = 0;
+	while (d->tmp1[i])
+	{
+		if (d->tmp1[i] == '\n' && d->tmp1[i + 1] && d->tmp1[i + 1] == '\n')
+		{
+			printf("empty line\n");
+			return (-1);
+		}
+		i++;
+	}
+	return (0);
+}
+int		map(int fd, t_data *data)
 {
 	data->tmp = my_read(fd);
 	config_map(data);
-	data->map = ft_split((char *)data->tmp1, '\n');
+	if (check_empty_line(data) == -1)
+		return (-1);
+	data->map = ft_split((char *)data->tmp1, "\n");
 	adjust_map(data);
 	leak(data->tmp1);
+	return (0);
 }
 
 int			check_textures(t_data *d)
@@ -174,7 +193,8 @@ int			pars_file(int fd, t_data *data)
 
 	len = 0;
 	set_var(data);
-	map(fd, data);
+	if (map(fd, data) == -1)
+		return (-1);
 	while (data->map[len])
 		len++;
 	if (pars_info_map(data) == -1 || pars_map(data, len - 1) == -1 ||

@@ -23,7 +23,7 @@ LIBOBJ		= project/libft/libft.a
 MLXOBJ		= mlx_linux/libmlx.a
 MLXPATH		= mlx_linux/
 @OBJS		= $(SRCS:.c=.o)
-CFLAGS		= -Wall -Wextra -Werror -g3 -fsanitize=address  -march=native -flto 
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address  -march=native -flto 
 MLXFLAGS	= -L$(MLXPATH) -lm -lXext -lX11 
 NAME		= cub3D
 
