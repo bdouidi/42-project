@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pars_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 15:02:00 by idouidi           #+#    #+#             */
-/*   Updated: 2020/10/14 03:10:19 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/11/10 14:20:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static int		p(char *str)
 static int		check_m_content(t_data *d, int i, int j)
 {
 	if (d->map[i][j] != '1' && d->map[i][j] != '2' && d->map[i][j]
-	 != '0' && d->map[i][j] != 'N' && d->map[i][j] != 'S' && d->map[i][j] != 'E'
-	  && d->map[i][j] != 'W'&& d->map[i][j] != '*')
+	!= '0' && d->map[i][j] != 'N' && d->map[i][j] != 'S' && d->map[i][j] != 'E'
+	&& d->map[i][j] != 'W' && d->map[i][j] != '*')
 		return (-1);
 	if (d->map[i][j] == '2')
 		d->count_spt++;
@@ -97,7 +97,8 @@ int				pars_map(t_data *d, int len)
 	i = 0;
 	j = 1;
 	check = 0;
-	if (p(d->map[0]) != 0 || p(d->map[len]) != 0 || m_content(d, len, check) != 0)
+	if (p(d->map[0]) != 0 || p(d->map[len]) != 0
+	|| m_content(d, len, check) != 0)
 		return (-1);
 	while (d->map[i])
 	{

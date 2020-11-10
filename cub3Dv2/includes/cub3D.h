@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/10/14 03:47:15 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/11/10 14:35:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,16 +124,21 @@ typedef struct  s_data
 
 /***          			fucntion to pars                                    ***/
 int			flags(char c);
+int			check_empty_line(t_data *d);
 int			is_flags(char *s, int i);
 int			r_f_c(char *s);
-char		*fill_str(char *s1, char *s2, int i, int j);
 int			pars_info_map(t_data *d);
 int			pars_map(t_data *d, int len);
 int			pars_file(int fd, t_data *data);
-void		adjust_map(t_data *d);
 int			border(char *s);
+int			check_textures(t_data *d);
+char		*fill_str(char *s1, char *s2, int i, int j);
 char 		*noblank(char *s, int c);
 char 		**noblank_2(char **s, int c, char *set);
+void		set_position(t_data *d);
+void		info_map_setup(char *s, int i, int *j, int *k);
+void		set_var(t_data *d);
+void		adjust_map(t_data *d);
 /***                    function to set display                             ***/
 int	        set_rfc(t_data *d);
 /***                       function to display                         ***/

@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 17:08:38 by dsy               #+#    #+#              #
-#    Updated: 2020/10/14 06:53:23 by othabchi         ###   ########.fr        #
+#    Updated: 2020/11/10 14:33:16 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = srcs/parsing/ft_utils_pars.c srcs/parsing/ft_pars_info_map.c \
+SRCS = srcs/parsing/ft_utils_pars.c srcs/parsing/ft_utils2_pars.c srcs/parsing/ft_pars_info_map.c \
 	   srcs/parsing/ft_pars_map.c  srcs/parsing/ft_parsing.c \
 	   srcs/parsing/ft_adjust_map.c srcs/parsing/ft_set_info_map.c \
 	   srcs/display/cub3d.c srcs/display/trgb.c \

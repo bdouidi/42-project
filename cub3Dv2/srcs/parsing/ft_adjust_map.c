@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_adjust_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 19:43:27 by othabchi          #+#    #+#             */
-/*   Updated: 2020/06/10 20:19:03 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/11/10 14:41:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-char		**noblank_2(char **s, int c, char *set)
+char	**noblank_2(char **s, int c, char *set)
 {
 	int	i;
 	int j;
@@ -40,7 +40,7 @@ char		**noblank_2(char **s, int c, char *set)
 	return (s);
 }
 
-char		*noblank(char *s, int c)
+char	*noblank(char *s, int c)
 {
 	int	i;
 
@@ -54,7 +54,7 @@ char		*noblank(char *s, int c)
 	return (s);
 }
 
-char		*adjust_str(char *tmp, char *m, int stock)
+char	*adjust_str(char *tmp, char *m, int stock)
 {
 	int	k;
 
@@ -91,7 +91,7 @@ void	leak_2(char **map)
 	map[i] = NULL;
 }
 
-void		adjust_map(t_data *d)
+void	adjust_map(t_data *d)
 {
 	int				i;
 	unsigned int	stock;

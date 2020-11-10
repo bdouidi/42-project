@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_epur.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/10 13:47:08 by user42            #+#    #+#             */
+/*   Updated: 2020/11/10 13:49:55 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static int	*count_word_n_length(char *s, int *tab)
@@ -57,9 +69,9 @@ static char	*fill_str(char *tmp, char *s)
 
 char		*ft_epur(char *s)
 {
-	char 	*tmp;
-	int	count;
-	int	tab[2];
+	char	*tmp;
+	int		count;
+	int		tab[2];
 
 	tmp = NULL;
 	count_word_n_length(s, tab);

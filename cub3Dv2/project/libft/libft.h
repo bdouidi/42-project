@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 17:14:11 by dsy               #+#    #+#             */
-/*   Updated: 2020/06/24 21:36:33 by idouidi          ###   ########.fr       */
+/*   Updated: 2020/11/10 13:53:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ size_t			ft_strlcpy(char *dest, const char *src, size_t dstsize);
 size_t			ft_strlcat(char *dest, const char *src, size_t size);
 char			*ft_strnstr(char const *haystack,
 				const char *needle, size_t len);
-long				ft_atoi(const char *str);
+long			ft_atoi(const char *str);
 char			*ft_itoa(int n);
 void			*ft_calloc(size_t nitems, size_t size);
 void			ft_putchar(char c);
@@ -70,5 +70,5 @@ char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s1, char const *set);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			*ft_memalloc(size_t n);
-char			**ft_split(char  *s, char *set);
+char			**ft_split(char *s, char *set);
 #endif
