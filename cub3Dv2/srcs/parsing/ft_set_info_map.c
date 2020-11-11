@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_set_info_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 14:49:35 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/13 17:25:19 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/11/11 20:04:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "../../includes/cub3d.h"
 
 static int	count(char *str)
 {

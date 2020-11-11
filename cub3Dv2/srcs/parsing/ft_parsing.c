@@ -6,11 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/10 14:40:15 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/11 20:16:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "../../includes/cub3d.h"
 
 void		info_map(t_data *d, char *s, int i)
 {
@@ -116,6 +116,6 @@ int			pars_file(int fd, t_data *data)
 	if (!(data->spt = malloc(sizeof(t_sprite) * (data->count_spt))))
 		return (-1);
 	set_position(data);
-	data->mapY--;
+	data->map_y--;
 	return (0);
 }

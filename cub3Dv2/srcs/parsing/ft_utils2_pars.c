@@ -6,11 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 14:23:40 by user42            #+#    #+#             */
-/*   Updated: 2020/11/10 14:32:18 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/11 20:14:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "../../includes/cub3d.h"
 
 int			check_empty_line(t_data *d)
 {
@@ -54,8 +54,8 @@ void		set_var(t_data *d)
 	d->west = NULL;
 	d->x = 0;
 	d->y = 0;
-	d->mapX = 0;
-	d->mapY = 0;
+	d->map_x = 0;
+	d->map_y = 0;
 	d->player.pos_x = 0;
 	d->player.pos_y = 0;
 	d->player.letter = 0;
@@ -67,27 +67,27 @@ void		set_position(t_data *d)
 	int i;
 
 	i = 0;
-	while (d->map[d->mapY])
+	while (d->map[d->map_y])
 	{
-		d->mapX = 0;
-		while (d->map[d->mapY][d->mapX])
+		d->map_x = 0;
+		while (d->map[d->map_y][d->map_x])
 		{
-			if (d->map[d->mapY][d->mapX] == '2')
+			if (d->map[d->map_y][d->map_x] == '2')
 			{
-				d->spt[i].x = d->mapX + 0.5;
-				d->spt[i].y = d->mapY + 0.5;
+				d->spt[i].x = d->map_x + 0.5;
+				d->spt[i].y = d->map_y + 0.5;
 				i++;
 			}
-			if (ft_isalpha(d->map[d->mapY][d->mapX]) == 1)
+			if (ft_isalpha(d->map[d->map_y][d->map_x]) == 1)
 			{
-				d->player.pos_y = d->mapY + .5;
-				d->player.pos_x = d->mapX + .5;
-				d->player.letter = d->map[d->mapY][d->mapX];
-				d->map[d->mapY][d->mapX] = '0';
+				d->player.pos_y = d->map_y + .5;
+				d->player.pos_x = d->map_x + .5;
+				d->player.letter = d->map[d->map_y][d->map_x];
+				d->map[d->map_y][d->map_x] = '0';
 			}
-			d->mapX++;
+			d->map_x++;
 		}
-		d->mapY++;
+		d->map_y++;
 	}
 }
 

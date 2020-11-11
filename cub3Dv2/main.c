@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:00:55 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/14 07:23:57 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/11/11 20:04:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3D.h"
+#include "includes/cub3d.h"
 
 void	clean(t_data *d)
 {
@@ -47,7 +47,7 @@ int main (int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (cub3d(fd, &d) == -1)
 	{
-		printf("\nfail");
+		printf("fail\n");
 		close(fd);
 		return (0);
 	}

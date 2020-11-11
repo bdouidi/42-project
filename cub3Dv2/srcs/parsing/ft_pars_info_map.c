@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pars_info_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 15:32:23 by idouidi           #+#    #+#             */
-/*   Updated: 2020/06/10 19:49:28 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/11/11 20:04:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "../../includes/cub3d.h"
 
 static int	check_rfc_content(char *s, int i)
 {

@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 17:08:38 by dsy               #+#    #+#              #
-#    Updated: 2020/11/10 14:33:16 by user42           ###   ########.fr        #
+#    Updated: 2020/11/11 19:03:11 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,14 @@ SRCS = srcs/parsing/ft_utils_pars.c srcs/parsing/ft_utils2_pars.c srcs/parsing/f
 	   srcs/display/display.c srcs/display/raycasting.c \
 	   srcs/display/utils_display.c srcs/display/dda.c \
 	   srcs/display/bitmap.c srcs/display/utils_display2.c \
+	   srcs/display/sprites.c srcs/display/utils_sprites.c \
 
 LIBFTPATH	= project/libft 
 LIBOBJ		= project/libft/libft.a
 MLXOBJ		= mlx_linux/libmlx.a
 MLXPATH		= mlx_linux/
 @OBJS		= $(SRCS:.c=.o)
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address  -march=native -flto 
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -march=native -flto 
 MLXFLAGS	= -L$(MLXPATH) -lm -lXext -lX11 
 NAME		= cub3D
 

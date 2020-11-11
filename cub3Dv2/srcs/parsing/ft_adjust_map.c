@@ -6,11 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 19:43:27 by othabchi          #+#    #+#             */
-/*   Updated: 2020/11/10 14:41:47 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/11 20:03:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "../../includes/cub3d.h"
 
 char	**noblank_2(char **s, int c, char *set)
 {

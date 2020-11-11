@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_display.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:16:55 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/14 05:22:42 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/11/11 20:28:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "../../includes/cub3d.h"
 
 void	my_mlx_pixel_put(t_data *d, int color)
 {
@@ -61,32 +61,28 @@ void	drawplayer(t_data *d)
 void	init_player(t_data *d)
 {
 	d->player.sp = .15;
-	if (d->player.letter == 'N')
+	if (d->player.letter == 'N' || d->player.letter == 'S')
 	{
 		d->player.dir_x = 0;
-		d->player.dir_y = -1;
-		d->ray.planeX = .6;
-		d->ray.planeY = 0;
-	}
-	else if (d->player.letter == 'E')
-	{
-		d->player.dir_x = 1;
-		d->player.dir_y = 0;
-		d->ray.planeX = 0;
-		d->ray.planeY = .6;
-	}
-	else if (d->player.letter == 'S')
-	{
-		d->player.dir_x = 0;
+		d->ray.plane_y = 0;
 		d->player.dir_y = 1;
-		d->ray.planeX = -.6;
-		d->ray.planeY = 0;
+		d->ray.plane_x = -.6;
+		if (d->player.letter == 'N')
+		{
+			d->player.dir_y = -1;
+			d->ray.plane_x = .6;
+		}
 	}
-	else if (d->player.letter == 'W')
+	else if (d->player.letter == 'E' || d->player.letter == 'W')
 	{
-		d->player.dir_x = -1;
 		d->player.dir_y = 0;
-		d->ray.planeX = 0;
-		d->ray.planeY = -.6;
+		d->ray.plane_x = 0;
+		d->player.dir_x = -1;
+		d->ray.plane_y = -.6;
+		if (d->player.letter == 'E')
+		{
+			d->player.dir_x = 1;
+			d->ray.plane_y = .6;
+		}
 	}
 }

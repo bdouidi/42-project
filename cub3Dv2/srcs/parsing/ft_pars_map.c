@@ -6,11 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 15:02:00 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/10 14:20:33 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/11 20:04:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "../../includes/cub3d.h"
 
 static int		p(char *str)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:28:33 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/14 02:34:56 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/11/11 20:18:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "../../includes/cub3d.h"
 
 void			drawmap2d(t_data *d)
 {
@@ -19,8 +19,8 @@ void			drawmap2d(t_data *d)
 
 	x = 0;
 	y = 0;
-	d->square.width = ((d->res[0] * .45) / d->mapX);
-	d->square.height = d->square.width;
+	d->square.width = ((d->res[0] * .45) / d->map_x);
+	d->square.height = ((d->res[1] * .45) / d->map_y);
 	while (d->map[y])
 	{
 		while (d->map[y][x])
@@ -37,7 +37,6 @@ void			drawmap2d(t_data *d)
 		y++;
 	}
 }
-
 
 void			load_texture(t_data *d, char *tex_path, int i)
 {
@@ -75,7 +74,6 @@ static int		handlekeys(int keycode, t_data *d)
 {
 	static int	check = 0;
 
-	// printf("keycode = [%d, %c]\n", keycode, keycode);
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(d->vars.mlx, d->vars.win);
@@ -100,17 +98,11 @@ static int		handlekeys(int keycode, t_data *d)
 	return (0);
 }
 
-int		cross_window(void)
-{
-	write(1,"Exit.\n",6);
-	exit(EXIT_SUCCESS);
-}
-
 void			window(t_data *d)
 {
 	d->vars.mlx = mlx_init();
 	d->vars.win = mlx_new_window(d->vars.mlx, d->res[0], d->res[1],
-			"PAYPAL/BDOUIDI");
+			"Cub3D");
 	if (!d->img.ptr[0])
 		create_img(d, 0, d->res[0], d->res[1]);
 	load_texture(d, d->sprite, 0);
