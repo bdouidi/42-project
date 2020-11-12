@@ -6,21 +6,23 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:28:33 by othabchi          #+#    #+#             */
-/*   Updated: 2020/11/11 20:18:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 20:36:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void			drawmap2d(t_data *d)
+void			drawmap2d(t_data *d, int *check)
 {
 	int x;
 	int	y;
 
 	x = 0;
 	y = 0;
-	d->square.width = ((d->res[0] * .45) / d->map_x);
-	d->square.height = ((d->res[1] * .45) / d->map_y);
+	d->square.width = ((d->res[0] * .65) / d->map_x);
+	d->square.height = d->square.width;
+	if (checksizemap(d, &check) == -1)
+		return ;
 	while (d->map[y])
 	{
 		while (d->map[y][x])
@@ -54,7 +56,9 @@ static void		display(t_data *d)
 	while (d->y++ < d->res[1] / 2)
 	{
 		while (d->x++ < d->res[0])
+		{
 			my_mlx_pixel_put(d, d->c_color);
+		}
 		d->x = 0;
 	}
 	while (d->y < d->res[1])
@@ -89,7 +93,7 @@ static int		handlekeys(int keycode, t_data *d)
 	{
 		mlx_clear_window(d->vars.mlx, d->vars.win);
 		display(d);
-		drawmap2d(d);
+		drawmap2d(d, &check);
 		drawplayer(d);
 	}
 	else
@@ -110,11 +114,11 @@ void			window(t_data *d)
 	load_texture(d, d->south, 2);
 	load_texture(d, d->east, 3);
 	load_texture(d, d->west, 4);
-	load_texture(d, "./files/textures/hache.xpm", 5);
+	load_texture(d, "./files/textures/epee.xpm", 5);
 	init_player(d);
 	display(d);
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);
 	mlx_hook(d->vars.win, 2, (1L << 0), handlekeys, d);
-	mlx_hook(d->vars.win, 17, 0, cross_window, d);
+	mlx_hook(d->vars.win, 33, 1L << 17, cross_window, d);
 	mlx_loop(d->vars.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 19:43:27 by othabchi          #+#    #+#             */
-/*   Updated: 2020/11/12 15:12:04 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 20:48:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,17 @@ void	leak_2(char **map)
 	int i;
 
 	i = 0;
-	while (map[i])
+	if (map)
 	{
-		free(map[i]);
+		while (map[i])
+		{
+			free(map[i]);
+			map[i] = NULL;
+			i++;
+		}
 		map[i] = NULL;
-		i++;
+		free(map);
 	}
-	map[i] = NULL;
-	free(map);
 }
 
 void	adjust_map(t_data *d)

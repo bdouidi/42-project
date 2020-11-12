@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/11 20:16:28 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 22:19:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ char		*my_read(int fd)
 		buf[ret] = 0;
 		if (!(antileak = ft_strjoin(save, buf)))
 			return (NULL);
-		free(save);
 		save = antileak;
 	}
 	return (save);

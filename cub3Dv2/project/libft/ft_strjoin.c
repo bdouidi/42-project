@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 18:29:18 by dsy               #+#    #+#             */
-/*   Updated: 2020/11/10 13:53:28 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 21:43:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	newstr = NULL;
 	if (!(newstr = (char*)malloc(sizeof(char) *
-					ft_strlen(s1) + ft_strlen(s2) + 1)))
+					(ft_strlen(s1) + ft_strlen(s2) + 1))))
 		return (NULL);
 	while (i < ft_strlen(s1))
 	{

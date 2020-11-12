@@ -1,12 +1,12 @@
-NO ./files/textures/b1.xpm
-EA ./files/textures/b2.xpm
-WE ./files/textures/b3.xpm
-R 800 600
-SO ./files/textures/b4.xpm
-S ./files/textures/b5.xpm
+NO ./files/textures/11.xpm
+EA ./files/textures/test.xpm
+WE ./files/textures/22.xpm
+R 467 500
+SO ./files/textures/test3.XPM
+S ./files/textures/chevalier.xpm
 
-F 180,190,174
-C 132,238,245
+F 68,40,25
+C 211,93,34
 
            1111111  111111111111111
  1 11111111000000011000000000000001

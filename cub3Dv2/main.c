@@ -6,28 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:00:55 by othabchi          #+#    #+#             */
-/*   Updated: 2020/11/11 20:04:34 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 22:28:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
-void	clean(t_data *d)
-{
-	leak_2(d->map);
-	leak(d->resolution);
-	leak(d->floor);
-	leak(d->ceiling);
-	leak(d->north);
-	leak(d->south);
-	leak(d->west);
-	leak(d->east);
-	leak(d->sprite);
-	leak(d->spt);
-	leak(d->rays);
-}
-
-int main (int ac, char **av)
+int		main(int ac, char **av)
 {
 	int		fd;
 	t_data	d;
@@ -38,20 +23,17 @@ int main (int ac, char **av)
 		return (0);
 	}
 	if (ac == 3 && (ft_strlen(av[2]) != ft_strlen("--save") ||
-	 ft_strncmp(av[2], "--save", ft_strlen("--save") != 0)))
+	ft_strncmp(av[2], "--save", ft_strlen("--save") != 0)))
 	{
-		ft_putstr("bad option call\n");
+		write(1, "bad option call\n", 16);
 		return (0);
 	}
 	d.save = (ac == 3) ? 1 : 0;
 	fd = open(av[1], O_RDONLY);
 	if (cub3d(fd, &d) == -1)
-	{
-		printf("fail\n");
-		close(fd);
-		return (0);
-	}
+		write(1, "fail\n", 5);
 	clean(&d);
+	leak(d.spt);
 	close(fd);
 	return (0);
 }

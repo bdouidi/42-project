@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:16:55 by othabchi          #+#    #+#             */
-/*   Updated: 2020/11/11 20:28:18 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 20:44:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	drawplayer(t_data *d)
 	/ ft_strlen(d->map[0])) / 3) / 2);
 	d->square.imgy = (d->player.pos_y * d->square.height) - ((((d->res[1] * .45)
 	/ ft_strlen(d->map[0])) / 3) / 2);
-	d->square.width = (((d->res[0] * .45) / ft_strlen(d->map[0])) / 2);
+	d->square.width = (((d->res[0] * .75) / ft_strlen(d->map[0])) / 2);
 	d->square.height = d->square.width;
 	drawsquare(d, 0x0);
 }

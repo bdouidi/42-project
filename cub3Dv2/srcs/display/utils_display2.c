@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 18:57:33 by othabchi          #+#    #+#             */
-/*   Updated: 2020/11/11 20:39:04 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 20:44:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void	rotation(t_data *d, int keycode)
 		d->player.dir_x = d->player.dir_x * cos(-.15) -
 		d->player.dir_y * sin(-.15);
 		d->player.dir_y = old_dir * sin(-.15) + d->player.dir_y * cos(-.15);
-		d->ray.plane_x = d->ray.plane_x * cos(-.15) - d->ray.plane_y * sin(-.15);
+		d->ray.plane_x = d->ray.plane_x * cos(-.15) - d->ray.plane_y *
+		sin(-.15);
 		d->ray.plane_y = oldplane_x * sin(-.15) + d->ray.plane_y * cos(-.15);
 	}
 	if (keycode == 101)
@@ -93,5 +94,16 @@ void	rotation(t_data *d, int keycode)
 int		cross_window(void)
 {
 	write(1, "Exit.\n", 6);
-	exit(EXIT_SUCCESS);
+	exit(1);
+}
+
+int		checksizemap(t_data *d, int **check)
+{
+	if (d->square.width > 7)
+	{
+		write(1, "Sorry your map is too big to be print :/\n", 41);
+		**check = 2;
+		return (-1);
+	}
+	return (0);
 }

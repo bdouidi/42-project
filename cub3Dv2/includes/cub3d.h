@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/11/11 19:48:52 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 20:55:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,10 +180,12 @@ void			set_drawsprites(t_data *d, int i);
 void			limit_to_draw(t_data *d);
 void			drawsprites(t_data *d, int stripe, int col, int color);
 void			do_sprites(t_data *d);
+void			clean(t_data *d);
 int				get_spt_color(t_data *d, int stripe);
 int				cross_window(void);
 void			leak(void *str);
 void			leak_2(char **str);
+int				checksizemap(t_data *d, int **check);
 int				create_trgb(int t, int r, int g, int b);
 int				get_r(int color);
 int				get_g(int color);
