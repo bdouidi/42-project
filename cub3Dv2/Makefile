@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 17:08:38 by dsy               #+#    #+#              #
-#    Updated: 2020/11/11 19:03:11 by user42           ###   ########.fr        #
+#    Updated: 2020/11/12 15:12:47 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LIBOBJ		= project/libft/libft.a
 MLXOBJ		= mlx_linux/libmlx.a
 MLXPATH		= mlx_linux/
 @OBJS		= $(SRCS:.c=.o)
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -march=native -flto 
+CFLAGS		= -Wall -Wextra -Werror #-fsanitize=address -march=native -flto 
 MLXFLAGS	= -L$(MLXPATH) -lm -lXext -lX11 
 NAME		= cub3D
 
