@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/12 22:19:31 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 18:59:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,26 @@ void		info_map(t_data *d, char *s, int i)
 static void	config_map(t_data *d)
 {
 	int		i;
-	char	*s;
 	int		check;
 
 	i = 0;
-	s = d->tmp;
 	check = 0;
-	while (s[i])
+	while (d->tmp[i])
 	{
-		if (s[i + 1] && s[i + 2] && is_flags(s, i) == 0)
+		if (d->tmp[i + 1] && d->tmp[i + 2] && is_flags(d->tmp, i) == 0)
 		{
-			info_map(d, s, i);
+			info_map(d, d->tmp, i);
 			check++;
 		}
 		if (check == 8)
 		{
-			while (s[i] && s[i] != '\n')
+			while (d->tmp[i] && d->tmp[i] != '\n')
 				i++;
-			d->tmp1 = ft_substr(s, i + 1, ft_strlen(s));
+			d->tmp1 = ft_substr(d->tmp, i + 1, ft_strlen(d->tmp));
 			return ;
 		}
 		i++;
 	}
-	free(d->tmp);
 }
 
 char		*my_read(int fd)
@@ -76,12 +73,18 @@ char		*my_read(int fd)
 
 	ret = 0;
 	save = NULL;
+	antileak = NULL;
 	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = 0;
 		if (!(antileak = ft_strjoin(save, buf)))
+		{
+			free(save);
+			free(antileak);
 			return (NULL);
+		}
 		save = antileak;
+		antileak = NULL;
 	}
 	return (save);
 }
@@ -94,7 +97,6 @@ int			map(int fd, t_data *data)
 		return (-1);
 	data->map = ft_split((char *)data->tmp1, "\n");
 	adjust_map(data);
-	leak(data->tmp1);
 	return (0);
 }
 
@@ -103,7 +105,6 @@ int			pars_file(int fd, t_data *data)
 	int		len;
 
 	len = 0;
-	set_var(data);
 	if (map(fd, data) == -1)
 		return (-1);
 	while (data->map[len])

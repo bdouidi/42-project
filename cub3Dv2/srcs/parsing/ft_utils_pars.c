@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 15:18:13 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/12 21:19:45 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 18:56:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char		*fill_str(char *s1, char *s2, int i, int j)
 	int	k;
 
 	k = 0;
-	if (!(s2 = (char *)malloc(sizeof(char) * j + 1)))
+	if (!(s2 = (char *)malloc(sizeof(char) * (j + 1))))
 		return (NULL);
 	while (i < j)
 	{

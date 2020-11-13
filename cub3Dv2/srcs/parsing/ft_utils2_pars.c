@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 14:23:40 by user42            #+#    #+#             */
-/*   Updated: 2020/11/11 20:14:56 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 18:58:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ int			check_empty_line(t_data *d)
 	int i;
 
 	i = 0;
+	if (!d->tmp1)
+		return (-1);
 	while (d->tmp1[i])
 	{
 		if (d->tmp1[i] == '\n' && d->tmp1[i + 1] && d->tmp1[i + 1] == '\n')
 		{
-			printf("empty line\n");
+			write(1, "empty line\n", 11);
 			return (-1);
 		}
 		i++;
@@ -52,6 +54,10 @@ void		set_var(t_data *d)
 	d->east = NULL;
 	d->south = NULL;
 	d->west = NULL;
+	d->spt = NULL;
+	d->tmp = NULL;
+	d->tmp1 = NULL;
+	d->rays = 0;
 	d->x = 0;
 	d->y = 0;
 	d->map_x = 0;
