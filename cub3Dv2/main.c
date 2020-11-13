@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:00:55 by othabchi          #+#    #+#             */
-/*   Updated: 2020/11/13 17:47:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 21:52:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		main(int ac, char **av)
 	d.save = (ac == 3) ? 1 : 0;
 	fd = open(av[1], O_RDONLY);
 	if (cub3d(fd, &d) == -1)
-		printf("fail\n");
+		write(1, "fail\n", 5);
 	clean(d);
 	close(fd);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 14:23:40 by user42            #+#    #+#             */
-/*   Updated: 2020/11/13 18:58:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 21:51:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,17 @@ void		set_var(t_data *d)
 	d->tmp1 = NULL;
 	d->rays = 0;
 	d->x = 0;
-	d->y = 0;
 	d->map_x = 0;
 	d->map_y = 0;
 	d->player.pos_x = 0;
 	d->player.pos_y = 0;
 	d->player.letter = 0;
 	d->count_spt = 0;
+	while (d->x < 5)
+	{
+		d->img.ptr[(int)d->x] = 0;
+		d->x++;
+	}
 }
 
 void		set_position(t_data *d)

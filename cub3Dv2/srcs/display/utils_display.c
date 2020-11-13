@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:16:55 by othabchi          #+#    #+#             */
-/*   Updated: 2020/11/12 20:44:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/13 21:26:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void	my_mlx_pixel_put(t_data *d, int color)
 
 void	create_img(t_data *d, int i, int width, int height)
 {
+	d->img.bits_per_pixel = 0;
+	d->img.line_length = 0;
+	d->img.endian = 0;
 	d->img.ptr[i] = mlx_new_image(d->vars.mlx, width, height);
 	d->img.addr[i] = mlx_get_data_addr(d->img.ptr[i], &d->img.bits_per_pixel,
 				&d->img.line_length, &d->img.endian);
