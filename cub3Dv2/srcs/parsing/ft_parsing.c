@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/13 18:59:22 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/14 19:14:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,11 @@ int			pars_file(int fd, t_data *data)
 		return (-1);
 	while (data->map[len])
 		len++;
-	if (pars_info_map(data) == -1 || pars_map(data, len - 1) == -1 ||
-		check_textures(data) == -1)
+	if (pars_info_map(data) == -1 || check_textures(data) == -1 ||
+		set_rfc(data) == -1)
 		return (-1);
+	if (pars_map(data, len - 1) == -1)
+		return (-2);
 	data->map = noblank_2(data->map, '1', "*");
 	if (!(data->spt = malloc(sizeof(t_sprite) * (data->count_spt))))
 		return (-1);

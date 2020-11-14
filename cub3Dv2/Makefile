@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 17:08:38 by dsy               #+#    #+#              #
-#    Updated: 2020/11/13 21:55:20 by user42           ###   ########.fr        #
+#    Updated: 2020/11/14 18:41:40 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,12 +31,14 @@ NAME		= cub3D
 all: $(NAME)
 
 $(NAME): $(@OBJS)
-	@echo "Compiling libft..."
+	@echo "- Compiling libft..."
 	$(MAKE) -C $(LIBFTPATH)
 	@echo "Done."
-	@echo "Compiling cub3D..."
+	@echo "- Compiling cub3d..."
 	@gcc ${CFLAGS} -o ${NAME} ${@OBJS} main.c $(LIBOBJ) $(MLXOBJ) $(MLXFLAGS)
 	@echo "Done."
+	@echo "======================"
+	@echo "======================"
 
 clean:
 	rm -rf $(@OBJS)

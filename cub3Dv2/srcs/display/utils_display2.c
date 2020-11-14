@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 18:57:33 by othabchi          #+#    #+#             */
-/*   Updated: 2020/11/13 13:28:02 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/14 19:28:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	rotation(t_data *d, int keycode)
 
 int		cross_window(t_data *d)
 {
-	write(1, "Exit.\n", 6);
+	write(1, "Exit.\n", 5);
 	mlx_destroy_window(d->vars.mlx, d->vars.win);
 	exit(1);
 }

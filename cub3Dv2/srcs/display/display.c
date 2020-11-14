@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:28:33 by othabchi          #+#    #+#             */
-/*   Updated: 2020/11/13 21:22:27 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/14 19:28:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static int		handlekeys(int keycode, t_data *d)
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(d->vars.mlx, d->vars.win);
+		write(1, "Exit\n", 5);
 		exit(1);
 	}
 	if (keycode == 109)

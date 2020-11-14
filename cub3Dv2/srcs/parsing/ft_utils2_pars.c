@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 14:23:40 by user42            #+#    #+#             */
-/*   Updated: 2020/11/13 21:51:42 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/14 13:38:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ int			check_textures(t_data *d)
 	if (open(d->sprite, O_RDONLY) < 0 || open(d->north, O_RDONLY) < 0 ||
 	open(d->east, O_RDONLY) < 0 || open(d->south, O_RDONLY) < 0 ||
 	open(d->west, O_RDONLY) < 0)
-	{
-		ft_putstr("incorrect texture path\n");
 		return (-1);
-	}
 	return (0);
 }
 

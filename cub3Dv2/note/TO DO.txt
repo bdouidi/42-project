@@ -1,22 +1,24 @@
-//1. LA NEIGE
 
-//2. Mouvement bloqué en position initiale
 
-//3. perso qui depasse un peu trop de la map visuellement
 
-4.revoir le parsing avec un \n en plein milieu de map
 
-//5.angle 45 degre choix du rayon le plus court incorecte
+            /******************************\
 
-//6. texture buguee en biais
+            #~~~~~~~~~~~~~~To DO:~~~~~~~~~~#
 
-To DO:
+            \*******************************/
 
-Gestion d'erreurs propre
-Free (gestion des leaks)
-/n bug #4
-limites de la minimap (bordures max)
-taille min de la fenetre (100x100 par ex)
-norminette
-faire en sorte qu'il compile sur la VM
-bonus
+O limites de la minimap (bordures max / bordure min)
+O taille min/max de la fenetre (100x100 par ex) ==> fonction mlx pour la VM
+O message d'erreur pour chaque retour d'erreur
+O assombrir au loin
+X LA NEIGE
+X Mouvement bloqué en position initiale
+X perso qui depasse un peu trop de la map visuellement
+X revoir le parsing avec un \n en plein milieu de map
+X angle 45 degre choix du rayon le plus court incorecte
+X texture buguee en biais
+X Free (gestion des leaks)
+X /n bug
+X norminette
+X faire en sorte qu'il compile sur la VM

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 14:49:35 by othabchi          #+#    #+#             */
-/*   Updated: 2020/11/11 20:04:16 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/14 13:31:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ static int	f_c_loop(char *str)
 		i++;
 	fc[2] = ft_atoi(str + i);
 	if (fc[0] > 255 || fc[1] > 255 || fc[2] > 255)
-	{
-		ft_putstr("Bad usage: rgb color doesnt exist");
 		return (-1);
-	}
 	return (create_trgb(1, fc[0], fc[1], fc[2]));
 }
 
