@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 14:46:21 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/16 23:57:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/17 00:47:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,11 @@ void	draw_wall(t_data *d)
 	{
 		d->y = drawstart;
 		if (d->ray.hit_side)
-			side < 0 ? my_mlx_pixel_put(d, add_shade(d, get_tex_color(d, 1),
-			d->rays[(int)d->x])) : my_mlx_pixel_put(d,
-			add_shade(d, get_tex_color(d, 2), d->rays[(int)d->x]));
+			side < 0 ? my_mlx_pixel_put(d, get_tex_color(d, 1)) :
+			my_mlx_pixel_put(d, get_tex_color(d, 2));
 		else
-			side < 0 ? my_mlx_pixel_put(d, add_shade(d, get_tex_color(d, 3),
-			d->rays[(int)d->x])) : my_mlx_pixel_put(d,
-			add_shade(d, get_tex_color(d, 4), d->rays[(int)d->x]));
+			side < 0 ? my_mlx_pixel_put(d, get_tex_color(d, 3)) :
+			my_mlx_pixel_put(d, get_tex_color(d, 4));
 	}
 }
 

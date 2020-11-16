@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:39:38 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/16 23:49:02 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/17 00:09:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,45 +25,10 @@ void	do_walls(t_data *d)
 	}
 }
 
-int		get_color(t_data *d)
-{
-	char	*color;
-	double	tex_y;
-	double	tex_x;
-
-	tex_y = d->y * d->texture.height[5] / d->res[1];
-	tex_x = d->x * d->texture.width[5] / d->res[0];
-	color = d->texture.addr[5] + (abs((int)tex_y) *
-	d->texture.szl[5] + (int)tex_x * (d->texture.bpp[5] / 8));
-	return (*(unsigned int *)color);
-}
-
-void	do_gun(t_data *d)
-{
-	int color;
-
-	color = 0;
-	d->x = 0;
-	d->y = 0;
-	while (d->x < d->res[0])
-	{
-		d->y = 0;
-		while (d->y < d->res[1])
-		{
-			color = get_color(d);
-			if (color != 0)
-				my_mlx_pixel_put(d, color);
-			d->y++;
-		}
-		d->x++;
-	}
-}
-
 void	raycasting(t_data *d)
 {
 	do_walls(d);
 	do_sprites(d);
-	do_gun(d);
 	if (d->save == 1)
 	{
 		create_bitmap(d);

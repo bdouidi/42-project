@@ -6,40 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:28:33 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/16 23:48:46 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/17 00:08:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void			drawmap2d(t_data *d, int *check)
-{
-	int x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	d->square.width = ((d->res[0] * .65) / d->map_x);
-	d->square.height = d->square.width;
-	if (checksizemap(d, &check) == -1)
-		return ;
-	while (d->map[y])
-	{
-		while (d->map[y][x])
-		{
-			d->square.imgx = x * d->square.width;
-			d->square.imgy = y * d->square.height;
-			if (d->map[y][x] == '0')
-				drawsquare(d, 0xFFFFFF);
-			else if (d->map[y][x] == '2')
-				drawsquare(d, 0xFF0000);
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-	drawplayer(d);
-}
 
 void			load_texture(t_data *d, char *tex_path, int i)
 {
@@ -95,7 +66,6 @@ static int		handlekeys(int keycode, t_data *d)
 	{
 		mlx_clear_window(d->vars.mlx, d->vars.win);
 		display(d);
-		drawmap2d(d, &check);
 	}
 	else
 		display(d);
@@ -120,7 +90,6 @@ void			window(t_data *d)
 	load_texture(d, d->south, 2);
 	load_texture(d, d->east, 3);
 	load_texture(d, d->west, 4);
-	load_texture(d, "./files/textures/epee.xpm", 5);
 	init_player(d);
 	display(d);
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:16:55 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/16 23:49:38 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/17 00:19:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,6 @@ void	create_img(t_data *d, int i, int width, int height)
 	d->img.ptr[i] = mlx_new_image(d->vars.mlx, width, height);
 	d->img.addr[i] = mlx_get_data_addr(d->img.ptr[i], &d->img.bits_per_pixel,
 				&d->img.line_length, &d->img.endian);
-}
-
-void	drawsquare(t_data *d, int color)
-{
-	d->x = d->square.imgx;
-	d->y = d->square.imgy;
-	while (d->y < (d->square.height + d->square.imgy - 1))
-	{
-		while (d->x < (d->square.width + d->square.imgx - 1))
-		{
-			my_mlx_pixel_put(d, color);
-			d->x++;
-		}
-		d->y++;
-		d->x = d->square.imgx;
-	}
-}
-
-void	drawplayer(t_data *d)
-{
-	d->square.imgx = (d->player.pos_x * d->square.width) - ((((d->res[0] * .45)
-	/ ft_strlen(d->map[0])) / 3) / 2);
-	d->square.imgy = (d->player.pos_y * d->square.height) - ((((d->res[1] * .45)
-	/ ft_strlen(d->map[0])) / 3) / 2);
-	d->square.width = (((d->res[0] * .75) / ft_strlen(d->map[0])) / 2);
-	d->square.height = d->square.width;
-	drawsquare(d, 0x0);
 }
 
 void	init_player(t_data *d)
