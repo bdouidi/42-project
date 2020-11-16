@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 18:57:33 by othabchi          #+#    #+#             */
-/*   Updated: 2020/11/14 19:28:49 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/16 16:35:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	rotation(t_data *d, int keycode)
 
 	old_dir = d->player.dir_x;
 	oldplane_x = d->ray.plane_x;
-	if (keycode == 113)
+	if (keycode == 65361)
 	{
 		d->player.dir_x = d->player.dir_x * cos(-.15) -
 		d->player.dir_y * sin(-.15);
@@ -81,7 +81,7 @@ void	rotation(t_data *d, int keycode)
 		sin(-.15);
 		d->ray.plane_y = oldplane_x * sin(-.15) + d->ray.plane_y * cos(-.15);
 	}
-	if (keycode == 101)
+	if (keycode == 65363)
 	{
 		d->player.dir_x = d->player.dir_x * cos(.15) -
 		d->player.dir_y * sin(.15);
@@ -93,16 +93,19 @@ void	rotation(t_data *d, int keycode)
 
 int		cross_window(t_data *d)
 {
-	write(1, "Exit.\n", 5);
+	write(1, "Exit\n", 5);
 	mlx_destroy_window(d->vars.mlx, d->vars.win);
 	exit(1);
 }
 
 int		checksizemap(t_data *d, int **check)
 {
-	if (d->square.width > 7)
+	if (d->square.width > d->res[0] / 25 || d->square.height > d->res[1] / 25
+	|| d->res[0] < 300 || d->res[1] < 300 || d->square.height < 4 ||
+	d->square.width < 4)
 	{
-		write(1, "Sorry your map is too big to be print :/\n", 41);
+		ft_putstr("Sorry your map is too big to be print or your resolution is \
+not adapted to print the map :/\n");
 		**check = 2;
 		return (-1);
 	}

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 17:14:11 by dsy               #+#    #+#             */
-/*   Updated: 2020/11/12 21:47:19 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/16 15:35:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <limits.h>
 # include <fcntl.h>
 
-# define BUFFER_SIZE 10000
+# define BUFFER_SIZE 1000000
 
 void			*ft_memset(void *str, int c, size_t n);
 void			ft_bzero(void *s, size_t n);

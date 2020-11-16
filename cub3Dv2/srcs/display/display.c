@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:28:33 by othabchi          #+#    #+#             */
-/*   Updated: 2020/11/14 19:28:15 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/16 14:46:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void			drawmap2d(t_data *d, int *check)
 		x = 0;
 		y++;
 	}
+	drawplayer(d);
 }
 
 void			load_texture(t_data *d, char *tex_path, int i)
@@ -88,14 +89,13 @@ static int		handlekeys(int keycode, t_data *d)
 		check++;
 	if (keycode == 119 || keycode == 100 || keycode == 97 || keycode == 115)
 		which_dir(d, keycode);
-	if (keycode == 101 || keycode == 113)
+	if (keycode == 65361 || keycode == 65363)
 		rotation(d, keycode);
 	if (check % 2 != 0)
 	{
 		mlx_clear_window(d->vars.mlx, d->vars.win);
 		display(d);
 		drawmap2d(d, &check);
-		drawplayer(d);
 	}
 	else
 		display(d);
@@ -105,9 +105,14 @@ static int		handlekeys(int keycode, t_data *d)
 
 void			window(t_data *d)
 {
+	d->sizex = 0;
+	d->sizey = 0;
 	d->vars.mlx = mlx_init();
+	mlx_get_screen_size(d->vars.mlx, &d->sizex, &d->sizey);
+	d->res[0] = (d->res[0] > d->sizex) ? d->sizex : d->res[0];
+	d->res[1] = (d->res[1] > d->sizey) ? d->sizey : d->res[1];
 	d->vars.win = mlx_new_window(d->vars.mlx, d->res[0], d->res[1],
-			"Cub3D");
+			"Cub3d");
 	if (!d->img.ptr[0])
 		create_img(d, 0, d->res[0], d->res[1]);
 	load_texture(d, d->sprite, 0);

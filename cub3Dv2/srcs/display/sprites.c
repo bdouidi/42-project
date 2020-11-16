@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 18:23:05 by user42            #+#    #+#             */
-/*   Updated: 2020/11/11 20:46:47 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/16 14:21:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	drawsprites(t_data *d, int stripe, int col, int color)
 			{
 				d->y = col;
 				color = get_spt_color(d, stripe);
-				if (color != 0)
-					my_mlx_pixel_put(d, color);
+				if (color)
+					my_mlx_pixel_put(d, add_shade(d, color, d->transform_y));
 				col++;
 			}
 		}

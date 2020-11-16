@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by dsy               #+#    #+#             */
-/*   Updated: 2020/11/13 17:45:54 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/16 14:03:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ typedef struct	s_data
 	int			drawend_x;
 	int			drawstart_y;
 	int			drawend_y;
+	int			sizex;
+	int			sizey;
 	double		camera_x;
 	double		*rays;
 	double		sprite_x;
@@ -190,4 +192,5 @@ int				create_trgb(int t, int r, int g, int b);
 int				get_r(int color);
 int				get_g(int color);
 int				get_b(int color);
+int				add_shade(t_data *d, int trgb, float dist);
 #endif

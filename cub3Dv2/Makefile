@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 17:08:38 by dsy               #+#    #+#              #
-#    Updated: 2020/11/14 18:41:40 by user42           ###   ########.fr        #
+#    Updated: 2020/11/16 15:32:32 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ $(NAME): $(@OBJS)
 	@gcc ${CFLAGS} -o ${NAME} ${@OBJS} main.c $(LIBOBJ) $(MLXOBJ) $(MLXFLAGS)
 	@echo "Done."
 	@echo "======================"
+	@echo "     TIME TO PLAY"
 	@echo "======================"
 
 clean:

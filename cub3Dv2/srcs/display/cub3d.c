@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:04:08 by othabchi          #+#    #+#             */
-/*   Updated: 2020/11/14 19:25:08 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/16 16:37:13 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	error_msg(int error)
 	if (error == -1)
 		ft_putstr("Error\nBad file: You made a mistake in the map information.\
 		\nCheck that there are no errors on:\n-identifiers.\
-		\n-render sizes (100 <= X < X MAX && 100 <= Y < Y MAX).\
 		\n-texture paths.\
 		\n-the RGB color format(three numbers between 0 and 255, each separeted\
 by a comma).\n");
