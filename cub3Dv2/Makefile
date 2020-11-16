@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
+#    By: idouidi <idouidi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/02/12 17:08:38 by dsy               #+#    #+#              #
-#    Updated: 2020/11/16 15:32:32 by user42           ###   ########.fr        #
+#    Created: 2020/02/12 17:08:38 by idouidi               #+#    #+#              #
+#    Updated: 2020/11/16 15:32:32 by idouidi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,15 @@ SRCS = srcs/parsing/ft_utils_pars.c srcs/parsing/ft_utils2_pars.c srcs/parsing/f
 	   srcs/display/bitmap.c srcs/display/utils_display2.c \
 	   srcs/display/sprites.c srcs/display/utils_sprites.c \
 
+B_SRCS = srcs/bonus/parsing/ft_utils_pars_bonus.c srcs/bonus/parsing/ft_utils2_pars_bonus.c srcs/bonus/parsing/ft_pars_info_map_bonus.c \
+	   srcs/bonus/parsing/ft_pars_map_bonus.c  srcs/bonus/parsing/ft_parsing_bonus.c \
+	   srcs/bonus/parsing/ft_adjust_map_bonus.c srcs/bonus/parsing/ft_set_info_map_bonus.c \
+	   srcs/bonus/display/cub3d_bonus.c srcs/bonus/display/trgb_bonus.c \
+	   srcs/bonus/display/display_bonus.c srcs/bonus/display/raycasting_bonus.c \
+	   srcs/bonus/display/utils_display_bonus.c srcs/bonus/display/dda_bonus.c \
+	   srcs/bonus/display/bitmap_bonus.c srcs/bonus/display/utils_display2_bonus.c \
+	   srcs/bonus/display/sprites_bonus.c srcs/bonus/display/utils_sprites_bonus.c \
+
 LIBFTPATH	= project/libft 
 LIBOBJ		= project/libft/libft.a
 MLXOBJ		= mlx_linux/libmlx.a
@@ -26,23 +35,38 @@ MLXPATH		= mlx_linux/
 @OBJS		= $(SRCS:.c=.o)
 CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -march=native -flto 
 MLXFLAGS	= -L$(MLXPATH) -lm -lXext -lX11 
-NAME		= cub3D
+NAME		= cub3d
+@B_OBJS		= $(B_SRCS:.c=.o)
 
 all: $(NAME)
 
+
 $(NAME): $(@OBJS)
-	@echo "- Compiling libft..."
+	@echo "\033[33m- Compiling libft..."
 	$(MAKE) -C $(LIBFTPATH)
-	@echo "Done."
-	@echo "- Compiling cub3d..."
+	@echo "\033[32mDone."
+	@echo "\033[33m- Compiling cub3d..."
 	@gcc ${CFLAGS} -o ${NAME} ${@OBJS} main.c $(LIBOBJ) $(MLXOBJ) $(MLXFLAGS)
-	@echo "Done."
-	@echo "======================"
+	@echo "\033[32mDone."
+	@echo "\033[31m======================"
 	@echo "     TIME TO PLAY"
 	@echo "======================"
 
+bonus: $(@B_OBJS)
+	@echo "\033[33m- Compiling libft..."
+	$(MAKE) -C $(LIBFTPATH)
+	@echo "\033[32mDone."
+	@echo "\033[33m- Compiling cub3d \033[35mWITH BONUS\033[33m..."
+	@gcc ${CFLAGS} -o ${NAME} ${@B_OBJS} main.c $(LIBOBJ) $(MLXOBJ) $(MLXFLAGS)
+	@echo "\033[32mDone."
+	@echo "\033[31m================================"
+	@echo "     TIME TO PLAY SERIOUSLY"
+	@echo "================================"
+	
+
 clean:
 	rm -rf $(@OBJS)
+	rm -rf $(@B_SRCS)
 	@cd $(LIBFTPATH) && make clean
 
 fclean: clean
