@@ -6,12 +6,12 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:24:47 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/16 23:59:20 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/17 19:09:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "../../project/libft/libft.h"
 # include <math.h>

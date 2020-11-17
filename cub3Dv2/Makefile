@@ -36,9 +36,11 @@ MLXPATH		= mlx_linux/
 CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -march=native -flto 
 MLXFLAGS	= -L$(MLXPATH) -lm -lXext -lX11 
 NAME		= cub3d
+B_NAME		= cubd3d_bonus
 @B_OBJS		= $(B_SRCS:.c=.o)
 
 all: $(NAME)
+bonus: $(B_NAME)
 
 
 $(NAME): $(@OBJS)
@@ -46,34 +48,37 @@ $(NAME): $(@OBJS)
 	$(MAKE) -C $(LIBFTPATH)
 	@echo "\033[32mDone."
 	@echo "\033[33m- Compiling cub3d..."
-	@gcc ${CFLAGS} -o ${NAME} ${@OBJS} main.c $(LIBOBJ) $(MLXOBJ) $(MLXFLAGS)
+	@gcc ${CFLAGS} -o ${NAME} ${@OBJS}  main.c $(LIBOBJ) $(MLXOBJ) $(MLXFLAGS)
 	@echo "\033[32mDone."
 	@echo "\033[31m======================"
 	@echo "     TIME TO PLAY"
 	@echo "======================"
 
-bonus: $(@B_OBJS)
+
+$(B_NAME): $(@B_OBJS)
+ifeq ("$(shell ls -R | grep bonus.o)", "")
 	@echo "\033[33m- Compiling libft..."
 	$(MAKE) -C $(LIBFTPATH)
 	@echo "\033[32mDone."
 	@echo "\033[33m- Compiling cub3d \033[35mWITH BONUS\033[33m..."
-	@gcc ${CFLAGS} -o ${NAME} ${@B_OBJS} main.c $(LIBOBJ) $(MLXOBJ) $(MLXFLAGS)
+	@gcc ${CFLAGS} -o ${B_NAME} ${@B_OBJS} main.c $(LIBOBJ) $(MLXOBJ) $(MLXFLAGS)
 	@echo "\033[32mDone."
 	@echo "\033[31m================================"
 	@echo "     TIME TO PLAY SERIOUSLY"
 	@echo "================================"
-	
+endif
 
 clean:
-	rm -rf $(@OBJS)
-	rm -rf $(@B_SRCS)
+	rm -rf $(@OBJS) $(@B_OBJS)
 	@cd $(LIBFTPATH) && make clean
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f $(B_NAME)
 	cd $(LIBFTPATH) && make fclean
 
 re: fclean all
+
 
 .PHONY: libft, all, clean, fclean, re
 .SILENT:
