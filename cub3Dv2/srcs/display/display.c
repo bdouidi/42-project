@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:28:33 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/21 15:14:06 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/21 15:48:31 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ static int		handlekeys(int keycode, t_data *d)
 		mlx_clear_window(d->vars.mlx, d->vars.win);
 		display(d);
 		drawmap2d(d);
+		
 	}
 	else
 		display(d);

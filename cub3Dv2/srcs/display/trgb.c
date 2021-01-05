@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:22:40 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/21 13:00:37 by othabchi         ###   ########.fr       */
+/*   Updated: 2020/10/27 13:39:31 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ int	get_b(int trgb)
 
 int	add_shade(t_data *d, int trgb, float dist)
 {
-	int t;
-	int r;
-	int g;
-	int b;
-	float shade;
+	int		t;
+	int		r;
+	int		g;
+	int		b;
+	float	shade;
 
 	shade = 1 - dist / d->mapX;
 	shade = pow(shade, 6);

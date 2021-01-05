@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:16:55 by othabchi          #+#    #+#             */
-/*   Updated: 2020/10/21 14:12:55 by othabchi         ###   ########.fr       */
+/*   Updated: 2021/01/04 11:15:05 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	drawplayer(t_data *d, int y, int x)
 	d->square.imgx = (x * d->square.width) + d->square.width / 2;
 	d->square.imgy = (y * d->square.height) + d->square.height / 2;
 	
-	printf("(%d, %d)", d->square.imgx, d->square.imgy);
+	// printf("(%d, %d)", d->square.imgx, d->square.imgy);
 
 	d->square.width = ((d->res[0] * .80) / d->mapX) * .66;
 	d->square.height = d->square.width;
