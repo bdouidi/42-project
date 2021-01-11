@@ -35,8 +35,8 @@ MLXPATH		= mlx_linux/
 @OBJS		= $(SRCS:.c=.o)
 CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -march=native -flto 
 MLXFLAGS	= -L$(MLXPATH) -lm -lXext -lX11 
-NAME		= cub3d
-B_NAME		= cubd3d_bonus
+NAME		= cub3D
+B_NAME		= cubd3D_bonus
 @B_OBJS		= $(B_SRCS:.c=.o)
 
 all: $(NAME)

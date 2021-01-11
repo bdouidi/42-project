@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils2_pars_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 14:23:40 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/16 23:55:56 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/11 15:08:01 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ int			check_empty_line(t_data *d)
 	while (d->tmp1[i])
 	{
 		if (d->tmp1[i] == '\n' && d->tmp1[i + 1] && d->tmp1[i + 1] == '\n')
-		{
-			write(1, "empty line\n", 11);
-			return (-1);
-		}
+			return (-2);
 		i++;
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:28:33 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/17 00:08:20 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/11 14:57:01 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void			window(t_data *d)
 	d->res[0] = (d->res[0] > d->sizex) ? d->sizex : d->res[0];
 	d->res[1] = (d->res[1] > d->sizey) ? d->sizey : d->res[1];
 	d->vars.win = mlx_new_window(d->vars.mlx, d->res[0], d->res[1],
-			"Cub3d");
+			"Cub3D");
 	if (!d->img.ptr[0])
 		create_img(d, 0, d->res[0], d->res[1]);
 	load_texture(d, d->sprite, 0);
