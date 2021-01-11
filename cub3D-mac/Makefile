@@ -35,8 +35,8 @@ MLXPATH		= mlx/
 @OBJS		= $(SRCS:.c=.o)
 CFLAGS		= -Wall -Wextra -Werror  -fsanitize=address -march=native -flto 
 MLXFLAGS	= -L$(MLXPATH) -lmlx -framework OpenGL -framework AppKit
-NAME		= cub3d
-B_NAME		= cub3d_bonus
+NAME		= cub3D
+B_NAME		= cub3D_bonus
 @B_OBJS		= $(B_SRCS:.c=.o)
 
 all: $(NAME)

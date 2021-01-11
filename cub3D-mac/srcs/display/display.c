@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:28:33 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/09 17:14:55 by othabchi         ###   ########.fr       */
+/*   Updated: 2021/01/11 14:20:36 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int		handlekeys(int keycode, t_data *d)
 		check++;
 	if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
 		which_dir(d, keycode);
-	if (keycode == 12 || keycode == 14)
+	if (keycode == 123 || keycode == 124)
 		rotation(d, keycode);
 	if (check % 2 != 0)
 	{
@@ -77,7 +77,7 @@ void			window(t_data *d)
 {
 	d->vars.mlx = mlx_init();
 	d->vars.win = mlx_new_window(d->vars.mlx, d->res[0], d->res[1],
-			"Cub3d");
+			"Cub3D");
 	if (!d->img.ptr[0])
 		create_img(d, 0, d->res[0], d->res[1]);
 	load_texture(d, d->sprite, 0);

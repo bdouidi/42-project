@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:28:33 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/09 17:29:09 by othabchi         ###   ########.fr       */
+/*   Updated: 2021/01/11 14:22:29 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void			window(t_data *d)
 {
 	d->vars.mlx = mlx_init();
 	d->vars.win = mlx_new_window(d->vars.mlx, d->res[0], d->res[1],
-			"Cub3d");
+			"cub3D");
 	if (!d->img.ptr[0])
 		create_img(d, 0, d->res[0], d->res[1]);
 	load_texture(d, d->sprite, 0);

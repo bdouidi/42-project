@@ -6,7 +6,7 @@
 /*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 18:57:33 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/09 15:55:13 by othabchi         ###   ########.fr       */
+/*   Updated: 2021/01/11 14:16:47 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	rotation(t_data *d, int keycode)
 
 	old_dir = d->player.dir_x;
 	oldplane_x = d->ray.plane_x;
-	if (keycode == 12)
+	if (keycode == 123)
 	{
 		d->player.dir_x = d->player.dir_x * cos(-.15) -
 		d->player.dir_y * sin(-.15);
@@ -81,7 +81,7 @@ void	rotation(t_data *d, int keycode)
 		sin(-.15);
 		d->ray.plane_y = oldplane_x * sin(-.15) + d->ray.plane_y * cos(-.15);
 	}
-	if (keycode == 14)
+	if (keycode == 124)
 	{
 		d->player.dir_x = d->player.dir_x * cos(.15) -
 		d->player.dir_y * sin(.15);
