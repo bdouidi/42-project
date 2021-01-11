@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:57:11 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/16 23:55:31 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/11 14:00:48 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ int			map(int fd, t_data *data)
 {
 	data->tmp = my_read(fd);
 	config_map(data);
-	if (check_empty_line(data) == -1)
-		return (-1);
+	if (check_empty_line(data) == -2)
+		return (-2);
 	data->map = ft_split((char *)data->tmp1, "\n");
 	adjust_map(data);
 	return (0);
@@ -105,8 +105,8 @@ int			pars_file(int fd, t_data *data)
 	int		len;
 
 	len = 0;
-	if (map(fd, data) == -1)
-		return (-1);
+	if (map(fd, data) == -2)
+		return (-2);
 	while (data->map[len])
 		len++;
 	if (pars_info_map(data) == -1 || check_textures(data) == -1 ||

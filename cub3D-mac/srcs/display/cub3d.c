@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:04:08 by idouidi           #+#    #+#             */
-/*   Updated: 2020/11/16 23:47:23 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/11 13:56:26 by othabchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	error_msg(int error)
 		ft_putstr("Error\nBad file: You made a mistake in the map information.\
 		\nCheck that there are no errors on:\n-identifiers.\
 		\n-texture paths.\
-		\n-the RGB color format(three numbers between 0 and 255, each separeted\
-by a comma).\n");
+		\n-the RGB color format(three numbers between 0 and 255, each \
+separeted by a comma).\n");
 	if (error == -2)
 		ft_putstr("Error\nBad file: you made a mistake in the map. Check \
 that there are no errors:\n-the only authorized digits are (0, 1, 2, N, S, \
-E, W).\n-zeros and twos must be surrounded by ones.\n-the map must be \
-surrounded by ones.\n-that there is no empty line once the map has been \
+E, W).\n-the map must be \
+surrounded by walls.\n-that there is no empty line once the map has been \
 identified until the end of the file.\n-there must be one letter and \
 only one among (N, S, E, W)\n");
 }
