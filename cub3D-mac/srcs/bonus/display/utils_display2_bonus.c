@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_display2_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 18:57:33 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/09 17:27:19 by othabchi         ###   ########.fr       */
+/*   Updated: 2021/01/12 11:20:02 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,9 @@ int		cross_window(t_data *d)
 
 int		checksizemap(t_data *d, int **check)
 {
-	if (d->square.width > d->res[0] / 25 || d->square.height > d->res[1] / 25
-	|| d->res[0] < 300 || d->res[1] < 300 || d->square.height < 4 ||
-	d->square.width < 4)
+	if (d->square.width <= 1 || d->square.height <= 1)
 	{
-		ft_putstr("Sorry your map is too big to be print or your resolution is \
-not adapted to print the map :/\n");
+		ft_putstr(" your resolution is not adapted to print the map :/\n");
 		**check = 2;
 		return (-1);
 	}

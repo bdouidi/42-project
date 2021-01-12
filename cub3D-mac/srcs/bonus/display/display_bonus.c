@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: othabchi <othabchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:28:33 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/11 14:22:29 by othabchi         ###   ########.fr       */
+/*   Updated: 2021/01/12 12:39:42 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void			drawmap2d(t_data *d, int *check)
 
 	x = 0;
 	y = 0;
-	d->square.width = ((d->res[0] * .65) / d->map_x);
-	d->square.height = d->square.width;
+	d->square.width = ((d->res[0] * .40) / d->map_x);
+	d->square.height = ((d->res[1] * .40) / d->map_y);
 	if (checksizemap(d, &check) == -1)
 		return ;
 	while (d->map[y])
