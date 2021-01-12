@@ -37,7 +37,7 @@ int		main(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if ((ac == 3 && (ft_strlen(av[2]) != ft_strlen("--save") ||
 	ft_strncmp(av[2], "--save", ft_strlen("--save") != 0))) || ac > 3 ||
-	is_cub(av[1], ".cub") == -1 || fd < 0)
+	is_cub(av[1], "buc.") == -1 || fd < 0)
 	{
 		ft_putstr("Error\nCheck that there are no errors, you have may be:\
 		\n-too much argument\

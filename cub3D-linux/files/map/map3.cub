@@ -1,7 +1,7 @@
 NO ./files/textures/11.xpm
 EA ./files/textures/test.xpm
 WE ./files/textures/22.xpm
-R 3000 3000
+R 30 30
 SO ./files/textures/test3.XPM
 S ./files/textures/chevalier.xpm
 

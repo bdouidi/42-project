@@ -12,18 +12,21 @@
 
 #include "../../includes/bonus/cub3d_bonus.h"
 
-int		is_present(char *s1, char *s2)
+int		iscub(char *s1, char *s2)
 {
-	if (ft_strlen(s1) < ft_strlen(s2))
-		return (-1);
-	while (*s1)
+	int i;
+	int j;
+
+	i = ft_strlen(s1) - 1;
+	j = 0;
+	while (s1[i] && s2[j])
 	{
-		if (*s1 == *s2 && ft_strncmp(s1, s2, 4) == 0)
-			return (0);
-		else
-			s1++;
+		if (s1[i] != s2[j])
+			return (-1);
+		i--;
+		j++;
 	}
-	return (-1);
+	return (1);
 }
 
 int		main(int ac, char **av)
@@ -34,7 +37,7 @@ int		main(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if ((ac == 3 && (ft_strlen(av[2]) != ft_strlen("--save") ||
 	ft_strncmp(av[2], "--save", ft_strlen("--save") != 0))) || ac > 3 ||
-	is_present(av[1], ".cub") == -1 || fd < 0)
+	is_present(av[1], "buc.") == -1 || fd < 0)
 	{
 		ft_putstr("Error\nCheck that there are no errors, you have may be:\
 		\n-too much argument\
