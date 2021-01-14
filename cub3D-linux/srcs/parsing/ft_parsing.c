@@ -18,23 +18,23 @@ void		info_map(t_data *d, char *s, int i)
 	int	k;
 
 	info_map_setup(s, i, &j, &k);
-	if (s[i] == 'R')
+	if (s[i] == 'R' && !d->resolution)
 		d->resolution = fill_str(s, d->resolution, i, j);
-	if (s[i] == 'F')
+	if (s[i] == 'F' && !d->floor)
 		d->floor = fill_str(s, d->floor, i, j);
-	if (s[i] == 'C')
+	if (s[i] == 'C' && !d->ceiling)
 		d->ceiling = fill_str(s, d->ceiling, i, j);
-	if (s[i] == 'N')
+	if (s[i] == 'N' && !d->north)
 		d->north = fill_str(s, d->north, k, j);
-	if (s[i] == 'W')
+	if (s[i] == 'W' && !d->west)
 		d->west = fill_str(s, d->west, k, j);
-	if (s[i] == 'E')
+	if (s[i] == 'E' && !d->east)
 		d->east = fill_str(s, d->east, k, j);
 	if (s[i] == 'S')
 	{
-		if (s[i + 1] == 'O')
+		if (s[i + 1] == 'O' && !d->south)
 			d->south = fill_str(s, d->south, k, j);
-		else
+		else if (!d->sprite)
 			d->sprite = fill_str(s, d->sprite, k, j);
 	}
 }

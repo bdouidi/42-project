@@ -1,9 +1,12 @@
 NO ./files/textures/11.xpm
-EA ./files/textures/test.xpm
 WE ./files/textures/22.xpm
+
 R 800 600
+
 SO ./files/textures/test3.XPM
 S ./files/textures/chevalier.xpm
+
+EA ./files/textures/test.xpm
 
 C 211,93,34
 F 68,40,25
@@ -27,4 +30,3 @@ F 68,40,25
 1111101111  10000000000000001
     101     11111111111111111
     111
-   

@@ -73,7 +73,7 @@ void	drawsprites(t_data *d, int stripe, int col, int color)
 			{
 				d->y = col;
 				color = get_spt_color(d, stripe);
-				if (color >= 0)
+				if (color)
 					my_mlx_pixel_put(d, color);
 				col++;
 			}

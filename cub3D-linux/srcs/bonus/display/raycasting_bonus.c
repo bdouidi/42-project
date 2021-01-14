@@ -51,7 +51,7 @@ void	do_gun(t_data *d)
 		while (d->y < d->res[1])
 		{
 			color = get_color(d);
-			if (color > 0)
+			if (color)
 				my_mlx_pixel_put(d, color);
 			d->y++;
 		}

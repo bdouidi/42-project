@@ -79,7 +79,7 @@ static int		handlekeys(int keycode, t_data *d)
 {
 	static int	check = 0;
 
-	if (keycode == 53)
+	if (keycode == 65307)
 	{
 		mlx_destroy_window(d->vars.mlx, d->vars.win);
 		write(1, "Exit\n", 5);
@@ -87,7 +87,7 @@ static int		handlekeys(int keycode, t_data *d)
 		close(d->fd);
 		exit(0);
 	}
-	if (keycode == 46)
+	if (keycode == 109)
 		check++;
 	which_dir(d, keycode);
 	rotation(d, keycode);
@@ -120,6 +120,6 @@ void			window(t_data *d)
 	display(d);
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);
 	mlx_hook(d->vars.win, 2, (1L << 0), handlekeys, d);
-	mlx_hook(d->vars.win, 17, 0, cross_window, d);
+	mlx_hook(d->vars.win, 33, 1L << 17, cross_window, d);
 	mlx_loop(d->vars.mlx);
 }
