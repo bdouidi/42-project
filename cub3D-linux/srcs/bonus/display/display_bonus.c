@@ -105,7 +105,12 @@ static int		handlekeys(int keycode, t_data *d)
 
 void			window(t_data *d)
 {
+	d->sizex = 0;
+	d->sizey = 0;
 	d->vars.mlx = mlx_init();
+	mlx_get_screen_size(d->vars.mlx, &d->sizex, &d->sizey);
+	d->res[0] = (d->res[0] > d->sizex) ? d->sizex : d->res[0];
+	d->res[1] = (d->res[1] > d->sizey) ? d->sizey : d->res[1];
 	d->vars.win = mlx_new_window(d->vars.mlx, d->res[0], d->res[1],
 			"cub3D");
 	if (!d->img.ptr[0])

@@ -1,7 +1,7 @@
 NO ./files/textures/11.xpm
 EA ./files/textures/test.xpm
 WE ./files/textures/22.xpm
-R 5000 6000
+R 500 600
 SO ./files/textures/test3.XPM
 S ./files/textures/sans2.xpm
 
