@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 13:03:42 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/13 13:03:44 by idouidi          ###   ########.fr       */
+/*   Created: 2021/01/13 13:16:56 by idouidi           #+#    #+#             */
+/*   Updated: 2021/01/13 13:16:58 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	drawsprites(t_data *d, int stripe, int col, int color)
 			{
 				d->y = col;
 				color = get_spt_color(d, stripe);
-				if (color)
+				if (color >= 0)
 					my_mlx_pixel_put(d, color);
 				col++;
 			}

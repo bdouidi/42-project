@@ -6,7 +6,7 @@
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 13:17:14 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/13 13:17:16 by idouidi          ###   ########.fr       */
+/*   Updated: 2021/01/13 16:13:43 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,7 @@ int		cross_window(t_data *d)
 {
 	write(1, "Exit\n", 5);
 	mlx_destroy_window(d->vars.mlx, d->vars.win);
-	exit(1);
+	clean(d);
+	close(d->fd);
+	exit(0);
 }

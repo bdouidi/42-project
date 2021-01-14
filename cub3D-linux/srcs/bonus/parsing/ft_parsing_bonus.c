@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 13:02:13 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/13 13:02:14 by idouidi          ###   ########.fr       */
+/*   Created: 2021/01/13 13:15:54 by idouidi           #+#    #+#             */
+/*   Updated: 2021/01/14 13:58:35 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void		info_map(t_data *d, char *s, int i)
 	}
 }
 
-static void	config_map(t_data *d)
+static int	config_map(t_data *d)
 {
-	int		i;
-	int		check;
+	int	i;
+	int	check;
 
 	i = 0;
 	check = 0;
@@ -52,16 +52,19 @@ static void	config_map(t_data *d)
 		{
 			info_map(d, d->tmp, i);
 			check++;
-		}
-		if (check == 8)
-		{
 			while (d->tmp[i] && d->tmp[i] != '\n')
 				i++;
+		}
+		else if (d->tmp[i] != '\n')
+			return (-1);
+		if (check == 8)
+		{
 			d->tmp1 = ft_substr(d->tmp, i + 1, ft_strlen(d->tmp));
-			return ;
+			return (0);
 		}
 		i++;
 	}
+	return (-1);
 }
 
 char		*my_read(int fd)
@@ -89,10 +92,11 @@ char		*my_read(int fd)
 	return (save);
 }
 
-int			map(int fd, t_data *data)
+int			map(t_data *data)
 {
-	data->tmp = my_read(fd);
-	config_map(data);
+	data->tmp = my_read(data->fd);
+	if (config_map(data) == -1)
+		return (-1);
 	if (check_empty_line(data) == -2)
 		return (-2);
 	data->map = ft_split((char *)data->tmp1, "\n");
@@ -100,13 +104,15 @@ int			map(int fd, t_data *data)
 	return (0);
 }
 
-int			pars_file(int fd, t_data *data)
+int			pars_file(t_data *data)
 {
 	int		len;
+	int		check;
 
 	len = 0;
-	if (map(fd, data) == -2)
-		return (-2);
+	check = map(data);
+	if (check != 0)
+		return (check);
 	while (data->map[len])
 		len++;
 	if (pars_info_map(data) == -1 || check_textures(data) == -1 ||

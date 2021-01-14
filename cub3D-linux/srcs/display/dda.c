@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 13:03:21 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/13 13:03:23 by idouidi          ###   ########.fr       */
+/*   Created: 2021/01/13 13:16:40 by idouidi           #+#    #+#             */
+/*   Updated: 2021/01/13 13:16:42 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	draw_wall(t_data *d)
 	if (drawstart < 0)
 		drawstart = 0;
 	if (drawend >= d->res[1])
-		drawend = d->res[1] - 1;
+		drawend = d->res[1];
 	side = (d->ray.hit_side == 0) ? d->player.map_x - d->player.pos_x :
 									d->player.map_y - d->player.pos_y;
-	while (drawstart++ < drawend)
+	while (drawstart < drawend)
 	{
 		d->y = drawstart;
 		if (d->ray.hit_side)
@@ -59,6 +59,7 @@ void	draw_wall(t_data *d)
 		else
 			side < 0 ? my_mlx_pixel_put(d, get_tex_color(d, 3)) :
 			my_mlx_pixel_put(d, get_tex_color(d, 4));
+		drawstart++;
 	}
 }
 

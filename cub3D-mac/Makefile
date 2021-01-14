@@ -6,7 +6,7 @@
 #    By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/13 13:18:14 by idouidi           #+#    #+#              #
-#    Updated: 2021/01/13 13:18:15 by idouidi          ###   ########.fr        #
+#    Updated: 2021/01/14 13:33:22 by idouidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ LIBOBJ		= project/libft/libft.a
 MLXOBJ		= mlx/libmlx.a
 MLXPATH		= mlx/
 @OBJS		= $(SRCS:.c=.o)
-CFLAGS		= -Wall -Wextra -Werror  -fsanitize=address -march=native -flto 
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -march=native -flto 
 MLXFLAGS	= -L$(MLXPATH) -lmlx -framework OpenGL -framework AppKit
 NAME		= cub3D
 B_NAME		= cub3D_bonus

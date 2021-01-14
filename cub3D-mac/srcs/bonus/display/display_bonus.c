@@ -6,7 +6,7 @@
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 13:14:00 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/13 13:14:01 by idouidi          ###   ########.fr       */
+/*   Updated: 2021/01/14 14:04:44 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,14 @@ static int		handlekeys(int keycode, t_data *d)
 	{
 		mlx_destroy_window(d->vars.mlx, d->vars.win);
 		write(1, "Exit\n", 5);
-		exit(1);
+		clean(d);
+		close(d->fd);
+		exit(0);
 	}
 	if (keycode == 46)
 		check++;
-	if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
-		which_dir(d, keycode);
-	if (keycode == 123 || keycode == 124)
-		rotation(d, keycode);
+	which_dir(d, keycode);
+	rotation(d, keycode);
 	if (check % 2 != 0)
 	{
 		mlx_clear_window(d->vars.mlx, d->vars.win);

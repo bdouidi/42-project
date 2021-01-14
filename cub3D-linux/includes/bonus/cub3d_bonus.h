@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 12:58:18 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/13 12:58:20 by idouidi          ###   ########.fr       */
+/*   Created: 2021/01/13 13:19:17 by idouidi           #+#    #+#             */
+/*   Updated: 2021/01/14 13:55:06 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../../project/libft/libft.h"
 # include <math.h>
-# include "../../mlx_linux/mlx.h"
+# include "../../mlx/mlx.h"
 
 typedef struct	s_vars
 {
@@ -125,6 +125,7 @@ typedef struct	s_data
 	int			drawend_y;
 	int			sizex;
 	int			sizey;
+	int			fd;
 	double		camera_x;
 	double		*rays;
 	double		sprite_x;
@@ -144,7 +145,7 @@ int				is_flags(char *s, int i);
 int				r_f_c(char *s);
 int				pars_info_map(t_data *d);
 int				pars_map(t_data *d, int len);
-int				pars_file(int fd, t_data *data);
+int				pars_file(t_data *data);
 int				border(char *s);
 int				check_textures(t_data *d);
 char			*fill_str(char *s1, char *s2, int i, int j);
@@ -156,7 +157,7 @@ void			set_var(t_data *d);
 void			adjust_map(t_data *d);
 int				set_rfc(t_data *d);
 void			init_player(t_data *d);
-int				cub3d(int fd, t_data *d);
+int				cub3d(t_data *d);
 void			window(t_data *d);
 void			raycasting(t_data *d);
 void			set_position(t_data *d);
@@ -182,7 +183,7 @@ void			set_drawsprites(t_data *d, int i);
 void			limit_to_draw(t_data *d);
 void			drawsprites(t_data *d, int stripe, int col, int color);
 void			do_sprites(t_data *d);
-void			clean(t_data d);
+void			clean(t_data *d);
 int				get_spt_color(t_data *d, int stripe);
 int				cross_window(t_data *d);
 void			leak(void *str);

@@ -6,27 +6,27 @@
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 13:16:35 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/13 13:16:36 by idouidi          ###   ########.fr       */
+/*   Updated: 2021/01/13 16:18:41 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	clean(t_data d)
+void	clean(t_data *d)
 {
-	leak_2(d.map);
-	leak(d.resolution);
-	leak(d.floor);
-	leak(d.ceiling);
-	leak(d.north);
-	leak(d.south);
-	leak(d.west);
-	leak(d.east);
-	leak(d.sprite);
-	leak(d.rays);
-	leak(d.spt);
-	leak(d.tmp);
-	leak(d.tmp1);
+	leak_2(d->map);
+	leak(d->resolution);
+	leak(d->floor);
+	leak(d->ceiling);
+	leak(d->north);
+	leak(d->south);
+	leak(d->west);
+	leak(d->east);
+	leak(d->sprite);
+	leak(d->rays);
+	leak(d->spt);
+	leak(d->tmp);
+	leak(d->tmp1);
 }
 
 void	error_msg(int error)
@@ -46,17 +46,19 @@ identified until the end of the file.\n-there must be one letter and \
 only one among (N, S, E, W)\n");
 }
 
-int		cub3d(int fd, t_data *d)
+int		cub3d(t_data *d)
 {
 	int	error;
 
 	error = 0;
 	set_var(d);
-	if ((error = pars_file(fd, d)) != 0 ||
+	if ((error = pars_file(d)) != 0 ||
 	(!(d->rays = malloc(sizeof(double) * d->res[0]))))
 	{
 		error_msg(error);
-		return (0);
+		clean(d);
+		close(d->fd);
+		return (-1);
 	}
 	window(d);
 	return (0);

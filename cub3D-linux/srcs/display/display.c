@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 13:03:28 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/13 13:03:29 by idouidi          ###   ########.fr       */
+/*   Created: 2021/01/13 13:16:46 by idouidi           #+#    #+#             */
+/*   Updated: 2021/01/14 14:07:19 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,18 @@ static int		handlekeys(int keycode, t_data *d)
 {
 	static int	check = 0;
 
-	if (keycode == 65307)
+	if (keycode == 53)
 	{
 		mlx_destroy_window(d->vars.mlx, d->vars.win);
 		write(1, "Exit\n", 5);
-		exit(1);
+		clean(d);
+		close(d->fd);
+		exit(0);
 	}
-	if (keycode == 109)
+	if (keycode == 46)
 		check++;
-	if (keycode == 119 || keycode == 100 || keycode == 97 || keycode == 115)
-		which_dir(d, keycode);
-	if (keycode == 65361 || keycode == 65363)
-		rotation(d, keycode);
+	which_dir(d, keycode);
+	rotation(d, keycode);
 	if (check % 2 != 0)
 	{
 		mlx_clear_window(d->vars.mlx, d->vars.win);
@@ -75,12 +75,7 @@ static int		handlekeys(int keycode, t_data *d)
 
 void			window(t_data *d)
 {
-	d->sizex = 0;
-	d->sizey = 0;
 	d->vars.mlx = mlx_init();
-	mlx_get_screen_size(d->vars.mlx, &d->sizex, &d->sizey);
-	d->res[0] = (d->res[0] > d->sizex) ? d->sizex : d->res[0];
-	d->res[1] = (d->res[1] > d->sizey) ? d->sizey : d->res[1];
 	d->vars.win = mlx_new_window(d->vars.mlx, d->res[0], d->res[1],
 			"Cub3D");
 	if (!d->img.ptr[0])
@@ -94,6 +89,6 @@ void			window(t_data *d)
 	display(d);
 	mlx_put_image_to_window(d->vars.mlx, d->vars.win, d->img.ptr[0], 0, 0);
 	mlx_hook(d->vars.win, 2, (1L << 0), handlekeys, d);
-	mlx_hook(d->vars.win, 33, 1L << 17, cross_window, d);
+	mlx_hook(d->vars.win, 17, 0, cross_window, d);
 	mlx_loop(d->vars.mlx);
 }

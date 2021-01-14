@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 13:00:59 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/13 13:01:01 by idouidi          ###   ########.fr       */
+/*   Created: 2021/01/13 13:15:04 by idouidi           #+#    #+#             */
+/*   Updated: 2021/01/13 13:15:05 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,11 @@ void	draw_wall(t_data *d)
 	d->ray.line_height = (int)(d->res[1] / d->ray.perpwalldist);
 	drawstart = -d->ray.line_height / 2 + d->res[1] / 2;
 	drawend = d->ray.line_height / 2 + d->res[1] / 2;
-	if (drawstart < 0)
-		drawstart = 0;
-	if (drawend >= d->res[1])
-		drawend = d->res[1] - 1;
+	drawstart = (drawstart < 0) ? 0 : drawstart;
+	drawend = (drawend >= d->res[1]) ? d->res[1] : drawend;
 	side = (d->ray.hit_side == 0) ? d->player.map_x - d->player.pos_x :
 									d->player.map_y - d->player.pos_y;
-	while (drawstart++ < drawend)
+	while (drawstart < drawend)
 	{
 		d->y = drawstart;
 		if (d->ray.hit_side)
@@ -61,6 +59,7 @@ void	draw_wall(t_data *d)
 			side < 0 ? my_mlx_pixel_put(d, add_shade(d, get_tex_color(d, 3),
 			d->rays[(int)d->x])) : my_mlx_pixel_put(d,
 			add_shade(d, get_tex_color(d, 4), d->rays[(int)d->x]));
+		drawstart++;
 	}
 }
 

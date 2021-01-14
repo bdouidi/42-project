@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 13:01:08 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/13 13:01:09 by idouidi          ###   ########.fr       */
+/*   Created: 2021/01/13 13:14:37 by idouidi           #+#    #+#             */
+/*   Updated: 2021/01/13 13:14:39 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	do_gun(t_data *d)
 		while (d->y < d->res[1])
 		{
 			color = get_color(d);
-			if (color != 0)
+			if (color > 0)
 				my_mlx_pixel_put(d, color);
 			d->y++;
 		}

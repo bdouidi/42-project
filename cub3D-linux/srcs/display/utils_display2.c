@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 13:04:04 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/13 13:04:05 by idouidi          ###   ########.fr       */
+/*   Created: 2021/01/13 13:17:14 by idouidi           #+#    #+#             */
+/*   Updated: 2021/01/13 16:13:43 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	which_dir2(t_data *d, int keycode)
 {
-	if (keycode == 100)
+	if (keycode == 2)
 	{
 		d->w_x = (int)(d->player.pos_x - d->player.dir_y * d->player.sp);
 		d->w_y = (int)(d->player.pos_y + d->player.dir_x * d->player.sp);
@@ -25,7 +25,7 @@ void	which_dir2(t_data *d, int keycode)
 		d->map[d->w_y][(int)d->player.pos_x] == '0')
 			d->player.pos_y += d->player.dir_x * d->player.sp;
 	}
-	if (keycode == 97)
+	if (keycode == 0)
 	{
 		d->w_x = (int)(d->player.pos_x + d->player.dir_y * d->player.sp);
 		d->w_y = (int)(d->player.pos_y - d->player.dir_x * d->player.sp);
@@ -40,7 +40,7 @@ void	which_dir2(t_data *d, int keycode)
 
 void	which_dir(t_data *d, int keycode)
 {
-	if (keycode == 119)
+	if (keycode == 13)
 	{
 		d->w_x = (int)(d->player.pos_x + d->player.dir_x * d->player.sp);
 		d->w_y = (int)(d->player.pos_y + d->player.dir_y * d->player.sp);
@@ -51,7 +51,7 @@ void	which_dir(t_data *d, int keycode)
 		d->map[d->w_y][(int)d->player.pos_x] == '0')
 			d->player.pos_y += d->player.dir_y * d->player.sp;
 	}
-	if (keycode == 115)
+	if (keycode == 1)
 	{
 		d->w_x = (int)(d->player.pos_x - d->player.dir_x * d->player.sp);
 		d->w_y = (int)(d->player.pos_y - d->player.dir_y * d->player.sp);
@@ -72,7 +72,7 @@ void	rotation(t_data *d, int keycode)
 
 	old_dir = d->player.dir_x;
 	oldplane_x = d->ray.plane_x;
-	if (keycode == 65361)
+	if (keycode == 123)
 	{
 		d->player.dir_x = d->player.dir_x * cos(-.15) -
 		d->player.dir_y * sin(-.15);
@@ -81,7 +81,7 @@ void	rotation(t_data *d, int keycode)
 		sin(-.15);
 		d->ray.plane_y = oldplane_x * sin(-.15) + d->ray.plane_y * cos(-.15);
 	}
-	if (keycode == 65363)
+	if (keycode == 124)
 	{
 		d->player.dir_x = d->player.dir_x * cos(.15) -
 		d->player.dir_y * sin(.15);
@@ -95,5 +95,7 @@ int		cross_window(t_data *d)
 {
 	write(1, "Exit\n", 5);
 	mlx_destroy_window(d->vars.mlx, d->vars.win);
-	exit(1);
+	clean(d);
+	close(d->fd);
+	exit(0);
 }
