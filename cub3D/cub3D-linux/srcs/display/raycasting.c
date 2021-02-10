@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 13:16:51 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/13 13:16:52 by idouidi          ###   ########.fr       */
+/*   Updated: 2021/02/10 18:56:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	raycasting(t_data *d)
 	if (d->save == 1)
 	{
 		create_bitmap(d);
-		exit(1);
+		clean(d);
+		close(d->fd);
+		exit(0);
 	}
 }
