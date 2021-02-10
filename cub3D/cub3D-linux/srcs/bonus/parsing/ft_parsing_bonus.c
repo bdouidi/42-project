@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 13:15:54 by idouidi           #+#    #+#             */
-/*   Updated: 2021/01/14 13:58:35 by idouidi          ###   ########.fr       */
+/*   Updated: 2021/02/10 20:03:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		info_map(t_data *d, char *s, int i)
 	{
 		if (s[i + 1] == 'O' && !d->south)
 			d->south = fill_str(s, d->south, k, j);
-		else if (!d->sprite)
+		else if (!d->sprite && (s[i + 1] == ' ' || s[i + 1] == '\t'))
 			d->sprite = fill_str(s, d->sprite, k, j);
 	}
 }
@@ -97,7 +97,7 @@ int			map(t_data *data)
 	data->tmp = my_read(data->fd);
 	if (config_map(data) == -1)
 		return (-1);
-	if (check_empty_line(data) == -2)
+	if ((ft_strlen(data->tmp1) == 0) || check_empty_line(data) == -2)
 		return (-2);
 	data->map = ft_split((char *)data->tmp1, "\n");
 	adjust_map(data);

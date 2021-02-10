@@ -1,7 +1,7 @@
 NO ./files/textures/11.xpm
 WE ./files/textures/22.xpm
 
-R 20 20
+R 900 600
 
 S ./files/textures/chevalier.xpm
 
