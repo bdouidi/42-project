@@ -6,7 +6,7 @@
 /*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 12:08:35 by idouidi           #+#    #+#             */
-/*   Updated: 2021/07/09 13:21:39 by idouidi          ###   ########.fr       */
+/*   Updated: 2021/07/09 16:50:16 by idouidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,20 @@ char	***ft_leak_3(char ***s)
 	return (s);
 }
 
+			// int	j = 0;
+			// while (d->pipe[i][j])
+			// {
+			// 	ft_putstr_fd(d->pipe[i][j], d->test);
+			// 	ft_putstr_fd(" ", d->test);
+			// 	j += 1;
+			// }
 void	is_son(t_data *d, int i, int fd[2])
 {
 	dup2(d->fdd, d->fd_stdin);
 	if (d->pipe[i + 1] != NULL)
 			dup2(fd[1], d->fd_stdout);
 	close(fd[0]);
-	if (file_exist(&(*d->pipe[i]), d) == 0)
+	if (file_exist(&d->pipe[i][0], d) == 0)
 	{
 		if (execve(d->pipe[i][0], d->pipe[i], NULL) == -1)
 		{
@@ -50,11 +57,9 @@ void	is_son(t_data *d, int i, int fd[2])
 
 void	is_father(t_data *d, int fd[2])
 {
-	d->fdd = fd[0];
 	waitpid(d->pid, &(d->status), 0);
 	close(fd[1]);
-	close(d->fd_stdin);
-	close(d->fd_stdout);
+	d->fdd = fd[0];
 }
 
 void	exec_pipex(char **s, t_data *d)
