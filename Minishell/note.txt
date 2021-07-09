@@ -1,0 +1,65 @@
+Tuto links:
+https://segfault42.github.io/posts/minishell/
+
+https://brennan.io/2015/01/16/write-a-shell-in-c/
+
+https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
+
+
+########################## Parsing plan ########################################
+
+- Read line
+- Split into args // char **
+- Execute
+################################################################################
+							BUILTIN
+parsing for export:
+
+- export x\== -> correct
+- export \\=x -> error
+- export \=x -> error
+- export x\\=x -> error
+- export x =x -> error
+- export x= 1 -> error
+- export "xx  xx"=x -> error
+- export (0-9)x=x -> error
+--------------------------------------------------------------------------------
+							CAS PARTICULIER
+parsing for '\':
+
+- echo "\" -> dquote			| - echo \ -> dquote
+- echo "\x"-> \x				| - echo \x -> x
+- echo "\\x" -> \x				| - echo \\x -> \x
+- echo "\\\x" -> \\x			| - echo \\\x -> \x
+- echo "\\\\x" -> \\x			| - echo \\\\x -> \\x
+- echo "\\\\\x" -> \\\x			| - echo \\\\\x -> \\x
+
+parsing for '\'':
+parsing for '\"':
+
+parsing for ';' and '|':
+
+- ;cmd -> error      | - |cmd ->error
+- cmd; ;cmd -> error | - cmd|  |cmd ->error
+-------------------------------------------------------------------------------
+							/!\ TO DO /!\
+
+CD :
+- gerer "cd .." (sans /) |GOOD|
+- gerer "cd " |GOOD|
+- afficher l'erreur quand mauvais path / gestion d'erreur |GOOD|
+- gerer "cd /////" (bash le considere comme le path absolu /) |GOOD|
+- gerer les path absolus |GOOD?|
+
+faire un tableau de pointeur sur fonction qui reference les builtin et renvoyer la fonction de parsing associé
+--------------------------------------------------------------------------------
+
+wget 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64' -O /tmp/code_latest_amd64.deb
+sudo dpkg -i /tmp/code_latest_amd64.deb
+sudo apt-get update
+sudo apt-get install code
+
+brew install readline
+brew link --force readline
+  export LDFLAGS="-L/Users/idouidi/.brew/opt/readline/lib"
+  export CPPFLAGS="-I/Users/idouidi/.brew/opt/readline/include"
