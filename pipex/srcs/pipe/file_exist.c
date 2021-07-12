@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_exist.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 13:12:04 by idouidi           #+#    #+#             */
-/*   Updated: 2021/07/09 15:52:51 by idouidi          ###   ########.fr       */
+/*   Updated: 2021/07/10 13:23:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	*join_path_cmd(char *path, char *slash, char *cmd)
 	leak = ft_leak(leak);
 	return (tmp);
 }
-
 
 int	set_return(char ***tab, int ret, char *s)
 {
@@ -72,13 +71,11 @@ char	*find_var(char *s, t_data *d)
 int	file_exist(char **s, t_data *d)
 {
 	char			**tab;
-	int				i;
 
-	i = 0;
 	if (s[0][0] == '/' || s[0][0] == '.')
 		return (0);
 	tab = ft_split(find_var("PATH", d), ":");
-	 if (loop_check_if_file_exist(&s[0], tab))
-	 	return(set_return(&tab, 0, s[0]));
+	if (loop_check_if_file_exist(&s[0], tab))
+		return (set_return(&tab, 0, s[0]));
 	return (set_return(&tab, 127, s[0]));
 }

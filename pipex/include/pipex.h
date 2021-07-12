@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 11:26:32 by idouidi           #+#    #+#             */
-/*   Updated: 2021/07/09 16:35:32 by idouidi          ###   ########.fr       */
+/*   Updated: 2021/07/10 13:28:13 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_env {
 	struct s_env	*next;
 }					t_env;
 
-typedef struct		s_data {
+typedef struct s_data {
 	char			***pipe;
 	int				fd_stdin;
 	int				fd_stdout;

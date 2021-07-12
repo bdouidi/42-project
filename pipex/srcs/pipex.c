@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 11:49:40 by idouidi           #+#    #+#             */
-/*   Updated: 2021/07/09 15:43:07 by idouidi          ###   ########.fr       */
+/*   Updated: 2021/07/10 15:20:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	free_list(t_data *d)
 
 int	pipex(char **s, t_data *d)
 {
+	d->fd_stdin = 0;
+	d->fd_stdout = 1;
 	if (redirection(s[0], s[3], d) == -1)
 		return (-1);
 	exec_pipex(s, d);

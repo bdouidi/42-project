@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:53:14 by othabchi          #+#    #+#             */
-/*   Updated: 2021/07/07 16:23:03 by user42           ###   ########.fr       */
+/*   Updated: 2021/07/12 16:30:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ void				update_return_cmd(char *s1, char *s2, t_data *d);
 void				nb_spaces(t_data *d, char **s);
 char				*transform_slash(char *s);
 int					check_line(t_data *d);
-char				***ft_leak_3(char ***s);
 int					check_quote_sep_redir(char *s);
 /*
 ** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

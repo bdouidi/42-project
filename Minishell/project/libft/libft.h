@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 15:35:53 by othabchi          #+#    #+#             */
-/*   Updated: 2021/05/05 14:53:34 by user42           ###   ########.fr       */
+/*   Updated: 2021/07/12 16:30:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void			ft_swap(char *a, char *b);
 void			showtab(char **s);
 char			*ft_leak(char *str);
 char			**ft_leak_2(char **str);
+char			***ft_leak_3(char ***s);
 char			**ft_strdup_2(char **str);
 int				get_next_line(int fd, char **line);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);

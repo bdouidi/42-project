@@ -3,44 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 12:08:35 by idouidi           #+#    #+#             */
-/*   Updated: 2021/07/09 16:50:16 by idouidi          ###   ########.fr       */
+/*   Updated: 2021/07/10 15:40:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-char	***ft_leak_3(char ***s)
+void	check_error_stdin(t_data *d, char *save)
 {
-	int	i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	while (s[i])
+	if (d->fd_stdin < 0)
 	{
-		s[i] = ft_leak_2(s[i]);
-		i += 1;
+		close (d->fd_stdout);
+		d->fd_stdout = open(save, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		ft_putstr_fd("0\n", d->fd_stdout);
+		exit (EXIT_FAILURE);
 	}
-	free (s);
-	s = NULL;
-	return (s);
 }
 
-			// int	j = 0;
-			// while (d->pipe[i][j])
-			// {
-			// 	ft_putstr_fd(d->pipe[i][j], d->test);
-			// 	ft_putstr_fd(" ", d->test);
-			// 	j += 1;
-			// }
-void	is_son(t_data *d, int i, int fd[2])
+void	is_son(t_data *d, int i, char *save, int fd[2])
 {
-	dup2(d->fdd, d->fd_stdin);
-	if (d->pipe[i + 1] != NULL)
-			dup2(fd[1], d->fd_stdout);
+	check_error_stdin(d, save);
+	if (i == 0 && d->fd_stdin >= 3)
+		dup2(d->fdd, d->fd_stdin);
+	else
+		dup2(d->fdd, 0);
+	if (i == 1)
+		dup2(fd[1], d->fd_stdout);
+	else
+		dup2(fd[1], 1);
 	close(fd[0]);
 	if (file_exist(&d->pipe[i][0], d) == 0)
 	{
@@ -55,10 +48,15 @@ void	is_son(t_data *d, int i, int fd[2])
 		exit(127);
 }
 
-void	is_father(t_data *d, int fd[2])
+void	is_father(t_data *d, int i, int fd[2])
 {
 	waitpid(d->pid, &(d->status), 0);
 	close(fd[1]);
+	if (i != 0 && d->fd_stdin >= 3)
+	{
+		close(d->fd_stdin);
+		d->fd_stdin = 0;
+	}
 	d->fdd = fd[0];
 }
 
@@ -82,9 +80,9 @@ void	exec_pipex(char **s, t_data *d)
 			exit(EXIT_FAILURE);
 		}
 		else if (d->pid == 0)
-			is_son(d, i, fd);
+			is_son(d, i, s[3], fd);
 		else
-			is_father(d, fd);
+			is_father(d, i, fd);
 		i += 1;
 	}
 	d->pipe = ft_leak_3(d->pipe);

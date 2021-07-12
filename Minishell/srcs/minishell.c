@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouidi <idouidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:55:57 by othabchi          #+#    #+#             */
-/*   Updated: 2021/07/09 11:13:06 by idouidi          ###   ########.fr       */
+/*   Updated: 2021/07/12 16:29:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	sig_handler(int signal)
 {
 	if (signal == 3)
 		 return ;
-	else if (signal == -1)
+	if (signal == -1)
 	{
-		 printf("exit\n");
-		 exit (0);
+		printf("exit\n");
+		exit (0);
 	}
-	else if (signal == 2)
+	else
 	{
 		g_data->line = ft_leak(g_data->line);
 		update_return_cmd("?", "130", g_data);
@@ -42,7 +42,7 @@ void	sig_handler(int signal)
 				exit(0);
 			}
 		}
-	}
+	}	
 }
 
 void	next_cmd(t_data *d, char **envp)
