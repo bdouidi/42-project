@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 15:32:10 by othabchi          #+#    #+#             */
-/*   Updated: 2021/07/07 16:12:00 by user42           ###   ########.fr       */
+/*   Updated: 2021/07/13 01:02:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,14 @@ char	**ft_split(char *s, char *delimiters)
 	unsigned int	nb_strs;
 	unsigned int	i;
 
+	if (!*s)
+	{
+		tab = malloc(sizeof(char *) * 2);
+		tab[0] = ft_strdup("");
+		tab[1] = NULL;
+		return (tab);
+	}
 	nb_strs = ft_get_nb_strs(s, delimiters);
-	if (nb_strs == 0)
-		return (NULL);
 	tab = malloc(sizeof(char *) * (nb_strs + 1));
 	if (tab == NULL)
 		return (NULL);

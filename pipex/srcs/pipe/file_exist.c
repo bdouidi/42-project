@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 13:12:04 by idouidi           #+#    #+#             */
-/*   Updated: 2021/07/10 13:23:43 by user42           ###   ########.fr       */
+/*   Updated: 2021/07/13 01:00:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ char	*join_path_cmd(char *path, char *slash, char *cmd)
 	return (tmp);
 }
 
-int	set_return(char ***tab, int ret, char *s)
+int	set_return(char ***tab, int ret, t_data *d)
 {
 	*tab = ft_leak_2(*tab);
 	if (ret == 127)
-		printf("minishell: %s: No such file or directory\n", s);
+		ft_putstr_fd("pipex: No such file or directory\n", d->save_stdout);
 	return (ret);
 }
 
@@ -72,10 +72,13 @@ int	file_exist(char **s, t_data *d)
 {
 	char			**tab;
 
+	tab = NULL;
+	if (!ft_strcmp("", s[0]))
+		return (set_return(&tab, 127, d));
 	if (s[0][0] == '/' || s[0][0] == '.')
 		return (0);
 	tab = ft_split(find_var("PATH", d), ":");
 	if (loop_check_if_file_exist(&s[0], tab))
-		return (set_return(&tab, 0, s[0]));
-	return (set_return(&tab, 127, s[0]));
+		return (set_return(&tab, 0, d));
+	return (set_return(&tab, 127, d));
 }

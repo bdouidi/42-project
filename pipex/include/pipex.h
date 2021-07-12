@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 11:26:32 by idouidi           #+#    #+#             */
-/*   Updated: 2021/07/10 13:28:13 by user42           ###   ########.fr       */
+/*   Updated: 2021/07/13 00:43:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_data {
 	int				pid;
 	int				fdd;
 	int				test;
+	int				save_stdout;
 	t_env			*new_;
 	t_env			*head;
 }					t_data;

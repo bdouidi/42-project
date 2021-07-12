@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 12:08:35 by idouidi           #+#    #+#             */
-/*   Updated: 2021/07/10 15:40:10 by user42           ###   ########.fr       */
+/*   Updated: 2021/07/13 00:13:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void	check_error_stdin(t_data *d, char *save)
 	}
 }
 
-void	is_son(t_data *d, int i, char *save, int fd[2])
+void	is_son(t_data *d, int i, int fd[2])
 {
-	check_error_stdin(d, save);
+	if (d->fd_stdin < 0 || d->fd_stdout < 0)
+	exit (EXIT_FAILURE);
 	if (i == 0 && d->fd_stdin >= 3)
 		dup2(d->fdd, d->fd_stdin);
 	else
@@ -39,7 +40,6 @@ void	is_son(t_data *d, int i, char *save, int fd[2])
 	{
 		if (execve(d->pipe[i][0], d->pipe[i], NULL) == -1)
 		{
-			printf("pipex: %s : command was not found\n", d->pipe[i][0]);
 			d->pipe[i] = ft_leak_2(d->pipe[i]);
 			exit(EXIT_FAILURE);
 		}
@@ -80,9 +80,13 @@ void	exec_pipex(char **s, t_data *d)
 			exit(EXIT_FAILURE);
 		}
 		else if (d->pid == 0)
-			is_son(d, i, s[3], fd);
+			is_son(d, i,  fd);
 		else
 			is_father(d, i, fd);
+		if (d->fd_stdin < 0)
+			d->fd_stdin = 0;
+		if (d->fd_stdout < 0)
+			d->fd_stdout = 1;
 		i += 1;
 	}
 	d->pipe = ft_leak_3(d->pipe);
