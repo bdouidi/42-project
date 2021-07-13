@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 13:12:04 by idouidi           #+#    #+#             */
-/*   Updated: 2021/07/13 01:00:18 by user42           ###   ########.fr       */
+/*   Updated: 2021/07/13 21:06:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	set_return(char ***tab, int ret, t_data *d)
 {
 	*tab = ft_leak_2(*tab);
 	if (ret == 127)
-		ft_putstr_fd("pipex: No such file or directory\n", d->save_stdout);
+		ft_putstr_fd("pipex: command was not found\n", d->save_stdout);
 	return (ret);
 }
 

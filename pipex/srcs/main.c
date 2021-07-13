@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 11:38:20 by idouidi           #+#    #+#             */
-/*   Updated: 2021/07/13 00:43:25 by user42           ###   ########.fr       */
+/*   Updated: 2021/07/13 21:17:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	init_env_var(t_data *d, char **envp)
 int	main(int ac, char *av[], char *envp[])
 {
 	t_data	d;
+
 	if (ac != 5)
 	{
-		showtab (av);
 		printf("Usage: program [file1] [cmd1] [cmd2] [file2]\n");
 		exit (EXIT_FAILURE);
 	}

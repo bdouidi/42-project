@@ -6,27 +6,16 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 12:08:35 by idouidi           #+#    #+#             */
-/*   Updated: 2021/07/13 00:13:01 by user42           ###   ########.fr       */
+/*   Updated: 2021/07/14 00:06:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-void	check_error_stdin(t_data *d, char *save)
-{
-	if (d->fd_stdin < 0)
-	{
-		close (d->fd_stdout);
-		d->fd_stdout = open(save, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-		ft_putstr_fd("0\n", d->fd_stdout);
-		exit (EXIT_FAILURE);
-	}
-}
-
 void	is_son(t_data *d, int i, int fd[2])
 {
 	if (d->fd_stdin < 0 || d->fd_stdout < 0)
-	exit (EXIT_FAILURE);
+		exit (EXIT_FAILURE);
 	if (i == 0 && d->fd_stdin >= 3)
 		dup2(d->fdd, d->fd_stdin);
 	else
@@ -60,6 +49,14 @@ void	is_father(t_data *d, int i, int fd[2])
 	d->fdd = fd[0];
 }
 
+void	check_state_of_redir(t_data *d)
+{
+	if (d->fd_stdin < 0)
+		d->fd_stdin = 0;
+	if (d->fd_stdout < 0)
+		d->fd_stdout = 1;
+}
+
 void	exec_pipex(char **s, t_data *d)
 {
 	int		fd[2];
@@ -80,13 +77,10 @@ void	exec_pipex(char **s, t_data *d)
 			exit(EXIT_FAILURE);
 		}
 		else if (d->pid == 0)
-			is_son(d, i,  fd);
+			is_son(d, i, fd);
 		else
 			is_father(d, i, fd);
-		if (d->fd_stdin < 0)
-			d->fd_stdin = 0;
-		if (d->fd_stdout < 0)
-			d->fd_stdout = 1;
+		check_state_of_redir(d);
 		i += 1;
 	}
 	d->pipe = ft_leak_3(d->pipe);

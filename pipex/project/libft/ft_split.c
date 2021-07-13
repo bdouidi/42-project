@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 15:32:10 by othabchi          #+#    #+#             */
-/*   Updated: 2021/07/13 01:02:50 by user42           ###   ########.fr       */
+/*   Updated: 2021/07/13 23:47:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ static void	ft_get_next_str(char **next_str, unsigned int *next_str_len,
 	}
 }
 
+char	**set_empty_tab(char **tab)
+{
+	tab = malloc(sizeof(char *) * 2);
+	tab[0] = ft_strdup("");
+	tab[1] = NULL;
+	return (tab);
+}
+
 char	**ft_split(char *s, char *delimiters)
 {
 	char			**tab;
@@ -80,26 +88,20 @@ char	**ft_split(char *s, char *delimiters)
 	unsigned int	nb_strs;
 	unsigned int	i;
 
+	tab = NULL;
 	if (!*s)
-	{
-		tab = malloc(sizeof(char *) * 2);
-		tab[0] = ft_strdup("");
-		tab[1] = NULL;
-		return (tab);
-	}
+		return (set_empty_tab(tab));
 	nb_strs = ft_get_nb_strs(s, delimiters);
 	tab = malloc(sizeof(char *) * (nb_strs + 1));
 	if (tab == NULL)
 		return (NULL);
 	i = -1;
-	next_str = (char *)s;
+	next_str = s;
 	next_str_len = 0;
 	while (++i < nb_strs)
 	{
 		ft_get_next_str(&next_str, &next_str_len, delimiters);
 		tab[i] = malloc(sizeof(char) * (next_str_len + 1));
-		if (tab[i] == NULL)
-			return (ft_clear_splitted(tab));
 		ft_strlcpy(tab[i], next_str, next_str_len + 1);
 	}
 	tab[i] = NULL;
